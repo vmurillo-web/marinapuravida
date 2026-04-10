@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marina Pura Vida — Agencia Marítima Costa Rica | Golfito · Caldera · Moín</title>
+  <meta name="description" content="Marina Pura Vida: agencia marítima y asesores operacionales en Costa Rica. Pacífico y Atlántico. Golfito, Caldera, Moín. Port agency, tanqueros, RORO, superyates, bunkering. 24/7.">
+  <meta name="keywords" content="agencia maritima costa rica,port agent costa rica,agente portuario caldera,agente maritimo golfito,tanker agent costa rica,roro costa rica eukor,superyacht agent costa rica,bunkering golfito,INCOP,JAPDEVA">
+  <link rel="canonical" href="https://marinapuravida.com">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"name":"Marina Pura Vida S.A.","description":"Maritime agency and operational advisors covering all Costa Rican ports.","url":"https://marinapuravida.com","email":"ops@marinapuravida.com","telephone":["+50688509403","+50670500037","+50621029121"],"address":{"@type":"PostalAddress","streetAddress":"Marina Bahía Golfito, Oficina #5","addressLocality":"Golfito","postalCode":"60701","addressCountry":"CR"},"openingHours":"Mo-Su 00:00-24:00"}</script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <img src="assets/img/logo-dark.png" alt="Marina Pura Vida Logo" class="mpv-logo">
+      <div class="nav-logo-text">
+        <span class="nav-logo-title">Marina Pura Vida</span>
+        <span class="nav-logo-sub">Maritime Advisory CR</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home"><span class="es">Inicio</span><span class="en">Home</span></a></li>
+      <li><a href="#services"><span class="es">Servicios</span><span class="en">Services</span></a></li>
+      <li><a href="#ports"><span class="es">Puertos</span><span class="en">Ports</span></a></li>
+      <li><a href="yachts.html"><span class="es">Yates</span><span class="en">Yachts</span></a></li>
+      <li><a href="tankers.html"><span class="es">Tanqueros</span><span class="en">Tankers</span></a></li>
+      <li><a href="roro.html">RORO</a></li>
+      <li><a href="#news"><span class="es">Noticias</span><span class="en">News</span></a></li>
+      <li><a href="#programacion"><span class="es">Situaci&oacute;n Portuaria</span><span class="en">Port Situation</span></a></li>
+      <li><a href="#contact"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="nav-btn lang-btn lang-active" data-lang="es">ES</button>
+      <button class="nav-btn lang-btn" data-lang="en">EN</button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9728;&#65039;</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+  <div id="mobile-menu">
+    <a href="#home"><span class="es">Inicio</span><span class="en">Home</span></a>
+    <a href="#services"><span class="es">Servicios</span><span class="en">Services</span></a>
+    <a href="#ports"><span class="es">Puertos</span><span class="en">Ports</span></a>
+    <a href="yachts.html"><span class="es">Yates</span><span class="en">Yachts</span></a>
+    <a href="tankers.html"><span class="es">Tanqueros</span><span class="en">Tankers</span></a>
+    <a href="roro.html">RORO</a>
+    <a href="#news"><span class="es">Noticias</span><span class="en">News</span></a>
+    <a href="#programacion"><span class="es">Situaci&oacute;n Portuaria</span><span class="en">Port Situation</span></a>
+    <a href="#contact"><span class="es">Contacto</span><span class="en">Contact</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="es">Costa Rica &middot; Pac&iacute;fico &amp; Atl&aacute;ntico</span>
+        <span class="en">Costa Rica &middot; Pacific &amp; Atlantic</span>
+      </div>
+      <h1>
+        <span class="es">Agencia Mar&iacute;tima &amp;<br><em>Asesores Operacionales</em></span>
+        <span class="en">Maritime Agency &amp;<br><em>Operational Advisors</em></span>
+      </h1>
+      <p class="hero-desc">
+        <span class="es">Presencia en tierra. Soluciones en tiempo real. Control operacional total en todos los puertos de Costa Rica.</span>
+        <span class="en">On-the-ground expertise. Real-time solutions. Total operational control at every Costa Rican port.</span>
+      </p>
+      <div class="hero-ports">
+        <span class="port-tag">Golfito</span>
+        <span class="port-tag">Caldera</span>
+        <span class="port-tag">Punta Morales</span>
+        <span class="port-tag">Mo&iacute;n / Lim&oacute;n</span>
+        <span class="port-tag">RECOPE</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary"><span class="es">Contactar ahora</span><span class="en">Contact us now</span></a>
+        <a href="#services" class="btn btn-outline"><span class="es">Ver servicios</span><span class="en">Our services</span></a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-number">4</div><div class="stat-label"><span class="es">Zonas portuarias</span><span class="en">Port zones</span></div></div>
+      <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label"><span class="es">Respuesta en campo</span><span class="en">On-ground response</span></div></div>
+      <div class="stat-card"><div class="stat-number">6+</div><div class="stat-label"><span class="es">Socios estrat&eacute;gicos</span><span class="en">Strategic partners</span></div></div>
+      <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label"><span class="es">Disponibilidad</span><span class="en">Availability</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-up">
+        <div class="about-image-wrap">
+          <div class="about-image" style="overflow:hidden;padding:0;"><img src="assets/img/port-caldera-night.webp" alt="Puerto Caldera operaciones nocturnas" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div>
+          <div class="about-badge"><div class="about-badge-num">24/7</div><div class="about-badge-txt">On Ground</div></div>
+        </div>
+      </div>
+      <div class="fade-up delay-2">
+        <div class="section-label"><span class="es">Sobre nosotros</span><span class="en">About us</span></div>
+        <h2>
+          <span class="es">No somos solo<br><em class="italic cyan">agentes de puerto</em></span>
+          <span class="en">We are not just<br><em class="italic cyan">port agents</em></span>
+        </h2>
+        <p class="mt-3" style="color:var(--text2)">
+          <span class="es">En Marina Pura Vida somos socios operacionales en tierra para embarcaciones que recalan a Costa Rica. Con presencia s&oacute;lida en Golfito, Caldera y Mo&iacute;n, nos especializamos en gestionar escalas complejas, operaciones remotas y coordinaci&oacute;n multiparte.</span>
+          <span class="en">At Marina Pura Vida we are hands-on operational partners for vessels calling Costa Rica. With strong presence in Golfito, Caldera, and Mo&iacute;n, we specialize in managing complex port calls, remote operations, and multi-party coordination.</span>
+        </p>
+        <p class="mt-2" style="color:var(--text2)">
+          <span class="es">Nuestro equipo combina ejecuci&oacute;n en campo con asesor&iacute;a estrat&eacute;gica, apoyando armadores, operadores, traders y empresas de log&iacute;stica con soluciones en tiempo real sobre el terreno.</span>
+          <span class="en">Our team combines field execution with strategic advisory, supporting shipowners, operators, traders, and logistics companies with real-time solutions on the ground.</span>
+        </p>
+        <blockquote class="about-quote">
+          <span class="es">"Operamos donde otros dudan &mdash; entregando certeza en cada escala."</span>
+          <span class="en">"We operate where others hesitate &mdash; delivering certainty in every port call."</span>
+        </blockquote>
+        <div class="stats-row">
+          <div class="stat-item"><div class="num">4</div><div class="lbl"><span class="es">Puertos cubiertos</span><span class="en">Ports covered</span></div></div>
+          <div class="stat-item"><div class="num">24/7</div><div class="lbl"><span class="es">Respuesta</span><span class="en">Response</span></div></div>
+          <div class="stat-item"><div class="num">6+</div><div class="lbl"><span class="es">Socios activos</span><span class="en">Active partners</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="section" id="differentiators" style="background:var(--bg)">
+  <div class="container">
+    <div class="text-center fade-up" style="margin-bottom:3rem">
+      <div class="section-label" style="justify-content:center"><span class="es">Por qu&eacute; elegirnos</span><span class="en">Why choose us</span></div>
+      <h2><span class="es">Por qu&eacute; <em class="italic cyan">Marina Pura Vida</em></span><span class="en">Why <em class="italic cyan">Marina Pura Vida</em></span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="card fade-up delay-1"><div class="card-number">01</div><div class="card-icon">&#128225;</div><h4><span class="es">Reportes en Tiempo Real</span><span class="en">Real-Time Reporting</span></h4><p><span class="es">Transparencia operacional total &mdash; coordinaci&oacute;n pre-arribo, actualizaciones en tiempo real y documentaci&oacute;n completa en cada escala.</span><span class="en">Full operational transparency &mdash; pre-arrival coordination, real-time updates, and complete documentation delivered to principals throughout every port call.</span></p></div>
+      <div class="card fade-up delay-2"><div class="card-number">02</div><div class="card-icon">&#9875;</div><h4><span class="es">Presencia donde Otros no Llegan</span><span class="en">Remote Port Expertise</span></h4><p><span class="es">Capacidad sin igual en Golfito &mdash; el puerto m&aacute;s complejo del Pac&iacute;fico Sur. Coordinaci&oacute;n multisupplier y log&iacute;stica de fondeo.</span><span class="en">Unmatched on-ground capability at Golfito &mdash; Costa Rica's most complex southern port. We solve what others cannot, including multi-supplier coordination and anchorage logistics.</span></p></div>
+      <div class="card fade-up delay-3"><div class="card-number">03</div><div class="card-icon">&#128674;</div><h4><span class="es">Especializaci&oacute;n Multi-Carga</span><span class="en">Multi-Cargo Specialization</span></h4><p><span class="es">Tanqueros, graneles l&iacute;quidos, aceites comestibles, RORO, carga de proyecto y superyates. Protocolos dedicados por tipo de buque.</span><span class="en">Tankers, liquid bulk, edible oils, ro-ro, project cargo, and superyachts. Deep operational experience across vessel types with dedicated protocols for each.</span></p></div>
+      <div class="card fade-up delay-1"><div class="card-number">04</div><div class="card-icon">&#128279;</div><h4><span class="es">Un Solo Punto de Contacto</span><span class="en">Full Stakeholder Coordination</span></h4><p><span class="es">L&iacute;nea directa con terminales, autoridades portuarias, aduanas y log&iacute;stica terrestre. Un punto de contacto elimina las demoras.</span><span class="en">Direct lines to terminals, port authorities, customs, truck logistics, and inspection bodies. One point of contact manages every party &mdash; eliminating delays.</span></p></div>
+      <div class="card fade-up delay-2"><div class="card-number">05</div><div class="card-icon">&#128203;</div><h4><span class="es">Precisi&oacute;n Aduanera</span><span class="en">Customs Precision</span></h4><p><span class="es">Gesti&oacute;n Aduanatica in-house &mdash; TICA, DUA y DUCAS sin demoras. Cumplimiento total con la ley aduanera costarricense.</span><span class="en">In-house customs (Aduanatica) handling TICA, DUA, and DUCAS processes with zero delays. Full compliance with Costa Rican customs law including complex transit regimes.</span></p></div>
+      <div class="card fade-up delay-3"><div class="card-number">06</div><div class="card-icon">&#128336;</div><h4><span class="es">Decisi&oacute;n Inmediata 24/7</span><span class="en">Decision-Ready 24/7</span></h4><p><span class="es">No somos un punto de contacto &mdash; somos un equipo con autoridad para actuar. Si surge un problema a las 03:00, lo resolvemos.</span><span class="en">Not just a point of contact &mdash; a team with authority to act. When a port call issue arises at 0300, we solve it. No escalation chains. Immediate field response.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section section" id="services">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label"><span class="es">Qu&eacute; hacemos</span><span class="en">What we do</span></div>
+      <h2><span class="es"><em class="italic cyan">Servicios</em> Especializados</span><span class="en"><em class="italic cyan">Specialized</em> Services</span></h2>
+    </div>
+    <div class="services-tabs mt-4 fade-up">
+      <button class="tab-btn active" data-tab="general">Port Agency</button>
+      <button class="tab-btn" data-tab="yachts"><span class="es">Superyates</span><span class="en">Superyachts</span></button>
+      <button class="tab-btn" data-tab="tankers"><span class="es">Tanqueros</span><span class="en">Tankers</span></button>
+      <button class="tab-btn" data-tab="roro">RORO</button>
+      <button class="tab-btn" data-tab="customs"><span class="es">Aduanas</span><span class="en">Customs</span></button>
+      <button class="tab-btn" data-tab="husbandry"><span class="es">Servicios a Bordo</span><span class="en">Husbandry</span></button>
+    </div>
+    <div id="panel-general" class="tab-panel active fade-up">
+      <div class="grid-2" style="gap:3rem;align-items:start">
+        <div>
+          <h3>Port Agency &amp; <span class="es">Coordinaci&oacute;n Operacional</span><span class="en">Operational Coordination</span></h3>
+          <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Asistencia integral al buque desde pre-arribo hasta despacho. Coordinaci&oacute;n en tiempo real con todos los stakeholders, terminales y autoridades.</span><span class="en">Full vessel assistance from pre-arrival to departure. Real-time coordination with all stakeholders, terminals, and authorities.</span></p>
+          <ul style="margin-top:1.5rem;list-style:none;display:flex;flex-direction:column;gap:0.65rem">
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Coordinaci&oacute;n pre-arribo y ETA management</span><span class="en">Pre-arrival coordination and ETA management</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Gesti&oacute;n de fondeo y berth planning</span><span class="en">Anchorage management and berth planning</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Declaraci&oacute;n de entrada/salida INCOP / JAPDEVA</span><span class="en">Entry/departure declaration INCOP / JAPDEVA</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">DA (Disbursement Account) transparente</span><span class="en">Transparent Disbursement Account (DA)</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Coordinaci&oacute;n multiportuaria Pac&iacute;fico&ndash;Atl&aacute;ntico</span><span class="en">Multi-port coordination Pacific&ndash;Atlantic</span></li>
+          </ul>
+          <div class="mt-4"><a href="#contact" class="btn btn-primary btn-sm"><span class="es">Solicitar cotizaci&oacute;n &rarr;</span><span class="en">Request quote &rarr;</span></a></div>
+        </div>
+        <div>
+          <div style="background:linear-gradient(135deg,var(--navy-light),var(--navy-mid));border-radius:var(--radius-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;border:1px solid var(--border)">
+            &#128248; <span class="es" style="margin-left:0.5rem">Foto: Puerto Caldera</span><span class="en" style="margin-left:0.5rem">Photo: Port Caldera</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-yachts" class="tab-panel fade-up">
+      <div class="grid-2" style="gap:3rem;align-items:start" id="yachts">
+        <div>
+          <h3><span class="es">Superyate &amp; Bunkering &mdash; Golfito</span><span class="en">Superyacht &amp; Bunkering &mdash; Golfito</span></h3>
+          <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Agencia de tr&aacute;nsito completa, coordinaci&oacute;n de bunkering y log&iacute;stica a bordo para superyates y embarcaciones privadas en Golfito.</span><span class="en">Full transit agency, bunkering coordination, and onboard logistics for superyachts and private vessels at Golfito.</span></p>
+          <ul style="margin-top:1.5rem;list-style:none;display:flex;flex-direction:column;gap:0.65rem">
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Bunkering MDO &mdash; MARPOL compliant, BDN oficial</span><span class="en">MDO Bunkering &mdash; MARPOL compliant, official BDN</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Permisos SINAC, parques nacionales</span><span class="en">SINAC permits, national parks</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Despacho aduanero eficiente</span><span class="en">Efficient customs clearance</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Provisioning y log&iacute;stica a bordo</span><span class="en">Provisioning and onboard logistics</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Coordinaci&oacute;n Marina Bah&iacute;a Golfito</span><span class="en">Coordination with Marina Bah&iacute;a Golfito</span></li>
+          </ul>
+          <div class="mt-4"><a href="#contact" class="btn btn-primary btn-sm"><span class="es">Planificar escala &rarr;</span><span class="en">Plan port call &rarr;</span></a></div>
+        </div>
+        <div>
+          <img src="assets/img/service-yacht.webp" alt="Superyacht berthed at Golfito Costa Rica — Marina Pura Vida" style="width:100%;border-radius:var(--radius-lg);aspect-ratio:16/9;object-fit:cover;">
+          <div class="card mt-3" style="background:rgba(0,200,200,0.06);border-color:rgba(0,200,200,0.25)">
+            <div style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--cyan);margin-bottom:0.75rem">GOLFITO PORT DATA</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+              <div><div style="font-size:0.7rem;color:var(--muted)">MAX DRAFT</div><div style="font-weight:700;color:var(--cyan)">9.8 m (UKC 0.5m)</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">MAX LOA</div><div style="font-weight:700;color:var(--cyan)">420 m</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">VHF</div><div style="font-weight:700">16 / 12</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">ANCHORAGE</div><div style="font-weight:700">Golfo Dulce</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-tankers" class="tab-panel fade-up">
+      <div class="grid-2" style="gap:3rem;align-items:start" id="tankers">
+        <div>
+          <h3><span class="es">Tanqueros &amp; Graneles L&iacute;quidos</span><span class="en">Tankers &amp; Liquid Bulk</span></h3>
+          <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Especialistas en operaciones de tanqueros en Costa Rica. RECOPE Mo&iacute;n, aceites vegetales en Caldera y Golfito, qu&iacute;micos.</span><span class="en">Specialists in tanker operations in Costa Rica. RECOPE Mo&iacute;n, vegetable oils at Caldera and Golfito, chemicals.</span></p>
+          <ul style="margin-top:1.5rem;list-style:none;display:flex;flex-direction:column;gap:0.65rem">
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Agencia RECOPE Mo&iacute;n &mdash; hidrocarburos, asfalto</span><span class="en">RECOPE Mo&iacute;n agency &mdash; hydrocarbons, asphalt</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Aceites vegetales comestibles &mdash; Caldera / Golfito</span><span class="en">Edible vegetable oils &mdash; Caldera / Golfito</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Coordinaci&oacute;n FOSFA / inspectores certificados</span><span class="en">FOSFA coordination / certified inspectors</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; MARPOL compliance</li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Demurrage tracking y gesti&oacute;n de laytime</span><span class="en">Demurrage tracking and laytime management</span></li>
+          </ul>
+          <div class="mt-4"><a href="#contact" class="btn btn-primary btn-sm"><span class="es">Consultar operaci&oacute;n &rarr;</span><span class="en">Inquire &rarr;</span></a></div>
+        </div>
+        <div>
+          <div style="background:linear-gradient(135deg,var(--navy-light),var(--navy-mid));border-radius:var(--radius-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;border:1px solid var(--border)">
+            &#128248; <span style="margin-left:0.5rem">Tanker RECOPE Mo&iacute;n</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-roro" class="tab-panel fade-up">
+      <div class="grid-2" style="gap:3rem;align-items:start" id="roro">
+        <div>
+          <h3>RORO &amp; <span class="es">Agencia de Veh&iacute;culos</span><span class="en">Vehicle Carrier Agency</span></h3>
+          <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Agencia especializada para buques RORO y transportistas de veh&iacute;culos en Costa Rica. Experiencia con EUKOR y Wallenius Wilhelmsen.</span><span class="en">Specialized agency for RORO vessels and vehicle carriers in Costa Rica. Experience with EUKOR and Wallenius Wilhelmsen.</span></p>
+          <ul style="margin-top:1.5rem;list-style:none;display:flex;flex-direction:column;gap:0.65rem">
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Agencia EUKOR / WW en Caldera y Lim&oacute;n</span><span class="en">EUKOR / WW agency at Caldera and Lim&oacute;n</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Coordinaci&oacute;n de rampas y berth</span><span class="en">Ramp and berth coordination</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Gesti&oacute;n de reclamos &mdash; da&ntilde;os y piezas faltantes</span><span class="en">Claims management &mdash; damage and missing parts</span></li>
+            <li style="color:var(--text2);font-size:0.9rem">&#10003; <span class="es">Tracking BL/VIN &rarr; ver secci&oacute;n Tracking</span><span class="en">BL/VIN Tracking &rarr; see Tracking section</span></li>
+          </ul>
+          <div class="mt-4 flex gap-2" style="flex-wrap:wrap">
+            <a href="#tracking" class="btn btn-primary btn-sm"><span class="es">Rastrear carga &rarr;</span><span class="en">Track cargo &rarr;</span></a>
+            <a href="#contact" class="btn btn-outline-dark btn-sm"><span class="es">Contactar agente</span><span class="en">Contact agent</span></a>
+          </div>
+        </div>
+        <div>
+          <div style="background:linear-gradient(135deg,var(--navy-light),var(--navy-mid));border-radius:var(--radius-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;border:1px solid var(--border)">
+            &#128248; <span style="margin-left:0.5rem">RORO Puerto Caldera</span>
+          </div>
+          <div class="card mt-3" style="background:rgba(0,200,200,0.06);border-color:rgba(0,200,200,0.25)">
+            <div style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--cyan);margin-bottom:0.75rem">CALDERA PORT DATA</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+              <div><div style="font-size:0.7rem;color:var(--muted)">MAX DRAFT</div><div style="font-weight:700;color:var(--cyan)">P1:10.7m / P4:12.5m</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">MAX LOA</div><div style="font-weight:700;color:var(--cyan)">300 m</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">VHF</div><div style="font-weight:700">16 / 14</div></div>
+              <div><div style="font-size:0.7rem;color:var(--muted)">AUTHORITY</div><div style="font-weight:700">INCOP</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-customs" class="tab-panel fade-up">
+      <div class="grid-3">
+        <div class="card"><div class="card-icon">&#128196;</div><h4>TICA / DUA / DUCAS</h4><p><span class="es">Gesti&oacute;n in-house Aduanatica. Todos los reg&iacute;menes aduaneros costarricenses con cero demoras.</span><span class="en">In-house Aduanatica management. All Costa Rican customs regimes with zero delays.</span></p></div>
+        <div class="card"><div class="card-icon">&#128269;</div><h4><span class="es">Tr&aacute;nsito Aduanero</span><span class="en">Customs Transit</span></h4><p><span class="es">Reg&iacute;menes especiales, zonas francas, admisi&oacute;n temporal. Cumplimiento total con DGA.</span><span class="en">Special regimes, free zones, temporary admission. Full compliance with DGA.</span></p></div>
+        <div class="card"><div class="card-icon">&#9878;&#65039;</div><h4><span class="es">Contrataci&oacute;n P&uacute;blica</span><span class="en">Public Contracting</span></h4><p><span class="es">Especialistas en Ley de Contrataci&oacute;n Administrativa y procesos SICOP.</span><span class="en">Specialists in Administrative Contracting Law and SICOP bidding processes.</span></p></div>
+      </div>
+    </div>
+    <div id="panel-husbandry" class="tab-panel fade-up">
+      <div class="grid-3">
+        <div class="card"><div class="card-icon">&#128101;</div><h4><span class="es">Cambio de Tripulación</span><span class="en">Crew Changes</span></h4><p><span class="es">Cambios de tripulaci&oacute;n en todos los puertos. Visas, transportes, hotel y log&iacute;stica completa.</span><span class="en">Crew changes at all ports. Visas, transportation, hotel and full logistics.</span></p></div>
+        <div class="card"><div class="card-icon">&#127869;&#65039;</div><h4><span class="es">Abastecimiento</span><span class="en">Provisioning</span></h4><p><span class="es">Abastecimiento de v&iacute;veres, repuestos y suministros. Entrega directa a muelle o fondeo.</span><span class="en">Supply of provisions, spare parts and supplies. Direct delivery to berth or anchorage.</span></p></div>
+        <div class="card"><div class="card-icon">&#128295;</div><h4><span class="es">Repuestos y Médico</span><span class="en">Spare Parts &amp; Medical</span></h4><p><span class="es">Gesti&oacute;n de repuestos, asistencia m&eacute;dica de emergencia y coordinaci&oacute;n con autoridades sanitarias.</span><span class="en">Spare parts management, emergency medical assistance and coordination with health authorities.</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section section" id="ports">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:2rem">
+      <div class="section-label"><span class="es">Red portuaria</span><span class="en">Port network</span></div>
+      <h2><span class="es"><em class="italic cyan">Cobertura</em> Nacional</span><span class="en"><em class="italic cyan">Full Country</em> Coverage</span></h2>
+      <p class="section-desc mt-2"><span class="es">Un solo punto de contacto para el Pac&iacute;fico y el Atl&aacute;ntico. Toca cada puerto para ver draft m&aacute;ximo, coordenadas y servicios.</span><span class="en">One point of contact for Pacific &amp; Atlantic. Tap each port to view max draft, coordinates and services.</span></p>
+    </div>
+    <div class="fade-up"><div id="map"></div></div>
+    <div class="grid-4 mt-4">
+      <div class="card fade-up delay-1" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">CALDERA</div><div style="font-size:0.82rem;color:var(--muted)">Draft: P1:10.7m / P4:12.5m | LOA: 300m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div></div>
+      <div class="card fade-up delay-2" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">GOLFITO</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 9.8m (UKC 0.5m) | LOA: 420m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Sur</span><span class="en">South Pacific</span></div></div>
+      <div class="card fade-up delay-3" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">MO&Iacute;N / LIM&Oacute;N</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 15.5m | LOA: 366m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div></div>
+      <div class="card fade-up delay-4" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">PUNTA MORALES</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 7.0m | LOA: 150m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEATHER & TIDES -->
+<section class="widgets-section section">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:0.5rem">
+      <div class="section-label"><span class="es">Condiciones portuarias</span><span class="en">Port conditions</span></div>
+      <h2><span class="es">Clima &amp; Mareas en vivo</span><span class="en">Live Weather &amp; Tides</span></h2>
+      <p class="section-desc mt-2"><span class="es">Informaci&oacute;n meteorol&oacute;gica actualizada para los puertos donde operamos.</span><span class="en">Real-time meteorological information for the ports where we operate.</span></p>
+    </div>
+    <div class="widget-grid">
+      <div class="weather-card fade-up delay-1" data-port-idx="0"><div class="weather-port-name">Puerto Caldera</div><div class="weather-main"><div class="weather-icon">&#127780;&#65039;</div><div><div class="weather-temp">--&deg;C</div><div class="weather-desc"><span class="es">Cargando...</span><span class="en">Loading...</span></div></div></div><div class="weather-detail-row"><div class="weather-detail"><div class="weather-detail-val weather-wind">--</div><div class="weather-detail-key"><span class="es">Viento</span><span class="en">Wind</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-dir">--</div><div class="weather-detail-key"><span class="es">Direcci&oacute;n</span><span class="en">Dir.</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-hum">--</div><div class="weather-detail-key"><span class="es">Humedad</span><span class="en">Humidity</span></div></div></div></div>
+      <div class="weather-card fade-up delay-2" data-port-idx="1"><div class="weather-port-name">Puerto Golfito</div><div class="weather-main"><div class="weather-icon">&#127780;&#65039;</div><div><div class="weather-temp">--&deg;C</div><div class="weather-desc"><span class="es">Cargando...</span><span class="en">Loading...</span></div></div></div><div class="weather-detail-row"><div class="weather-detail"><div class="weather-detail-val weather-wind">--</div><div class="weather-detail-key"><span class="es">Viento</span><span class="en">Wind</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-dir">--</div><div class="weather-detail-key"><span class="es">Direcci&oacute;n</span><span class="en">Dir.</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-hum">--</div><div class="weather-detail-key"><span class="es">Humedad</span><span class="en">Humidity</span></div></div></div></div>
+      <div class="weather-card fade-up delay-3" data-port-idx="2"><div class="weather-port-name">Mo&iacute;n / Lim&oacute;n</div><div class="weather-main"><div class="weather-icon">&#127780;&#65039;</div><div><div class="weather-temp">--&deg;C</div><div class="weather-desc"><span class="es">Cargando...</span><span class="en">Loading...</span></div></div></div><div class="weather-detail-row"><div class="weather-detail"><div class="weather-detail-val weather-wind">--</div><div class="weather-detail-key"><span class="es">Viento</span><span class="en">Wind</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-dir">--</div><div class="weather-detail-key"><span class="es">Direcci&oacute;n</span><span class="en">Dir.</span></div></div><div class="weather-detail"><div class="weather-detail-val weather-hum">--</div><div class="weather-detail-key"><span class="es">Humedad</span><span class="en">Humidity</span></div></div></div></div>
+      <div class="tide-card fade-up">
+        <div class="tide-header">
+          <div><div style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.25rem">&#127754; <span class="es">Mareas del d&iacute;a</span><span class="en">Today's tides</span></div><h4 style="font-size:1rem"><span class="es">Predicci&oacute;n de mareas</span><span class="en">Tide predictions</span></h4></div>
+          <div class="tide-selector"><button class="tide-btn active" data-port="caldera">Caldera</button><button class="tide-btn" data-port="golfito">Golfito</button><button class="tide-btn" data-port="moin">Mo&iacute;n</button></div>
+        </div>
+        <div class="tide-predictions" id="tide-predictions"></div>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.75rem"><span class="es">&#9888;&#65039; Datos de referencia. Verificar con INCOP/JAPDEVA para operaciones en puerto.</span><span class="en">&#9888;&#65039; Reference data. Verify with INCOP/JAPDEVA for in-port operations.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARINETRAFFIC -->
+<section class="vessel-section section">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:1rem">
+      <div class="section-label"><span class="es">Tr&aacute;fico en vivo</span><span class="en">Live traffic</span></div>
+      <h2><span class="es">Movimiento de buques</span><span class="en">Vessel Movements</span></h2>
+      <p class="section-desc mt-2"><span class="es">Tr&aacute;fico AIS en tiempo real en aguas costarricenses.</span><span class="en">Real-time AIS traffic in Costa Rican waters.</span></p>
+    </div>
+    <div class="vessel-frame-wrap fade-up">
+      <iframe src="https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.8/centerx:-84.5/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:/remember:false" allowfullscreen loading="lazy" title="MarineTraffic Live AIS Costa Rica"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- PORT SCHEDULE -->
+<section class="tracking-section section" id="programacion">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:2rem">
+      <div class="section-label"><span class="es">Programación Portuaria</span><span class="en">Port Schedule</span></div>
+      <h2 style="color:#fff">
+        <span class="es">Situación &amp; <em class="italic" style="color:var(--cyan)">Programación de Puertos</em></span>
+        <span class="en">Port Situation &amp; <em class="italic" style="color:var(--cyan)">Schedule</em></span>
+      </h2>
+      <p class="mt-3" style="color:rgba(255,255,255,0.6);line-height:1.8">
+        <span class="es">Información actualizada sobre la situación operacional y programación de arribo en los principales puertos de Costa Rica.</span>
+        <span class="en">Updated information on the operational situation and arrival schedule at Costa Rica's main ports.</span>
+      </p>
+    </div>
+    <div class="grid-2" style="gap:2rem;align-items:stretch">
+
+      <!-- Caldera -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="width:48px;height:48px;background:rgba(0,200,200,0.12);border:1px solid rgba(0,200,200,0.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">&#9875;</div>
+          <div>
+            <div style="color:#fff;font-weight:700;font-size:1.05rem">Puerto Caldera</div>
+            <div style="color:var(--cyan);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-mono)">INCOP / SPC &mdash; <span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+          <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius);padding:0.75rem;text-align:center">
+            <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:600;color:var(--cyan)">10.7 m</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem"><span class="es">Draft Puesto 1</span><span class="en">Berth 1 Draft</span></div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius);padding:0.75rem;text-align:center">
+            <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:600;color:var(--cyan)">12.5 m</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem"><span class="es">Draft Puesto 4</span><span class="en">Berth 4 Draft</span></div>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7">
+          <span class="es">Descarga la programaci&oacute;n portuaria actualizada directamente desde el sistema SPC Caldera. El documento incluye lista de buques en espera, ocupaci&oacute;n de puestos y tiempos estimados.</span>
+          <span class="en">Download the updated port schedule directly from the SPC Caldera system. The document includes waiting vessel list, berth occupancy and estimated times.</span>
+        </p>
+        <a href="https://web.spcaldera.com/FS/DOC/SituacionPortuaria.pdf" target="_blank" rel="noopener"
+           class="btn btn-primary" style="justify-content:center;gap:0.75rem">
+          <span style="font-size:1.1rem">&#128196;</span>
+          <span class="es">Ver Situaci&oacute;n Portuaria Caldera &rarr;</span>
+          <span class="en">View Caldera Port Schedule &rarr;</span>
+        </a>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-align:center">
+          <span class="es">Fuente oficial: web.spcaldera.com &mdash; Actualizado por SPC</span>
+          <span class="en">Official source: web.spcaldera.com &mdash; Updated by SPC</span>
+        </p>
+      </div>
+
+      <!-- JAPDEVA -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:2rem;display:flex;flex-direction:column;gap:1.5rem">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="width:48px;height:48px;background:rgba(0,200,200,0.12);border:1px solid rgba(0,200,200,0.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">&#9875;</div>
+          <div>
+            <div style="color:#fff;font-weight:700;font-size:1.05rem">Puerto Mo&iacute;n / Lim&oacute;n</div>
+            <div style="color:var(--cyan);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-mono)">JAPDEVA / APM &mdash; <span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+          <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius);padding:0.75rem;text-align:center">
+            <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:600;color:var(--cyan)">15.5 m</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem"><span class="es">Draft M&aacute;x. APM</span><span class="en">APM Max Draft</span></div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius);padding:0.75rem;text-align:center">
+            <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:600;color:var(--cyan)">366 m</div>
+            <div style="font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem">LOA M&aacute;x.</div>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7">
+          <span class="es">JAPDEVA distribuye la programaci&oacute;n portuaria semanalmente. Para recibir el reporte m&aacute;s reciente o consultar disponibilidad de puestos, cont&aacute;ctenos directamente &mdash; lo gestionamos en tiempo real.</span>
+          <span class="en">JAPDEVA distributes the port schedule on a weekly basis. To receive the latest report or check berth availability, contact us directly &mdash; we manage it in real time.</span>
+        </p>
+        <a href="https://wa.me/50688509403?text=Hola%20MPV%2C%20necesito%20la%20programaci%C3%B3n%20portuaria%20de%20JAPDEVA%20Mo%C3%ADn"
+           target="_blank" rel="noopener" class="btn" style="background:#25D366;color:#fff;justify-content:center;gap:0.75rem">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+          <span class="es">Solicitar Programaci&oacute;n JAPDEVA</span>
+          <span class="en">Request JAPDEVA Schedule</span>
+        </a>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:0.25rem">
+          <span class="es">&#128197; Actualizado: </span><span class="en">&#128197; Updated: </span>
+          <span id="japdeva-updated" style="color:var(--cyan)">—</span>
+        </p>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:0.35rem">
+          <span class="es">Si el documento no carga, </span><span class="en">If the document doesn't load, </span>
+          <a href="https://wa.me/50688509403?text=Hola%20MPV%2C%20necesito%20la%20programaci%C3%B3n%20portuaria%20de%20JAPDEVA%20Mo%C3%ADn" 
+             target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline">
+            <span class="es">solicítalo por WhatsApp</span><span class="en">request it via WhatsApp</span>
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-section section" id="news">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:1rem">
+      <div class="section-label"><span class="es">Situaci&oacute;n portuaria</span><span class="en">Port status</span></div>
+      <h2><span class="es"><em class="italic cyan">Noticias</em> Operacionales</span><span class="en"><em class="italic cyan">Operational</em> News</span></h2>
+      <p class="section-desc mt-2"><span class="es">Actualizaciones en tiempo real sobre condiciones en los puertos costarricenses.</span><span class="en">Real-time updates on conditions at Costa Rican ports.</span></p>
+    </div>
+    <div class="news-grid" id="news-container"></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners-section section">
+  <div class="container">
+    <div class="text-center fade-up" style="margin-bottom:2rem">
+      <div class="section-label" style="justify-content:center"><span class="es">Alianzas</span><span class="en">Alliances</span></div>
+      <h2><span class="es"><em class="italic cyan">Socios</em> Estrat&eacute;gicos</span><span class="en"><em class="italic cyan">Strategic</em> Partners</span></h2>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card fade-up delay-1"><div class="partner-name">Boluda Towage</div><div class="partner-desc"><span class="es">Representante oficial en licitaciones p&uacute;blicas JAPDEVA &mdash; socio de remolque operacional en los puertos costarricenses.</span><span class="en">Official representative in JAPDEVA public tenders &mdash; operational towage partner across Costa Rican ports.</span></div></div>
+      <div class="partner-card fade-up delay-2"><div class="partner-name">DHL Express</div><div class="partner-desc"><span class="es">Representante local para la regi&oacute;n del Pac&iacute;fico Sur, apoyando log&iacute;stica de &uacute;ltima milla y servicios de courier.</span><span class="en">Local representative for the Southern Pacific region, supporting last-mile logistics and courier services.</span></div></div>
+      <div class="partner-card fade-up delay-3"><div class="partner-name">Dutch Dredging</div><div class="partner-desc"><span class="es">Asociado en proyectos de dragado en Caldera, APM Terminals y obras de infraestructura JAPDEVA.</span><span class="en">Associated with major dredging projects at Caldera, APM Terminals, and JAPDEVA infrastructure works.</span></div></div>
+      <div class="partner-card fade-up delay-1"><div class="partner-name">GEINSP</div><div class="partner-desc"><span class="es">Inspectores certificados FOSFA para muestreo y certificaci&oacute;n de aceites comestibles y graneles.</span><span class="en">Certified FOSFA inspectors providing trusted cargo survey, sampling, and certification for edible oils and bulk commodities.</span></div></div>
+      <div class="partner-card fade-up delay-2"><div class="partner-name">Newport Tank (ISO Tank)</div><div class="partner-desc"><span class="es">Agente oficial de Costa Rica para operaciones de tanque ISO y log&iacute;stica qu&iacute;mica &mdash; capacidad intermodal completa.</span><span class="en">Costa Rica's official agent for ISO tank operations and chemical logistics &mdash; full intermodal capability.</span></div></div>
+      <div class="partner-card fade-up delay-3"><div class="partner-name">ALG Maritime</div><div class="partner-desc"><span class="es">Acuerdos de log&iacute;stica internacional &mdash; plataforma de coordinaci&oacute;n multimodal para cadenas de suministro complejas.</span><span class="en">International logistics and agency agreements &mdash; multimodal coordination platform for complex supply chains.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="fade-up">
+        <div class="section-label"><span class="es">Contacto</span><span class="en">Contact</span></div>
+        <h2><span class="es">Coordinemos<br><em class="italic cyan">tu pr&oacute;xima escala</em></span><span class="en">Let's coordinate<br><em class="italic cyan">your next port call</em></span></h2>
+        <p class="section-desc mt-3"><span class="es">Disponibles 24/7 para coordinar operaciones en todos los puertos de Costa Rica.</span><span class="en">Available 24/7 to coordinate operations at all Costa Rican ports.</span></p>
+        <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1.25rem">
+          <div class="contact-info-item"><div class="contact-icon">&#128231;</div><div><div class="contact-info-label"><span class="es">Email operaciones</span><span class="en">Operations email</span></div><div class="contact-info-value">ops@marinapuravida.com</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon">&#128241;</div><div><div class="contact-info-label"><span class="es">M&oacute;vil / WhatsApp 24/7</span><span class="en">Mobile / WhatsApp 24/7</span></div><div class="contact-info-value">+506 8850.9403 &middot; +506 7050.0037</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon">&#9743;&#65039;</div><div><div class="contact-info-label"><span class="es">Oficina</span><span class="en">Office</span></div><div class="contact-info-value">+506 2102.9121</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon">&#128205;</div><div><div class="contact-info-label"><span class="es">Oficina principal</span><span class="en">Main office</span></div><div class="contact-info-value">Marina Bah&iacute;a Golfito, Oficina #5<br>Golfito 60701, Puntarenas, Costa Rica</div></div></div>
+        </div>
+      </div>
+      <div class="fade-up delay-2">
+        <div class="contact-form">
+          <h3 style="margin-bottom:1.5rem;font-size:1.2rem"><span class="es">Enviar consulta</span><span class="en">Send inquiry</span></h3>
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact">
+            <input type="hidden" name="bot-field" style="display:none">
+            <div class="form-row">
+              <div class="form-group"><label><span class="es">Nombre / Empresa</span><span class="en">Name / Company</span></label><input type="text" name="nombre" required></div>
+              <div class="form-group"><label><span class="es">Correo electr&oacute;nico</span><span class="en">Email address</span></label><input type="email" name="email" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label><span class="es">Tel&eacute;fono / WhatsApp</span><span class="en">Phone / WhatsApp</span></label><input type="tel" name="telefono"></div>
+              <div class="form-group">
+                <label><span class="es">Puerto de destino</span><span class="en">Destination port</span></label>
+                <select name="puerto">
+                  <option value=""><span class="es">Seleccionar...</span><span class="en">Select...</span></option>
+                  <option value="Caldera">Puerto Caldera</option>
+                  <option value="Golfito">Puerto Golfito</option>
+                  <option value="Moin">Mo&iacute;n / Lim&oacute;n</option>
+                  <option value="Punta Morales">Punta Morales</option>
+                  <option value="RECOPE">RECOPE</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><span class="es">Servicio requerido</span><span class="en">Service required</span></label>
+                <select name="servicio">
+                  <option value="">Select...</option>
+                  <option value="Port Agency">Port Agency</option>
+                  <option value="Superyate">Superyate / Bunkering</option>
+                  <option value="Tanquero">Tanquero / Liquid bulk</option>
+                  <option value="RORO">RORO / Veh&iacute;culos</option>
+                  <option value="Aduanas">Aduanas / Customs</option>
+                  <option value="Husbandry">Husbandry</option>
+                  <option value="Otro">Otro / Other</option>
+                </select>
+              </div>
+              <div class="form-group"><label><span class="es">Nombre / IMO del buque</span><span class="en">Vessel name / IMO</span></label><input type="text" name="buque" placeholder="MV EXAMPLE / IMO 1234567"></div>
+            </div>
+            <div class="form-group"><label><span class="es">Detalles de la operaci&oacute;n</span><span class="en">Operation details</span></label><textarea name="mensaje" rows="4"></textarea></div>
+            <button type="submit" class="btn btn-primary" id="form-submit-btn" style="width:100%;justify-content:center"><span class="es">Enviar consulta &rarr;</span><span class="en">Send inquiry &rarr;</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/img/logo-dark.png" alt="Marina Pura Vida" class="mpv-logo">
+          <div class="footer-logo-text">
+            <div class="name">Marina Pura Vida</div>
+            <div class="sub">Maritime Advisory Costa Rica</div>
+          </div>
+        </div>
+        <p><span class="es">Agencia mar&iacute;tima y asesores operacionales para el Pac&iacute;fico y Atl&aacute;ntico de Costa Rica.</span><span class="en">Maritime agency and operational advisors for Costa Rica's Pacific and Atlantic.</span></p>
+      </div>
+      <div class="footer-col">
+        <h5><span class="es">Servicios</span><span class="en">Services</span></h5>
+        <ul>
+          <li><a href="#services">Port Agency</a></li>
+          <li><a href="#services"><span class="es">Superyates &amp; Bunkering</span><span class="en">Superyachts &amp; Bunkering</span></a></li>
+          <li><a href="#services"><span class="es">Tanqueros</span><span class="en">Tankers</span></a></li>
+          <li><a href="#services">RORO / <span class="es">Veh&iacute;culos</span><span class="en">Vehicles</span></a></li>
+          <li><a href="#services"><span class="es">Aduanas</span><span class="en">Customs</span></a></li>
+          <li><a href="#services">Husbandry</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5><span class="es">Puertos</span><span class="en">Ports</span></h5>
+        <ul>
+          <li><a href="#ports">Puerto Caldera</a></li>
+          <li><a href="#ports">Puerto Golfito</a></li>
+          <li><a href="#ports">Mo&iacute;n / Lim&oacute;n</a></li>
+          <li><a href="#ports">Punta Morales</a></li>
+          <li><a href="#ports">RECOPE</a></li>
+          <li><a href="#programacion"><span class="es">Programación Portuaria</span><span class="en">Port Schedule</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5><span class="es">Empresa</span><span class="en">Company</span></h5>
+        <ul>
+          <li><a href="#about"><span class="es">Sobre nosotros</span><span class="en">About us</span></a></li>
+          <li><a href="#news"><span class="es">Noticias Portuarias</span><span class="en">Port News</span></a></li>
+          <li><a href="mailto:ops@marinapuravida.com">ops@marinapuravida.com</a></li>
+          <li><a href="tel:+50688509403">+506 8850.9403</a></li>
+          <li><a href="tel:+50670500037">+506 7050.0037</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span><span class="es">&copy; 2026 Marina Pura Vida S.A. Todos los derechos reservados.</span><span class="en">&copy; 2026 Marina Pura Vida S.A. All rights reserved.</span></span>
+      <div class="footer-cert"><span class="cert-badge">INCOP</span><span class="cert-badge">JAPDEVA</span><span class="cert-badge">FOSFA</span><span class="cert-badge">MARPOL</span></div>
+    </div>
+  </div>
+</footer>
+
+<a id="wa-float" href="https://wa.me/50688509403?text=Hola%20Marina%20Pura%20Vida" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+</a>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
