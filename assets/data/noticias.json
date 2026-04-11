@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-04-10",
+    "puerto": "Caldera",
+    "puerto_en": "Caldera",
+    "titulo_es": "Operaciones normales — Puestos 1 y 4 activos",
+    "titulo_en": "Normal operations — Berths 1 and 4 active",
+    "contenido_es": "Puerto Caldera opera con normalidad. Tiempo de espera en fondeo estimado en 12-18 horas. Despacho aduanal sin retrasos. Condiciones meteorológicas favorables. Draft disponible Puesto 1: 10.7m / Puesto 4: 12.5m.",
+    "contenido_en": "Port Caldera operating normally. Anchorage waiting time estimated at 12-18 hours. Customs clearance without delays. Favorable weather conditions. Available draft Berth 1: 10.7m / Berth 4: 12.5m.",
+    "tipo": "normal",
+    "autor": "MPV Operations"
+  },
+  {
+    "id": 2,
+    "fecha": "2026-04-09",
+    "puerto": "Golfito",
+    "puerto_en": "Golfito",
+    "titulo_es": "Exportación de aceite de palma — Temporada activa",
+    "titulo_en": "Palm oil export — Active season",
+    "contenido_es": "Operaciones de exportación de aceite de palma en curso en Puerto Golfito. Capacidad de bodega disponible. Coordinación con INCOP confirmada. Contactar MPV para ventanas de carga y programación.",
+    "contenido_en": "Palm oil export operations underway at Port Golfito. Storage capacity available. INCOP coordination confirmed. Contact MPV for loading windows and scheduling.",
+    "tipo": "info",
+    "autor": "MPV Golfito"
+  },
+  {
+    "id": 3,
+    "fecha": "2026-04-08",
+    "puerto": "Moín / Limón",
+    "puerto_en": "Moín / Limón",
+    "titulo_es": "APM Terminals — Operaciones con normalidad",
+    "titulo_en": "APM Terminals — Normal operations",
+    "contenido_es": "APM Terminals Moín reporta operaciones normales. JAPDEVA Moín opera sin restricciones. RECOPE coordinando recepciones de hidrocarburo. Para programación de atraques contactar MPV Atlántico.",
+    "contenido_en": "APM Terminals Moín reports normal operations. JAPDEVA Moín operating without restrictions. RECOPE coordinating hydrocarbon receivals. For berth scheduling contact MPV Atlantic.",
+    "tipo": "normal",
+    "autor": "MPV Limón"
+  }
+]
