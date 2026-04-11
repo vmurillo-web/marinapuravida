@@ -546,7 +546,7 @@ window.renderNews = async function() {
   if (!container) return;
   let news = [];
   try {
-    const res = await fetch('assets/data/noticias.json');
+    const res = await fetch('assets/data/noticias.json?v=' + Date.now());
     news = await res.json();
   } catch(e) { return; }
 
@@ -559,7 +559,7 @@ window.renderNews = async function() {
       { day: 'numeric', month: 'short' }
     );
     return `
-      <div class="news-card fade-up">
+      <div class="news-card">
         <div class="news-card-head">
           <div class="news-status status-${n.tipo}"></div>
           <span class="news-puerto">${puerto}</span>
