@@ -47,7 +47,7 @@
     .svc-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.25rem}
     .svc-i{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--text2)}
     .svc-ic{color:var(--cyan);flex-shrink:0;margin-top:.1rem}
-    .sw-widget{background:var(--navy);border:1px solid rgba(0,200,200,.2);border-radius:16px;padding:2rem;margin-top:3rem}
+    .sw-widget{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:3rem}
     .sw-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
     .sw-title{color:#fff;font-family:var(--font-display);font-size:1.2rem}
     .sw-coords{font-family:var(--font-mono);font-size:.7rem;color:var(--muted)}
@@ -179,8 +179,12 @@
 </section>
 
 <!-- ATLANTIC / RECOPE -->
-<section class="tk-sec tk-sec-alt">
-  <div class="tk-c">
+<section class="tk-sec tk-sec-alt" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
+    <img src="assets/img/recope-moin.webp" alt="RECOPE Moin terminal Costa Rica"
+         style="width:100%;height:100%;object-fit:cover;opacity:0.07;filter:saturate(0.5);">
+  </div>
+  <div class="tk-c" style="position:relative;z-index:1;">
     <div class="tk-2col">
       <div>
         <div class="stag">&#9875; <span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div>
@@ -235,39 +239,172 @@
         </div>
         <span id="swell-updated" style="font-family:var(--font-mono);font-size:.72rem;color:var(--muted)"></span>
       </div>
-      <div class="sw-grid">
-        <div class="sw-item">
-          <div class="sw-lbl"><span class="es">Altura de ola</span><span class="en">Wave height</span></div>
-          <div class="sw-val" id="sw-height">--</div>
-          <div class="sw-unit">metros</div>
+
+      <!-- Nautical Rose + Data Grid -->
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:2rem;align-items:center;">
+
+        <!-- SVG Nautical Rose -->
+        <div style="display:flex;justify-content:center;">
+          <svg id="nav-rose" viewBox="0 0 280 280" width="280" height="280" style="overflow:visible">
+            <!-- Sector definitions (16 sectors of 22.5 degrees each) -->
+            <!-- Risk zones: NW(315)-N(0)-NE(45) = DANGER, NE(45)-E(90) = CAUTION, rest = OK -->
+            <defs>
+              <marker id="arrow-swell" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#00C8C8"/>
+              </marker>
+              <marker id="arrow-wind" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+                <path d="M0,0 L7,3.5 L0,7 Z" fill="#C8A96E"/>
+              </marker>
+            </defs>
+
+            <!-- Outer ring -->
+            <circle cx="140" cy="140" r="120" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <circle cx="140" cy="140" r="90" fill="none" stroke="var(--border)" stroke-width="0.75" stroke-dasharray="4,4"/>
+            <circle cx="140" cy="140" r="60" fill="none" stroke="var(--border)" stroke-width="0.75" stroke-dasharray="3,5"/>
+            <circle cx="140" cy="140" r="30" fill="none" stroke="var(--border)" stroke-width="0.75" stroke-dasharray="2,6"/>
+
+            <!-- 16 sectors - colored by risk zone -->
+            <!-- Each sector is 22.5deg. We draw pie slices. -->
+            <!-- DANGER zone: 315-360-045 = NW,NNW,N,NNE,NE sectors -->
+            <!-- Sectors: NNW(315-337.5), N(337.5-360+0-22.5), NNE(22.5-45) = 3 full danger sectors -->
+            <!-- CAUTION: NE(45-67.5), ENE(67.5-90) = 2 caution sectors -->
+            <!-- Also caution: WNW(292.5-315) sector -->
+
+            <!-- Helper: sector path from center (140,140) radius 120 -->
+            <!-- Using pre-calculated path data for 16 sectors -->
+
+            <!-- SECTOR paths: 0=N(337.5-22.5), going clockwise -->
+            <!-- N sector (337.5 to 22.5) - DANGER -->
+            <path id="s-n" d="M140,140 L140,20 A120,120 0 0,1 186.6,53.4 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+            <!-- NNE (22.5 to 45) - DANGER -->
+            <path id="s-nne" d="M140,140 L186.6,53.4 A120,120 0 0,1 224.9,55.1 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+            <!-- NE (45 to 67.5) - CAUTION -->
+            <path id="s-ne" d="M140,140 L224.9,55.1 A120,120 0 0,1 245.1,95.1 Z" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+            <!-- ENE (67.5 to 90) - CAUTION -->
+            <path id="s-ene" d="M140,140 L245.1,95.1 A120,120 0 0,1 260,140 Z" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+            <!-- E (90 to 112.5) - OK -->
+            <path id="s-e" d="M140,140 L260,140 A120,120 0 0,1 245.1,184.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- ESE (112.5 to 135) - OK -->
+            <path id="s-ese" d="M140,140 L245.1,184.9 A120,120 0 0,1 224.9,224.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- SE (135 to 157.5) - OK -->
+            <path id="s-se" d="M140,140 L224.9,224.9 A120,120 0 0,1 186.6,226.6 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- SSE (157.5 to 180) - OK -->
+            <path id="s-sse" d="M140,140 L186.6,226.6 A120,120 0 0,1 140,260 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- S (180 to 202.5) - OK -->
+            <path id="s-s" d="M140,140 L140,260 A120,120 0 0,1 93.4,226.6 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- SSW (202.5 to 225) - OK -->
+            <path id="s-ssw" d="M140,140 L93.4,226.6 A120,120 0 0,1 55.1,224.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- SW (225 to 247.5) - OK -->
+            <path id="s-sw" d="M140,140 L55.1,224.9 A120,120 0 0,1 34.9,184.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- WSW (247.5 to 270) - OK -->
+            <path id="s-wsw" d="M140,140 L34.9,184.9 A120,120 0 0,1 20,140 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- W (270 to 292.5) - OK -->
+            <path id="s-w" d="M140,140 L20,140 A120,120 0 0,1 34.9,95.1 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <!-- WNW (292.5 to 315) - CAUTION -->
+            <path id="s-wnw" d="M140,140 L34.9,95.1 A120,120 0 0,1 55.1,55.1 Z" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+            <!-- NW (315 to 337.5) - DANGER -->
+            <path id="s-nw" d="M140,140 L55.1,55.1 A120,120 0 0,1 93.4,26.6 Z" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+            <!-- NNW (337.5 to 360) - DANGER (connects back to N) -->
+            <path id="s-nnw" d="M140,140 L93.4,26.6 A120,120 0 0,1 140,20 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+
+            <!-- Cardinal cross lines -->
+            <line x1="140" y1="20" x2="140" y2="260" stroke="var(--border)" stroke-width="0.75" opacity="0.5"/>
+            <line x1="20" y1="140" x2="260" y2="140" stroke="var(--border)" stroke-width="0.75" opacity="0.5"/>
+            <line x1="55" y1="55" x2="225" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.4" stroke-dasharray="3,4"/>
+            <line x1="225" y1="55" x2="55" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.4" stroke-dasharray="3,4"/>
+
+            <!-- Cardinal labels -->
+            <text x="140" y="10" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" font-weight="700" fill="#EF4444">N</text>
+            <text x="270" y="144" text-anchor="start" font-family="DM Mono,monospace" font-size="11" font-weight="600" fill="var(--text2)">E</text>
+            <text x="140" y="276" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" font-weight="600" fill="var(--text2)">S</text>
+            <text x="10" y="144" text-anchor="end" font-family="DM Mono,monospace" font-size="11" font-weight="600" fill="var(--text2)">W</text>
+            <text x="232" y="22" text-anchor="start" font-family="DM Mono,monospace" font-size="9" fill="#F59E0B">NE</text>
+            <text x="232" y="262" text-anchor="start" font-family="DM Mono,monospace" font-size="9" fill="var(--text2)">SE</text>
+            <text x="18" y="262" text-anchor="end" font-family="DM Mono,monospace" font-size="9" fill="var(--text2)">SW</text>
+            <text x="18" y="22" text-anchor="end" font-family="DM Mono,monospace" font-size="9" fill="#EF4444">NW</text>
+
+            <!-- SWELL arrow (cyan, long) - rotated by JS -->
+            <g id="arrow-swell-g" transform="rotate(0, 140, 140)">
+              <line x1="140" y1="140" x2="140" y2="30" stroke="#00C8C8" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-swell)"/>
+              <line x1="140" y1="140" x2="140" y2="195" stroke="#00C8C8" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+            </g>
+
+            <!-- WIND arrow (gold, shorter) - rotated by JS -->
+            <g id="arrow-wind-g" transform="rotate(45, 140, 140)">
+              <line x1="140" y1="140" x2="140" y2="55" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-wind)" opacity="0.9"/>
+            </g>
+
+            <!-- Center circle -->
+            <circle cx="140" cy="140" r="10" fill="var(--surface)" stroke="var(--cyan)" stroke-width="1.5"/>
+            <text x="140" y="144" text-anchor="middle" font-size="10">&#9875;</text>
+
+            <!-- Active sector highlight - updated by JS -->
+            <circle id="rose-pulse" cx="140" cy="140" r="120" fill="none" stroke="transparent" stroke-width="0"/>
+          </svg>
         </div>
-        <div class="sw-item">
-          <div class="sw-lbl"><span class="es">Direcci&oacute;n swell</span><span class="en">Swell direction</span></div>
-          <div class="sw-val" id="sw-dir">--&#176;</div>
-          <div class="sw-card" id="sw-dir-card">--</div>
-        </div>
-        <div class="sw-item">
-          <div class="sw-lbl"><span class="es">Per&iacute;odo de ola</span><span class="en">Wave period</span></div>
-          <div class="sw-val" id="sw-period">--</div>
-          <div class="sw-unit">seg</div>
-        </div>
-        <div class="sw-item">
-          <div class="sw-lbl"><span class="es">Viento</span><span class="en">Wind</span></div>
-          <div class="sw-val" id="sw-wind">--</div>
-          <div class="sw-unit">kt</div>
-          <div class="sw-card" id="sw-wind-card">--</div>
+
+        <!-- Data columns -->
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="sw-item">
+              <div class="sw-lbl"><span class="es">Altura de ola</span><span class="en">Wave height</span></div>
+              <div class="sw-val" id="sw-height">--</div>
+              <div class="sw-unit">metros</div>
+            </div>
+            <div class="sw-item">
+              <div class="sw-lbl"><span class="es">Dir. Swell</span><span class="en">Swell dir.</span></div>
+              <div class="sw-val" id="sw-dir">--&#176;</div>
+              <div class="sw-card" id="sw-dir-card" style="color:var(--cyan)">--</div>
+            </div>
+            <div class="sw-item">
+              <div class="sw-lbl"><span class="es">Per&iacute;odo</span><span class="en">Period</span></div>
+              <div class="sw-val" id="sw-period">--</div>
+              <div class="sw-unit">seg</div>
+            </div>
+            <div class="sw-item">
+              <div class="sw-lbl"><span class="es">Viento</span><span class="en">Wind</span></div>
+              <div class="sw-val" id="sw-wind">--</div>
+              <div class="sw-unit">kt</div>
+              <div class="sw-card" id="sw-wind-card" style="color:var(--gold)">--</div>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div style="display:flex;gap:1.5rem;flex-wrap:wrap;padding:.75rem 1rem;background:rgba(0,0,0,0.15);border-radius:8px;border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--text2);">
+              <div style="width:24px;height:3px;background:#00C8C8;border-radius:2px;"></div>
+              <span class="es">Direcci&oacute;n Swell</span><span class="en">Swell Direction</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--text2);">
+              <div style="width:20px;height:3px;background:#C8A96E;border-radius:2px;"></div>
+              <span class="es">Direcci&oacute;n Viento</span><span class="en">Wind Direction</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--text2);">
+              <div style="width:12px;height:12px;background:rgba(239,68,68,0.3);border-radius:2px;border:1px solid rgba(239,68,68,0.6);"></div>
+              <span class="es">Zona de atenci&oacute;n</span><span class="en">Attention zone</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--text2);">
+              <div style="width:12px;height:12px;background:rgba(34,197,94,0.2);border-radius:2px;border:1px solid rgba(34,197,94,0.5);"></div>
+              <span class="es">Zona favorable</span><span class="en">Favorable zone</span>
+            </div>
+          </div>
+
+          <!-- Semáforo -->
+          <div id="sf-box" class="semaforo sf-green">
+            <div id="sf-dot" class="sf-dot dot-green"></div>
+            <div class="sf-txt">
+              <div id="sf-status" class="sf-status"><span class="es">Cargando...</span><span class="en">Loading...</span></div>
+              <div id="sf-detail" class="sf-detail"></div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div id="sf-box" class="semaforo sf-green">
-        <div id="sf-dot" class="sf-dot dot-green"></div>
-        <div class="sf-txt">
-          <div id="sf-status" class="sf-status"><span class="es">Cargando...</span><span class="en">Loading...</span></div>
-          <div id="sf-detail" class="sf-detail"></div>
-        </div>
-      </div>
+
       <div class="sf-disc"><span class="es">&#9888;&#65039; Datos referenciales generados por Open-Meteo. No constituyen restricci&oacute;n operacional oficial. La decisi&oacute;n final siempre corresponde al capit&aacute;n, pr&aacute;ctico de puerto y RECOPE. Coordinar siempre con Capitan&iacute;a de Puerto Mo&iacute;n antes de cada operaci&oacute;n.</span><span class="en">&#9888;&#65039; Reference data generated by Open-Meteo. Does not constitute an official operational restriction. Final decision always rests with the captain, port pilot and RECOPE. Always coordinate with Port Captain Mo&iacute;n before each operation.</span></div>
     </div>
 
+  </div>
   </div>
 </section>
 
@@ -294,14 +431,81 @@ var RECOPE_LAT=10.00886,RECOPE_LON=-83.07780;
 var DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 function degCard(d){return DIRS[Math.round(((d%360)+360)%360/22.5)%16];}
 
-function swellRisk(dir,h,p){
+// Sector IDs mapped to degree ranges
+var SECTORS=[
+  {id:'s-n',   from:337.5, to:22.5,  risk:'danger'},
+  {id:'s-nne', from:22.5,  to:45,    risk:'danger'},
+  {id:'s-ne',  from:45,    to:67.5,  risk:'caution'},
+  {id:'s-ene', from:67.5,  to:90,    risk:'caution'},
+  {id:'s-e',   from:90,    to:112.5, risk:'ok'},
+  {id:'s-ese', from:112.5, to:135,   risk:'ok'},
+  {id:'s-se',  from:135,   to:157.5, risk:'ok'},
+  {id:'s-sse', from:157.5, to:180,   risk:'ok'},
+  {id:'s-s',   from:180,   to:202.5, risk:'ok'},
+  {id:'s-ssw', from:202.5, to:225,   risk:'ok'},
+  {id:'s-sw',  from:225,   to:247.5, risk:'ok'},
+  {id:'s-wsw', from:247.5, to:270,   risk:'ok'},
+  {id:'s-w',   from:270,   to:292.5, risk:'ok'},
+  {id:'s-wnw', from:292.5, to:315,   risk:'caution'},
+  {id:'s-nw',  from:315,   to:337.5, risk:'danger'},
+  {id:'s-nnw', from:337.5, to:360,   risk:'danger'}
+];
+
+function inSector(deg, from, to){
+  var d=((deg%360)+360)%360;
+  if(from>to) return d>=from||d<to; // wraps around 0
+  return d>=from&&d<to;
+}
+
+function getActiveSector(deg){
+  for(var i=0;i<SECTORS.length;i++){
+    if(inSector(deg,SECTORS[i].from,SECTORS[i].to)) return SECTORS[i];
+  }
+  return null;
+}
+
+function highlightSector(deg){
+  // Reset all sectors to base opacity
+  SECTORS.forEach(function(s){
+    var el=document.getElementById(s.id);
+    if(!el) return;
+    if(s.risk==='danger') el.style.fill='rgba(239,68,68,0.2)';
+    else if(s.risk==='caution') el.style.fill='rgba(245,158,11,0.12)';
+    else el.style.fill='rgba(34,197,94,0.08)';
+  });
+  // Highlight active sector
+  var active=getActiveSector(deg);
+  if(active){
+    var el=document.getElementById(active.id);
+    if(el){
+      if(active.risk==='danger') el.style.fill='rgba(239,68,68,0.55)';
+      else if(active.risk==='caution') el.style.fill='rgba(245,158,11,0.45)';
+      else el.style.fill='rgba(34,197,94,0.4)';
+    }
+  }
+}
+
+function rotateArrow(id, deg){
+  var el=document.getElementById(id);
+  if(el) el.setAttribute('transform','rotate('+deg+', 140, 140)');
+}
+
+function swellRisk(dir,h){
   var d=((dir%360)+360)%360;
   var danger=(d>=315||d<=45);
   var caution=(d>45&&d<=90)||(d>=270&&d<315);
-  if(danger&&h>=1.0)return{lvl:'red',es:'Atenci\u00f3n \u2014 Swell cuadrante N/NW/NE con altura \u22651.0m. Consultar con pr\u00e1ctico.',en:'Attention \u2014 Swell from N/NW/NE quadrant \u22651.0m. Consult with pilot.'};
-  if(danger&&h>=0.5)return{lvl:'yellow',es:'Monitorear \u2014 Swell del cuadrante norte con altura moderada.',en:'Monitor \u2014 Swell from northern quadrant with moderate height.'};
-  if(caution&&h>=1.2)return{lvl:'yellow',es:'Monitorear \u2014 Altura de ola elevada.',en:'Monitor \u2014 Elevated wave height.'};
-  return{lvl:'green',es:'Condiciones favorables \u2014 Swell fuera del cuadrante de atenci\u00f3n.',en:'Favorable conditions \u2014 Swell outside attention quadrant.'};
+  if(danger&&h>=1.0) return{lvl:'red',
+    es:'Atención — Swell cuadrante N/NW/NE con altura ≥1.0m. Consultar práctico.',
+    en:'Attention — Swell from N/NW/NE quadrant ≥1.0m. Consult pilot.'};
+  if(danger&&h>=0.5) return{lvl:'yellow',
+    es:'Monitorear — Swell del cuadrante norte con altura moderada.',
+    en:'Monitor — Swell from northern quadrant with moderate height.'};
+  if(caution&&h>=1.2) return{lvl:'yellow',
+    es:'Monitorear — Altura de ola elevada.',
+    en:'Monitor — Elevated wave height.'};
+  return{lvl:'green',
+    es:'Condiciones favorables — Swell fuera del cuadrante de atención.',
+    en:'Favorable conditions — Swell outside attention quadrant.'};
 }
 
 async function loadSwell(){
@@ -312,14 +516,25 @@ async function loadSwell(){
     var c=d1.current,w=d2.current;
     var h=c.wave_height,dir=c.wave_direction,per=c.wave_period;
     var ws=w.wind_speed_10m,wd=w.wind_direction_10m;
+
+    // Update data fields
     document.getElementById('sw-height').textContent=h!=null?h.toFixed(1):'--';
-    document.getElementById('sw-dir').textContent=dir!=null?Math.round(dir)+'\u00b0':'--\u00b0';
+    document.getElementById('sw-dir').textContent=dir!=null?Math.round(dir)+'°':'--°';
     document.getElementById('sw-dir-card').textContent=dir!=null?degCard(dir):'--';
     document.getElementById('sw-period').textContent=per!=null?Math.round(per):'--';
     document.getElementById('sw-wind').textContent=ws!=null?Math.round(ws):'--';
     document.getElementById('sw-wind-card').textContent=wd!=null?degCard(wd):'--';
+
+    // Rotate arrows on rose
+    if(dir!=null) rotateArrow('arrow-swell-g', dir);
+    if(wd!=null)  rotateArrow('arrow-wind-g', wd);
+
+    // Highlight active swell sector
+    if(dir!=null) highlightSector(dir);
+
+    // Semaforo
     if(h!=null&&dir!=null){
-      var risk=swellRisk(dir,h,per||0);
+      var risk=swellRisk(dir,h);
       var lang=document.documentElement.getAttribute('data-lang')||'es';
       var box=document.getElementById('sf-box'),dot=document.getElementById('sf-dot');
       box.className='semaforo sf-'+risk.lvl;
@@ -327,34 +542,36 @@ async function loadSwell(){
       document.getElementById('sf-status').innerHTML=
         risk.lvl==='green'?'<span class="es">Condiciones favorables</span><span class="en">Favorable conditions</span>':
         risk.lvl==='yellow'?'<span class="es">Monitorear</span><span class="en">Monitor</span>':
-        '<span class="es">Atenci\u00f3n</span><span class="en">Attention</span>';
-      document.getElementById('sf-detail').innerHTML='<span class="es">'+risk.es+'</span><span class="en">'+risk.en+'</span>';
-      if(window.applyLang)applyLang(lang);
+        '<span class="es">Atención</span><span class="en">Attention</span>';
+      document.getElementById('sf-detail').innerHTML=
+        '<span class="es">'+risk.es+'</span><span class="en">'+risk.en+'</span>';
+      if(window.applyLang) applyLang(lang);
     }
+
     var now=new Date().toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
     var u=document.getElementById('swell-updated');
-    if(u)u.textContent=(document.documentElement.getAttribute('data-lang')==='es'?'Actualizado: ':'Updated: ')+now;
+    if(u) u.textContent=(document.documentElement.getAttribute('data-lang')==='es'?'Actualizado: ':'Updated: ')+now;
   }catch(e){console.warn('Swell error',e);}
 }
 
 function loadPrices(){
   var lang=document.documentElement.getAttribute('data-lang')||'es';
-  var bursa='<a href="https://www.bursamalaysia.com/trade/trading_resources/derivatives/commodities" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver en Bursa Malaysia \u2192':'View on Bursa Malaysia \u2192')+'</a>';
-  var inv='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver en Investing.com \u2192':'View on Investing.com \u2192')+'</a>';
+  var bursa='<a href="https://www.investing.com/commodities/palm-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver precio en tiempo real →':'View real-time price →')+'</a>';
+  var inv='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver precio en tiempo real →':'View real-time price →')+'</a>';
   document.getElementById('cpo-val').innerHTML=bursa;
   document.getElementById('pko-val').innerHTML=bursa;
   document.getElementById('olein-val').innerHTML=bursa;
   document.getElementById('brent-val').innerHTML=inv;
   var now=new Date().toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
   var u=document.getElementById('prices-updated');
-  if(u)u.textContent=(lang==='es'?'Actualizado: ':'Updated: ')+now;
+  if(u) u.textContent=(lang==='es'?'Actualizado: ':'Updated: ')+now;
 }
 
 document.addEventListener('DOMContentLoaded',function(){
-  loadSwell();loadPrices();
+  loadSwell();
+  loadPrices();
   setInterval(loadSwell,15*60*1000);
   setInterval(loadPrices,30*60*1000);
 });
 </script>
 </body>
-</html>
