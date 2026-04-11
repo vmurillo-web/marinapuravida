@@ -3,134 +3,358 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marina Pura Vida — Tanker <em>Agency</em> | Costa Rica</title>
-  <meta name="description" content="Dedicated page for tanker agency in Costa Rica — RECOPE Moín, vegetable oils at Caldera and Golfito, liquid bulk and chemicals. Coming soon with full technical and operational information. Marina Pura Vida, maritime agency Costa Rica.">
-  <meta name="keywords" content="tanker agent costa rica, RECOPE moín agency, liquid bulk costa rica, edible oil tanker caldera, tanker agency golfito">
+  <title>Marina Pura Vida — Agencia Tanqueros Costa Rica | Aceite de Palma Golfito · RECOPE Moin</title>
+  <meta name="description" content="Agencia maritima especializada en tanqueros en Costa Rica. Aceite de palma CPO/PKO en Golfito, hidrocarburos RECOPE Moin. Swell en tiempo real puestos 5-0 y 5-1. 24/7.">
+  <meta name="keywords" content="tanker agent costa rica,agencia tanqueros costa rica,aceite palma golfito,CPO costa rica,RECOPE moin agency,liquid bulk costa rica,swell moin recope,palm oil tanker pacific">
   <link rel="canonical" href="https://marinapuravida.com/tankers.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    .cs-hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0A2535 100%);
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 2rem;
-    }
-    .cs-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(0,200,200,0.1) 0%, transparent 65%);
-    }
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,200,200,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,200,200,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .cs-content {
-      position: relative;
-      z-index: 2;
-      max-width: 640px;
-    }
-    .cs-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-    .cs-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(0,200,200,0.12);
-      border: 1px solid rgba(0,200,200,0.3);
-      color: var(--cyan);
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-      margin-bottom: 1.5rem;
-    }
-    .cs-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      animation: pulse 2s infinite;
-    }
-    .cs-title { color: #fff; margin-bottom: 1rem; }
-    .cs-title em { color: var(--cyan); }
-    .cs-desc { color: rgba(255,255,255,0.55); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; }
-    .cs-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .cs-back { 
-      position: fixed; top: 1.25rem; left: 1.5rem; z-index: 100;
-      display: flex; align-items: center; gap: 0.5rem;
-      color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 600;
-      transition: color 0.2s;
-    }
-    .cs-back:hover { color: var(--cyan); }
-    .cs-nav-controls {
-      position: fixed; top: 1.25rem; right: 1.5rem; z-index: 100;
-      display: flex; gap: 0.5rem; align-items: center;
-    }
+    body{background:var(--bg)}
+    .tk-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:70px;display:flex;align-items:center;padding:0 2rem;justify-content:space-between}
+    .tk-nav a{color:var(--text2);font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:.5rem;transition:color .2s;text-decoration:none}
+    .tk-nav a:hover{color:var(--cyan)}
+    .tk-hero{padding-top:70px;min-height:380px;position:relative;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#0A2535 100%)}
+    .tk-hero-bg{position:absolute;inset:0;z-index:0}
+    .tk-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;filter:saturate(.6)}
+    .tk-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.85) 0%,rgba(13,27,42,.5) 100%)}
+    .tk-grid-bg{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(0,200,200,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,200,.04) 1px,transparent 1px);background-size:60px 60px}
+    .tk-hero-c{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:3rem 2rem}
+    .tk-hero-c h1{color:#fff;margin-bottom:1rem}
+    .tk-hero-c h1 em{color:var(--cyan);font-style:italic}
+    .tk-hero-c p{color:rgba(255,255,255,.65);font-size:1.05rem;max-width:650px;line-height:1.75}
+    .stag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.3);color:var(--cyan);padding:.3rem .85rem;border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:var(--font-mono);margin-bottom:1.25rem}
+    .tk-sec{padding:4rem 0}
+    .tk-sec-alt{background:var(--bg2)}
+    .tk-c{max-width:1200px;margin:0 auto;padding:0 2rem}
+    .tk-2col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+    .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+    .price-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .25s}
+    .price-card:hover{border-color:rgba(0,200,200,.4);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+    .pc-lbl{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:.4rem}
+    .pc-name{font-weight:700;font-size:1rem;color:var(--text);margin-bottom:.2rem}
+    .pc-sub{font-size:.78rem;color:var(--muted);margin-bottom:1rem}
+    .pc-main{font-family:var(--font-mono);font-size:1.8rem;font-weight:600;color:var(--cyan);line-height:1}
+    .pc-unit{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+    .pc-src{font-size:.68rem;color:var(--muted);margin-top:.75rem}
+    .pc-link a{color:var(--cyan);font-size:.82rem;text-decoration:none;font-weight:600}
+    .pd{background:rgba(0,200,200,.06);border:1px solid rgba(0,200,200,.2);border-radius:12px;padding:1.25rem}
+    .pd-title{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem}
+    .pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .pd-grid dt{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .pd-grid dd{font-family:var(--font-mono);font-size:.92rem;font-weight:600;color:var(--text);margin-top:.15rem}
+    .svc-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.25rem}
+    .svc-i{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--text2)}
+    .svc-ic{color:var(--cyan);flex-shrink:0;margin-top:.1rem}
+    .sw-widget{background:var(--navy);border:1px solid rgba(0,200,200,.2);border-radius:16px;padding:2rem;margin-top:3rem}
+    .sw-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+    .sw-title{color:#fff;font-family:var(--font-display);font-size:1.2rem}
+    .sw-coords{font-family:var(--font-mono);font-size:.7rem;color:var(--muted)}
+    .sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+    .sw-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.25rem;text-align:center}
+    .sw-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.5rem;font-family:var(--font-mono)}
+    .sw-val{font-family:var(--font-mono);font-size:1.8rem;font-weight:600;color:#fff;line-height:1}
+    .sw-unit{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+    .sw-card{font-size:.82rem;color:var(--cyan);margin-top:.25rem;font-weight:600}
+    .semaforo{margin-top:1.5rem;padding:1.25rem 1.5rem;border-radius:10px;display:flex;align-items:center;gap:1rem;border:1px solid transparent;transition:all .5s}
+    .sf-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+    .sf-green {background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3)}
+    .sf-yellow{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3)}
+    .sf-red   {background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3)}
+    .dot-green {background:#22C55E}
+    .dot-yellow{background:#F59E0B}
+    .dot-red   {background:#EF4444}
+    .sf-txt{flex:1}
+    .sf-status{font-weight:700;font-size:.95rem;color:#fff}
+    .sf-detail{font-size:.82rem;color:rgba(255,255,255,.55);margin-top:.2rem}
+    .sf-disc{margin-top:1rem;font-size:.72rem;color:rgba(255,255,255,.3);padding:.75rem;background:rgba(255,255,255,.03);border-radius:8px;line-height:1.6}
+    .cta-bar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:3rem 2rem;text-align:center}
+    .cta-bar h2{color:#fff;margin-bottom:1rem}
+    .cta-bar p{color:rgba(255,255,255,.6);margin-bottom:2rem}
+    .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    @media(max-width:768px){.tk-2col{grid-template-columns:1fr}.price-grid{grid-template-columns:1fr}.sw-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.sw-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <a href="index.html" class="cs-back">← <span class="es">Volver al inicio</span><span class="en">Back to home</span></a>
-  <div class="cs-nav-controls">
+
+<nav class="tk-nav">
+  <a href="index.html">&#8592; <span class="es">Inicio</span><span class="en">Home</span></a>
+  <div style="display:flex;gap:.5rem;align-items:center">
     <button class="nav-btn lang-btn lang-active" data-lang="es">ES</button>
     <button class="nav-btn lang-btn" data-lang="en">EN</button>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀️</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9728;&#65039;</button>
   </div>
+</nav>
 
-  <section class="cs-hero" style="position:relative;">
-    <div style="position:absolute;inset:0;overflow:hidden;z-index:0;">
-      <img src="assets/img/tanker-golfito.webp" alt="" aria-hidden="true"
-           style="width:100%;height:100%;object-fit:cover;opacity:0.18;filter:saturate(0.5);">
-    </div>
-    <div class="hero-grid"></div>
-    <div class="cs-content">
-      <span class="cs-icon">🛢️</span>
-      <div class="cs-badge">
-        <span class="es">Próximamente</span><span class="en">Coming Soon</span>
+<section class="tk-hero">
+  <div class="tk-hero-bg"><img src="assets/img/tanker-golfito.webp" alt="Tanker operations Costa Rica"></div>
+  <div class="tk-grid-bg"></div>
+  <div class="tk-hero-c">
+    <div class="stag">&#128722; <span class="es">Agencia Especializada</span><span class="en">Specialized Agency</span></div>
+    <h1><span class="es">Agencia para <em>Tanqueros</em> en Costa Rica</span><span class="en">Tanker <em>Agency</em> in Costa Rica</span></h1>
+    <p><span class="es">Pac&iacute;fico Sur &mdash; Aceites de palma en Golfito. Atl&aacute;ntico &mdash; Hidrocarburos RECOPE en Mo&iacute;n. Operaciones 24/7 con m&aacute;s de 23 a&ntilde;os de experiencia en graneles l&iacute;quidos.</span><span class="en">South Pacific &mdash; Palm oils at Golfito. Atlantic &mdash; RECOPE hydrocarbons at Mo&iacute;n. 24/7 operations with over 23 years of liquid bulk experience.</span></p>
+  </div>
+</section>
+
+<!-- PACIFIC / GOLFITO -->
+<section class="tk-sec">
+  <div class="tk-c">
+    <div class="tk-2col">
+      <div>
+        <div class="stag">&#127804; <span class="es">Pac&iacute;fico Sur</span><span class="en">South Pacific</span></div>
+        <h2><span class="es"><em style="font-style:italic;color:var(--cyan)">Aceite de Palma</em> &mdash; Puerto Golfito</span><span class="en"><em style="font-style:italic;color:var(--cyan)">Palm Oil</em> &mdash; Port Golfito</span></h2>
+        <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Costa Rica produce entre 280,000 y 300,000 toneladas de aceite de palma anuales con exportaciones superiores a 250,000 toneladas. El flujo genera entre 17 y 22 buques tanque por a&ntilde;o en el Pac&iacute;fico Sur &mdash; convirtiendo a Golfito en un puerto estrat&eacute;gico para CPO, PKO, RBD Ole&iacute;na y Estearina.</span><span class="en">Costa Rica produces 280,000&ndash;300,000 tons of palm oil annually with exports exceeding 250,000 tons. The flow generates 17 to 22 tanker vessels per year in the South Pacific &mdash; making Golfito a strategic port for CPO, PKO, RBD Olein and Stearin.</span></p>
+        <div class="svc-list">
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Agencia portuaria &mdash; pre-arribo hasta despacho</span><span class="en">Port agency &mdash; pre-arrival to departure</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Inspectores FOSFA certificados &mdash; muestreo y certificaci&oacute;n</span><span class="en">FOSFA certified inspectors &mdash; sampling and certification</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Tallying y supervisi&oacute;n de carga &mdash; CPO, PKO, RBD Ole&iacute;na, Estearina</span><span class="en">Tallying and cargo supervision &mdash; CPO, PKO, RBD Olein, Stearin</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Demurrage tracking y gesti&oacute;n de laytime</span><span class="en">Demurrage tracking and laytime management</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Coordinaci&oacute;n INCOP y plantas extractoras Zona Sur</span><span class="en">INCOP and South Zone extraction plant coordination</span></span></div>
+        </div>
       </div>
-      <h1 class="cs-title">
-        <span class="es">Agencia para <em>Tanqueros</em></span>
-        <span class="en">Tanker <em>Agency</em></span>
-      </h1>
-      <p class="cs-desc">
-        <span class="es">Página especializada en agencia para buques tanqueros en Costa Rica — RECOPE Moín, aceites vegetales en Caldera y Golfito, graneles líquidos y químicos. Próximamente con toda la información técnica y operacional.</span>
-        <span class="en">Dedicated page for tanker agency in Costa Rica — RECOPE Moín, vegetable oils at Caldera and Golfito, liquid bulk and chemicals. Coming soon with full technical and operational information.</span>
-      </p>
-      <div class="cs-ctas">
-        <a href="index.html#contact" class="btn btn-primary">
-          <span class="es">Consultar ahora →</span><span class="en">Contact us now →</span>
-        </a>
-        <a href="https://wa.me/50688509403" target="_blank" rel="noopener"
-           class="btn" style="background:#25D366;color:#fff">
-          <span class="es">WhatsApp</span><span class="en">WhatsApp</span>
-        </a>
+      <div>
+        <div class="pd">
+          <div class="pd-title">&#9875; Puerto Golfito &mdash; <span class="es">Datos T&eacute;cnicos</span><span class="en">Technical Data</span></div>
+          <dl class="pd-grid">
+            <div><dt>Max Draft</dt><dd>9.8 m (UKC 0.5m)</dd></div>
+            <div><dt>Max LOA</dt><dd>420 m</dd></div>
+            <div><dt><span class="es">Muelle</span><span class="en">Wharf</span></dt><dd>317 m</dd></div>
+            <div><dt>VHF Port</dt><dd>Ch 16 / 14</dd></div>
+            <div><dt>Autoridad</dt><dd>INCOP</dd></div>
+            <div><dt><span class="es">Fondeo</span><span class="en">Anchorage</span></dt><dd>Golfo Dulce</dd></div>
+            <div><dt><span class="es">Coords Muelle</span><span class="en">Wharf Coords</span></dt><dd>8.63586&#176;N 83.16631&#176;W</dd></div>
+            <div><dt><span class="es">Coords Piloto</span><span class="en">Pilot Coords</span></dt><dd>8.60643&#176;N 83.19560&#176;W</dd></div>
+            <div><dt><span class="es">Piloto</span><span class="en">Pilot</span></dt><dd><span class="es">Contesta 1.5nm de Punta Voladera</span><span class="en">Answers 1.5nm from Punta Voladera</span></dd></div>
+          </dl>
+          <div style="margin-top:1rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:0.85rem 1rem;font-size:0.8rem;line-height:1.6;">
+            <span style="color:#F59E0B;font-weight:700;">&#9888;&#65039; <span class="es">Nota operacional</span><span class="en">Operational note</span>:</span>
+            <span class="es"> Bow thruster operativo obligatorio. Sin BT: debe contratar remolcador.</span>
+            <span class="en"> Operative bow thruster mandatory. Without BT: tug hire required.</span>
+          </div>
+        </div>
+        <img src="assets/img/tanker-golfito.webp" alt="Palm oil tanker Golfito Costa Rica" style="width:100%;border-radius:12px;aspect-ratio:16/9;object-fit:cover;margin-top:1rem">
       </div>
-      <p style="margin-top:2rem;color:rgba(255,255,255,0.3);font-size:0.8rem">
-        ops@marinapuravida.com &nbsp;·&nbsp; +506 8850.9403
-      </p>
     </div>
-  </section>
 
-  <a id="wa-float" href="https://wa.me/50688509403" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-  </a>
+    <!-- Commodity Prices -->
+    <div style="margin-top:3rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+        <div>
+          <h3 style="font-size:1.2rem"><span class="es">Precios Internacionales &mdash; Bursa Malaysia</span><span class="en">International Prices &mdash; Bursa Malaysia</span></h3>
+          <p style="color:var(--muted);font-size:.82rem;margin-top:.25rem"><span class="es">Referencia de mercado. Tipo de cambio MYR/USD actualizado.</span><span class="en">Market reference. MYR/USD exchange rate updated.</span></p>
+        </div>
+        <span id="prices-updated" style="font-family:var(--font-mono);font-size:.72rem;color:var(--muted)"></span>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <div class="pc-lbl">CPO</div>
+          <div class="pc-name">Crude Palm Oil</div>
+          <div class="pc-sub"><span class="es">Aceite de palma crudo</span><span class="en">Crude palm oil</span></div>
+          <div class="pc-main pc-link" id="cpo-val"></div>
+          <div class="pc-unit">MYR &amp; USD / MT</div>
+          <div class="pc-src">Bursa Malaysia Derivatives</div>
+        </div>
+        <div class="price-card">
+          <div class="pc-lbl">PKO</div>
+          <div class="pc-name">Palm Kernel Oil</div>
+          <div class="pc-sub"><span class="es">Aceite de palmiste</span><span class="en">Palm kernel oil</span></div>
+          <div class="pc-main pc-link" id="pko-val"></div>
+          <div class="pc-unit">MYR &amp; USD / MT</div>
+          <div class="pc-src">Bursa Malaysia Derivatives</div>
+        </div>
+        <div class="price-card">
+          <div class="pc-lbl">RBD OLEIN</div>
+          <div class="pc-name">RBD Palm Olein</div>
+          <div class="pc-sub"><span class="es">Ole&iacute;na refinada</span><span class="en">Refined palm olein</span></div>
+          <div class="pc-main pc-link" id="olein-val"></div>
+          <div class="pc-unit">MYR &amp; USD / MT</div>
+          <div class="pc-src">Bursa Malaysia Derivatives</div>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:.75rem;text-align:center"><span class="es">&#9888;&#65039; Precios de referencia orientativos. Verificar con su corredor antes de tomar decisiones comerciales.</span><span class="en">&#9888;&#65039; Reference prices only. Verify with your broker before making commercial decisions.</span></p>
+    </div>
+  </div>
+</section>
 
-  <script src="assets/js/main.js"></script>
+<!-- ATLANTIC / RECOPE -->
+<section class="tk-sec tk-sec-alt">
+  <div class="tk-c">
+    <div class="tk-2col">
+      <div>
+        <div class="stag">&#9875; <span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div>
+        <h2><span class="es"><em style="font-style:italic;color:var(--cyan)">RECOPE</em> &mdash; Terminal Mo&iacute;n</span><span class="en"><em style="font-style:italic;color:var(--cyan)">RECOPE</em> &mdash; Mo&iacute;n Terminal</span></h2>
+        <p style="color:var(--text2);margin-top:1rem;line-height:1.8"><span class="es">Marina Pura Vida coordina operaciones de tanqueros en el terminal RECOPE de Mo&iacute;n &mdash; Puestos 5-0 y 5-1 &mdash; para recepciones de hidrocarburo, asfalto y derivados. Presencia en campo con respuesta 24/7.</span><span class="en">Marina Pura Vida coordinates tanker operations at the RECOPE terminal in Mo&iacute;n &mdash; Berths 5-0 and 5-1 &mdash; for hydrocarbon, asphalt and derivatives receivals. On-ground presence with 24/7 response.</span></p>
+        <div class="svc-list">
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Agencia portuaria &mdash; coordinaci&oacute;n JAPDEVA y RECOPE</span><span class="en">Port agency &mdash; JAPDEVA and RECOPE coordination</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Hidrocarburos, asfalto, diesel, gasolina, bunker</span><span class="en">Hydrocarbons, asphalt, diesel, gasoline, bunker</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span>MARPOL compliance &mdash; <span class="es">documentaci&oacute;n completa</span><span class="en">full documentation</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Pre-arribo: an&aacute;lisis de swell y condiciones operacionales</span><span class="en">Pre-arrival: swell analysis and operational conditions</span></span></div>
+          <div class="svc-i"><span class="svc-ic">&#10003;</span><span><span class="es">Coordinaci&oacute;n Capitan&iacute;a de Puerto Mo&iacute;n</span><span class="en">Port Captain Mo&iacute;n coordination</span></span></div>
+        </div>
+      </div>
+      <div>
+        <div class="pd">
+          <div class="pd-title">&#9875; RECOPE Mo&iacute;n &mdash; Puestos 5-0 / 5-1</div>
+          <dl class="pd-grid">
+            <div><dt>Terminal</dt><dd>RECOPE Mo&iacute;n</dd></div>
+            <div><dt>Puestos</dt><dd>5-0 / 5-1</dd></div>
+            <div><dt>Autoridad</dt><dd>JAPDEVA</dd></div>
+            <div><dt>VHF Port Control</dt><dd>Ch 16 / 10</dd></div>
+            <div><dt>VHF Piloto</dt><dd>Ch 13</dd></div>
+            <div><dt>VHF Terminal</dt><dd>Ch 73 / 17</dd></div>
+            <div><dt><span class="es">Coords Terminal</span><span class="en">Terminal Coords</span></dt><dd>10.00886&#176;N 83.07780&#176;W</dd></div>
+            <div><dt><span class="es">Coords Piloto</span><span class="en">Pilot Coords</span></dt><dd>10.02484&#176;N 83.08402&#176;W</dd></div>
+            <div><dt><span class="es">Pilotaje</span><span class="en">Pilotage</span></dt><dd><span class="es">Obligatorio</span><span class="en">Compulsory</span></dd></div>
+          </dl>
+          <div style="margin-top:1rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:0.85rem 1rem;font-size:0.8rem;line-height:1.6;">
+            <span style="color:#F59E0B;font-weight:700;">&#9888;&#65039; <span class="es">Nota operacional</span><span class="en">Operational note</span>:</span>
+            <span class="es"> Uso de remolcadores obligatorio &mdash; m&iacute;nimo 2, m&aacute;ximo 3.</span>
+            <span class="en"> Tug use mandatory &mdash; minimum 2, maximum 3.</span>
+          </div>
+        </div>
+        <div class="price-card" style="margin-top:1rem">
+          <div class="pc-lbl">BRENT CRUDE</div>
+          <div class="pc-name">ICE Brent Crude Oil</div>
+          <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
+          <div class="pc-main pc-link" id="brent-val"></div>
+          <div class="pc-unit">USD / BBL</div>
+          <div class="pc-src">ICE Futures Europe</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Swell Widget -->
+    <div class="sw-widget">
+      <div class="sw-header">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;color:var(--cyan);margin-bottom:.4rem">&#127754; <span class="es">CONDICIONES MAR&Iacute;TIMAS EN TIEMPO REAL</span><span class="en">REAL-TIME MARITIME CONDITIONS</span></div>
+          <div class="sw-title"><span class="es">Swell &amp; Viento &mdash; Terminal RECOPE Mo&iacute;n</span><span class="en">Swell &amp; Wind &mdash; RECOPE Mo&iacute;n Terminal</span></div>
+          <div class="sw-coords">10.00886&#176;N, 83.07780&#176;W &mdash; Puestos 5-0 / 5-1</div>
+        </div>
+        <span id="swell-updated" style="font-family:var(--font-mono);font-size:.72rem;color:var(--muted)"></span>
+      </div>
+      <div class="sw-grid">
+        <div class="sw-item">
+          <div class="sw-lbl"><span class="es">Altura de ola</span><span class="en">Wave height</span></div>
+          <div class="sw-val" id="sw-height">--</div>
+          <div class="sw-unit">metros</div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-lbl"><span class="es">Direcci&oacute;n swell</span><span class="en">Swell direction</span></div>
+          <div class="sw-val" id="sw-dir">--&#176;</div>
+          <div class="sw-card" id="sw-dir-card">--</div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-lbl"><span class="es">Per&iacute;odo de ola</span><span class="en">Wave period</span></div>
+          <div class="sw-val" id="sw-period">--</div>
+          <div class="sw-unit">seg</div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-lbl"><span class="es">Viento</span><span class="en">Wind</span></div>
+          <div class="sw-val" id="sw-wind">--</div>
+          <div class="sw-unit">kt</div>
+          <div class="sw-card" id="sw-wind-card">--</div>
+        </div>
+      </div>
+      <div id="sf-box" class="semaforo sf-green">
+        <div id="sf-dot" class="sf-dot dot-green"></div>
+        <div class="sf-txt">
+          <div id="sf-status" class="sf-status"><span class="es">Cargando...</span><span class="en">Loading...</span></div>
+          <div id="sf-detail" class="sf-detail"></div>
+        </div>
+      </div>
+      <div class="sf-disc"><span class="es">&#9888;&#65039; Datos referenciales generados por Open-Meteo. No constituyen restricci&oacute;n operacional oficial. La decisi&oacute;n final siempre corresponde al capit&aacute;n, pr&aacute;ctico de puerto y RECOPE. Coordinar siempre con Capitan&iacute;a de Puerto Mo&iacute;n antes de cada operaci&oacute;n.</span><span class="en">&#9888;&#65039; Reference data generated by Open-Meteo. Does not constitute an official operational restriction. Final decision always rests with the captain, port pilot and RECOPE. Always coordinate with Port Captain Mo&iacute;n before each operation.</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-bar">
+  <div style="max-width:600px;margin:0 auto">
+    <h2><span class="es">&#191;Necesitas agencia para tu pr&oacute;xima escala?</span><span class="en">Need agency for your next port call?</span></h2>
+    <p><span class="es">Disponibles 24/7 para coordinar operaciones en todos los terminales de Costa Rica.</span><span class="en">Available 24/7 to coordinate operations at all Costa Rican terminals.</span></p>
+    <div class="btn-row">
+      <a href="index.html#contact" class="btn btn-primary"><span class="es">Contactar ahora &rarr;</span><span class="en">Contact us now &rarr;</span></a>
+      <a href="https://wa.me/50688509403?text=Hola%20MPV%2C%20necesito%20agencia%20para%20tanquero" target="_blank" rel="noopener" class="btn" style="background:#25D366;color:#fff">WhatsApp 24/7</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:rgba(255,255,255,.35)">ops@marinapuravida.com &nbsp;&middot;&nbsp; +506 8850.9403 &nbsp;&middot;&nbsp; +506 7050.0037</p>
+  </div>
+</section>
+
+<a id="wa-float" href="https://wa.me/50688509403" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+</a>
+
+<script src="assets/js/main.js"></script>
+<script>
+var RECOPE_LAT=10.00886,RECOPE_LON=-83.07780;
+var DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+function degCard(d){return DIRS[Math.round(((d%360)+360)%360/22.5)%16];}
+
+function swellRisk(dir,h,p){
+  var d=((dir%360)+360)%360;
+  var danger=(d>=315||d<=45);
+  var caution=(d>45&&d<=90)||(d>=270&&d<315);
+  if(danger&&h>=1.0)return{lvl:'red',es:'Atenci\u00f3n \u2014 Swell cuadrante N/NW/NE con altura \u22651.0m. Consultar con pr\u00e1ctico.',en:'Attention \u2014 Swell from N/NW/NE quadrant \u22651.0m. Consult with pilot.'};
+  if(danger&&h>=0.5)return{lvl:'yellow',es:'Monitorear \u2014 Swell del cuadrante norte con altura moderada.',en:'Monitor \u2014 Swell from northern quadrant with moderate height.'};
+  if(caution&&h>=1.2)return{lvl:'yellow',es:'Monitorear \u2014 Altura de ola elevada.',en:'Monitor \u2014 Elevated wave height.'};
+  return{lvl:'green',es:'Condiciones favorables \u2014 Swell fuera del cuadrante de atenci\u00f3n.',en:'Favorable conditions \u2014 Swell outside attention quadrant.'};
+}
+
+async function loadSwell(){
+  try{
+    var r1=await fetch('https://marine-api.open-meteo.com/v1/marine?latitude='+RECOPE_LAT+'&longitude='+RECOPE_LON+'&current=wave_height,wave_direction,wave_period&timezone=America/Costa_Rica');
+    var r2=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+RECOPE_LAT+'&longitude='+RECOPE_LON+'&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn&timezone=America/Costa_Rica');
+    var d1=await r1.json(),d2=await r2.json();
+    var c=d1.current,w=d2.current;
+    var h=c.wave_height,dir=c.wave_direction,per=c.wave_period;
+    var ws=w.wind_speed_10m,wd=w.wind_direction_10m;
+    document.getElementById('sw-height').textContent=h!=null?h.toFixed(1):'--';
+    document.getElementById('sw-dir').textContent=dir!=null?Math.round(dir)+'\u00b0':'--\u00b0';
+    document.getElementById('sw-dir-card').textContent=dir!=null?degCard(dir):'--';
+    document.getElementById('sw-period').textContent=per!=null?Math.round(per):'--';
+    document.getElementById('sw-wind').textContent=ws!=null?Math.round(ws):'--';
+    document.getElementById('sw-wind-card').textContent=wd!=null?degCard(wd):'--';
+    if(h!=null&&dir!=null){
+      var risk=swellRisk(dir,h,per||0);
+      var lang=document.documentElement.getAttribute('data-lang')||'es';
+      var box=document.getElementById('sf-box'),dot=document.getElementById('sf-dot');
+      box.className='semaforo sf-'+risk.lvl;
+      dot.className='sf-dot dot-'+risk.lvl;
+      document.getElementById('sf-status').innerHTML=
+        risk.lvl==='green'?'<span class="es">Condiciones favorables</span><span class="en">Favorable conditions</span>':
+        risk.lvl==='yellow'?'<span class="es">Monitorear</span><span class="en">Monitor</span>':
+        '<span class="es">Atenci\u00f3n</span><span class="en">Attention</span>';
+      document.getElementById('sf-detail').innerHTML='<span class="es">'+risk.es+'</span><span class="en">'+risk.en+'</span>';
+      if(window.applyLang)applyLang(lang);
+    }
+    var now=new Date().toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
+    var u=document.getElementById('swell-updated');
+    if(u)u.textContent=(document.documentElement.getAttribute('data-lang')==='es'?'Actualizado: ':'Updated: ')+now;
+  }catch(e){console.warn('Swell error',e);}
+}
+
+function loadPrices(){
+  var lang=document.documentElement.getAttribute('data-lang')||'es';
+  var bursa='<a href="https://www.bursamalaysia.com/trade/trading_resources/derivatives/commodities" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver en Bursa Malaysia \u2192':'View on Bursa Malaysia \u2192')+'</a>';
+  var inv='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver en Investing.com \u2192':'View on Investing.com \u2192')+'</a>';
+  document.getElementById('cpo-val').innerHTML=bursa;
+  document.getElementById('pko-val').innerHTML=bursa;
+  document.getElementById('olein-val').innerHTML=bursa;
+  document.getElementById('brent-val').innerHTML=inv;
+  var now=new Date().toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
+  var u=document.getElementById('prices-updated');
+  if(u)u.textContent=(lang==='es'?'Actualizado: ':'Updated: ')+now;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  loadSwell();loadPrices();
+  setInterval(loadSwell,15*60*1000);
+  setInterval(loadPrices,30*60*1000);
+});
+</script>
 </body>
 </html>
