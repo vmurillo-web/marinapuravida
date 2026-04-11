@@ -1,5 +1,17 @@
 [
   {
+    "id": 4,
+    "fecha": "2026-04-10",
+    "puerto": "Caldera",
+    "puerto_en": "Caldera",
+    "titulo_es": "Consorcio Sunset: tarifas y pagos al Estado — Puerto Caldera",
+    "titulo_en": "Sunset Consortium: tariffs and state payments — Port Caldera",
+    "contenido_es": "Tras la apertura del sobre económico, el Consorcio Sunset (Hanseatic Global Terminals + APM Terminals) presentó tarifas All-In que cumplen el cartel y en varios rubros mejoran las expectativas del mercado. Contenedor seco: $184.61 | Reefer: $280.73 | Vehículos: $18.37 | Granel líquido: $9.91. Los pagos ofrecidos a INCOP alcanzan el máximo puntuable tanto en el componente fijo como variable. El análisis ahora se centra en la solidez financiera del modelo para sostener una inversión de USD 587 millones durante 30 años de concesión. Las próximas semanas definirán el marco operativo del principal puerto del Pacífico costarricense por tres décadas.",
+    "contenido_en": "Following the economic envelope opening, Sunset Consortium (Hanseatic Global Terminals + APM Terminals) submitted All-In tariffs that comply with the tender and in several categories exceed market expectations. Dry container: $184.61 | Reefer: $280.73 | Vehicles: $18.37 | Liquid bulk: $9.91. Payments offered to INCOP reach the maximum scorable amount for both fixed and variable components. Analysis now focuses on the financial soundness of the model to sustain a USD 587 million investment over a 30-year concession. The coming weeks will define the operational framework for Costa Rica's main Pacific port for three decades.",
+    "tipo": "info",
+    "autor": "Fuente: análisis sectorial"
+  },
+  {
     "id": 1,
     "fecha": "2026-04-10",
     "puerto": "Caldera",
