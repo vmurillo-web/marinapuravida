@@ -550,41 +550,46 @@ window.renderNews = async function() {
     news = await res.json();
   } catch(e) { return; }
 
-  const VISIBLE = 3; // Show 3, rest hidden but indexable by Google
+  const VISIBLE = 3;
 
-  container.innerHTML = news.map((n, idx) => {
-    const titulo = LANG === 'es' ? n.titulo_es : n.titulo_en;
-    const contenido = LANG === 'es' ? n.contenido_es : n.contenido_en;
-    const puerto = LANG === 'es' ? n.puerto : n.puerto_en;
-    const fecha = new Date(n.fecha).toLocaleDateString(
+  container.innerHTML = news.map(function(n, idx) {
+    var titulo   = LANG === 'es' ? n.titulo_es   : n.titulo_en;
+    var contenido= LANG === 'es' ? n.contenido_es: n.contenido_en;
+    var puerto   = LANG === 'es' ? n.puerto      : n.puerto_en;
+    var fecha    = new Date(n.fecha).toLocaleDateString(
       LANG === 'es' ? 'es-CR' : 'en-US',
       { day: 'numeric', month: 'short' }
     );
-    const hidden = idx >= VISIBLE ? 'style="display:none" aria-hidden="true"' : '';
-    // Download button if available
-    const dlBtn = n.descarga_url ? `
-      <a href="${n.descarga_url}" target="_blank" rel="noopener" download
-         style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.75rem;
-                background:var(--cyan);color:var(--navy);padding:0.4rem 0.9rem;
-                border-radius:6px;font-size:0.78rem;font-weight:700;text-decoration:none;">
-        &#128196; ${LANG === 'es' ? (n.descarga_es || 'Descargar') : (n.descarga_en || 'Download')}
-      </a>` : '';
-    return \`
-      <div class="news-card" ${hidden}>
-        <div class="news-card-head">
-          <div class="news-status status-\${n.tipo}"></div>
-          <span class="news-puerto">\${puerto}</span>
-          <span class="news-fecha">\${fecha}</span>
-        </div>
-        <div class="news-card-body">
-          <h4>\${titulo}</h4>
-          <p>\${contenido}</p>
-          \${dlBtn}
-        </div>
-      </div>
-    \`;
+    var hiddenStyle = idx >= VISIBLE ? ' style="display:none" aria-hidden="true"' : '';
+
+    var dlBtn = '';
+    if (n.descarga_url) {
+      var dlLabel = LANG === 'es'
+        ? (n.descarga_es || 'Descargar documento')
+        : (n.descarga_en || 'Download document');
+      dlBtn = '<a href="' + n.descarga_url + '" target="_blank" rel="noopener" download ' +
+        'style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.85rem;' +
+        'background:var(--cyan);color:var(--navy);padding:0.45rem 1rem;' +
+        'border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">' +
+        '&#128196; ' + dlLabel + '</a>';
+    }
+
+    return '<div class="news-card"' + hiddenStyle + '>' +
+      '<div class="news-card-head">' +
+        '<div class="news-status status-' + n.tipo + '"></div>' +
+        '<span class="news-puerto">' + puerto + '</span>' +
+        '<span class="news-fecha">' + fecha + '</span>' +
+      '</div>' +
+      '<div class="news-card-body">' +
+        '<h4>' + titulo + '</h4>' +
+        '<p>' + contenido + '</p>' +
+        dlBtn +
+      '</div>' +
+    '</div>';
   }).join('');
 };
+
+
 
 // ── EUKOR Tracking ────────────────────────────────────────────
 function initTracking() {
