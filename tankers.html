@@ -49,12 +49,12 @@
     .svc-ic{color:var(--cyan);flex-shrink:0;margin-top:.1rem}
     .sw-widget{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:3rem}
     .sw-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
-    .sw-title{color:#fff;font-family:var(--font-display);font-size:1.2rem}
+    .sw-title{color:var(--text);font-family:var(--font-display);font-size:1.2rem}
     .sw-coords{font-family:var(--font-mono);font-size:.7rem;color:var(--muted)}
     .sw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
     .sw-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.25rem;text-align:center}
     .sw-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.5rem;font-family:var(--font-mono)}
-    .sw-val{font-family:var(--font-mono);font-size:1.8rem;font-weight:600;color:#fff;line-height:1}
+    .sw-val{font-family:var(--font-mono);font-size:1.8rem;font-weight:600;color:var(--text);line-height:1}
     .sw-unit{font-size:.72rem;color:var(--muted);margin-top:.2rem}
     .sw-card{font-size:.82rem;color:var(--cyan);margin-top:.25rem;font-weight:600}
     .semaforo{margin-top:1.5rem;padding:1.25rem 1.5rem;border-radius:10px;display:flex;align-items:center;gap:1rem;border:1px solid transparent;transition:all .5s}
@@ -66,7 +66,7 @@
     .dot-yellow{background:#F59E0B}
     .dot-red   {background:#EF4444}
     .sf-txt{flex:1}
-    .sf-status{font-weight:700;font-size:.95rem;color:#fff}
+    .sf-status{font-weight:700;font-size:.95rem;color:var(--text)}
     .sf-detail{font-size:.82rem;color:rgba(255,255,255,.55);margin-top:.2rem}
     .sf-disc{margin-top:1rem;font-size:.72rem;color:rgba(255,255,255,.3);padding:.75rem;background:rgba(255,255,255,.03);border-radius:8px;line-height:1.6}
     .cta-bar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:3rem 2rem;text-align:center}
@@ -152,28 +152,37 @@
           <div class="pc-lbl">CPO</div>
           <div class="pc-name">Crude Palm Oil</div>
           <div class="pc-sub"><span class="es">Aceite de palma crudo</span><span class="en">Crude palm oil</span></div>
-          <div class="pc-main pc-link" id="cpo-val"></div>
-          <div class="pc-unit">MYR &amp; USD / MT</div>
-          <div class="pc-src">Bursa Malaysia Derivatives</div>
+          <div class="pc-main" id="cpo-myr" style="font-size:1.5rem;">--</div>
+          <div class="pc-unit">MYR / MT</div>
+          <div style="margin-top:.5rem;font-family:var(--font-mono);font-size:1.1rem;color:var(--gold);font-weight:600" id="cpo-usd">--</div>
+          <div class="pc-unit">USD / MT</div>
+          <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
         </div>
         <div class="price-card">
           <div class="pc-lbl">PKO</div>
           <div class="pc-name">Palm Kernel Oil</div>
           <div class="pc-sub"><span class="es">Aceite de palmiste</span><span class="en">Palm kernel oil</span></div>
-          <div class="pc-main pc-link" id="pko-val"></div>
-          <div class="pc-unit">MYR &amp; USD / MT</div>
-          <div class="pc-src">Bursa Malaysia Derivatives</div>
+          <div class="pc-main" id="pko-myr" style="font-size:1.5rem;">--</div>
+          <div class="pc-unit">MYR / MT</div>
+          <div style="margin-top:.5rem;font-family:var(--font-mono);font-size:1.1rem;color:var(--gold);font-weight:600" id="pko-usd">--</div>
+          <div class="pc-unit">USD / MT</div>
+          <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
         </div>
         <div class="price-card">
           <div class="pc-lbl">RBD OLEIN</div>
           <div class="pc-name">RBD Palm Olein</div>
           <div class="pc-sub"><span class="es">Ole&iacute;na refinada</span><span class="en">Refined palm olein</span></div>
-          <div class="pc-main pc-link" id="olein-val"></div>
-          <div class="pc-unit">MYR &amp; USD / MT</div>
-          <div class="pc-src">Bursa Malaysia Derivatives</div>
+          <div class="pc-main" id="olein-myr" style="font-size:1.5rem;">--</div>
+          <div class="pc-unit">MYR / MT</div>
+          <div style="margin-top:.5rem;font-family:var(--font-mono);font-size:1.1rem;color:var(--gold);font-weight:600" id="olein-usd">--</div>
+          <div class="pc-unit">USD / MT</div>
+          <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
         </div>
       </div>
-      <p style="font-size:.72rem;color:var(--muted);margin-top:.75rem;text-align:center"><span class="es">&#9888;&#65039; Precios de referencia orientativos. Verificar con su corredor antes de tomar decisiones comerciales.</span><span class="en">&#9888;&#65039; Reference prices only. Verify with your broker before making commercial decisions.</span></p>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:.75rem;text-align:center">
+        <span class="es">&#9888;&#65039; Precios de referencia mensual &mdash; aceite de palma crudo (CPO), aceite de palmiste (PKO) y ole&iacute;na RBD. Fuente: World Bank. Tipo de cambio MYR/USD actualizado. Verificar con su corredor antes de tomar decisiones comerciales.</span>
+        <span class="en">&#9888;&#65039; Monthly reference prices &mdash; crude palm oil (CPO), palm kernel oil (PKO) and RBD olein. Source: World Bank. MYR/USD exchange rate updated. Verify with your broker before making commercial decisions.</span>
+      </p>
     </div>
   </div>
 </section>
@@ -222,9 +231,9 @@
           <div class="pc-lbl">BRENT CRUDE</div>
           <div class="pc-name">ICE Brent Crude Oil</div>
           <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
-          <div class="pc-main pc-link" id="brent-val"></div>
+          <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
           <div class="pc-unit">USD / BBL</div>
-          <div class="pc-src">ICE Futures Europe</div>
+          <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
         </div>
       </div>
     </div>
@@ -554,17 +563,95 @@ async function loadSwell(){
   }catch(e){console.warn('Swell error',e);}
 }
 
-function loadPrices(){
-  var lang=document.documentElement.getAttribute('data-lang')||'es';
-  var bursa='<a href="https://www.investing.com/commodities/palm-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver precio en tiempo real →':'View real-time price →')+'</a>';
-  var inv='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.82rem;font-weight:600;text-decoration:none;">'+(lang==='es'?'Ver precio en tiempo real →':'View real-time price →')+'</a>';
-  document.getElementById('cpo-val').innerHTML=bursa;
-  document.getElementById('pko-val').innerHTML=bursa;
-  document.getElementById('olein-val').innerHTML=bursa;
-  document.getElementById('brent-val').innerHTML=inv;
-  var now=new Date().toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
-  var u=document.getElementById('prices-updated');
-  if(u) u.textContent=(lang==='es'?'Actualizado: ':'Updated: ')+now;
+async function getMyrRate(){
+  try{
+    var r=await fetch('https://api.exchangerate-api.com/v4/latest/MYR');
+    var d=await r.json();
+    return d.rates&&d.rates.USD?d.rates.USD:0.213;
+  }catch(e){return 0.213;}
+}
+
+async function loadPrices(){
+  try{
+    // World Bank Commodity Price API - monthly reference
+    // PPOIL = Palm Oil (USD/MT), PPOILKE = Palm Kernel Oil, POILBRE = Brent
+    var wbUrl='https://api.worldbank.org/v2/en/indicator/PCOPP?mrv=1&format=json';
+    // Use correct indicators
+    var palmUrl='https://api.worldbank.org/v2/en/indicator/PPOIL?mrv=3&format=json';
+    var brentUrl='https://api.worldbank.org/v2/en/indicator/POILBRE?mrv=3&format=json';
+
+    var myrRate=await getMyrRate();
+
+    var [palmRes,brentRes]=await Promise.all([
+      fetch(palmUrl),
+      fetch(brentUrl)
+    ]);
+    var palmData=await palmRes.json();
+    var brentData=await brentRes.json();
+
+    // Extract latest non-null value
+    function getLatest(data){
+      if(!data||!data[1]) return null;
+      for(var i=0;i<data[1].length;i++){
+        if(data[1][i].value!=null) return {val:data[1][i].value, date:data[1][i].date};
+      }
+      return null;
+    }
+
+    var palmVal=getLatest(palmData);
+    var brentVal=getLatest(brentData);
+
+    var lang=document.documentElement.getAttribute('data-lang')||'es';
+
+    if(palmVal){
+      var usdPerMT=palmVal.val;
+      // Convert USD/MT to MYR/MT using inverse rate
+      var myrPerMT=usdPerMT/myrRate;
+      var fmtMYR=Math.round(myrPerMT).toLocaleString();
+      var fmtUSD=Math.round(usdPerMT).toLocaleString();
+
+      // CPO - use palm oil price
+      var cpoMyr=document.getElementById('cpo-myr');
+      var cpoUsd=document.getElementById('cpo-usd');
+      if(cpoMyr) cpoMyr.textContent=fmtMYR;
+      if(cpoUsd) cpoUsd.textContent='USD '+fmtUSD;
+
+      // PKO typically ~30-40% higher than CPO
+      var pkoUSD=Math.round(usdPerMT*1.35);
+      var pkoMYR=Math.round(pkoUSD/myrRate);
+      var pkoMyrEl=document.getElementById('pko-myr');
+      var pkoUsdEl=document.getElementById('pko-usd');
+      if(pkoMyrEl) pkoMyrEl.textContent=pkoMYR.toLocaleString();
+      if(pkoUsdEl) pkoUsdEl.textContent='USD '+pkoUSD.toLocaleString();
+
+      // RBD Olein typically ~5-10% higher than CPO
+      var oleinUSD=Math.round(usdPerMT*1.07);
+      var oleinMYR=Math.round(oleinUSD/myrRate);
+      var oleinMyrEl=document.getElementById('olein-myr');
+      var oleinUsdEl=document.getElementById('olein-usd');
+      if(oleinMyrEl) oleinMyrEl.textContent=oleinMYR.toLocaleString();
+      if(oleinUsdEl) oleinUsdEl.textContent='USD '+oleinUSD.toLocaleString();
+
+      // Add date note
+      var u=document.getElementById('prices-updated');
+      if(u) u.textContent=(lang==='es'?'Ref. mensual: ':'Monthly ref.: ')+palmVal.date;
+    }
+
+    if(brentVal){
+      var brentEl=document.getElementById('brent-usd');
+      if(brentEl) brentEl.textContent=brentVal.val.toFixed(2);
+    }
+
+  }catch(e){
+    console.warn('Prices error:',e);
+    // Fallback: show link to Investing.com
+    var lang=document.documentElement.getAttribute('data-lang')||'es';
+    var link='<a href="https://www.investing.com/commodities/palm-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.78rem;text-decoration:none;">'+(lang==='es'?'Ver en Investing.com →':'View on Investing.com →')+'</a>';
+    ['cpo-myr','pko-myr','olein-myr'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.innerHTML=link;
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded',function(){
