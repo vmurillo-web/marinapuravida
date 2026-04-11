@@ -550,7 +550,9 @@ window.renderNews = async function() {
     news = await res.json();
   } catch(e) { return; }
 
-  container.innerHTML = news.map(n => {
+  const VISIBLE = 3; // Show 3, rest hidden but indexable by Google
+
+  container.innerHTML = news.map((n, idx) => {
     const titulo = LANG === 'es' ? n.titulo_es : n.titulo_en;
     const contenido = LANG === 'es' ? n.contenido_es : n.contenido_en;
     const puerto = LANG === 'es' ? n.puerto : n.puerto_en;
@@ -558,19 +560,29 @@ window.renderNews = async function() {
       LANG === 'es' ? 'es-CR' : 'en-US',
       { day: 'numeric', month: 'short' }
     );
-    return `
-      <div class="news-card">
+    const hidden = idx >= VISIBLE ? 'style="display:none" aria-hidden="true"' : '';
+    // Download button if available
+    const dlBtn = n.descarga_url ? `
+      <a href="${n.descarga_url}" target="_blank" rel="noopener" download
+         style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.75rem;
+                background:var(--cyan);color:var(--navy);padding:0.4rem 0.9rem;
+                border-radius:6px;font-size:0.78rem;font-weight:700;text-decoration:none;">
+        &#128196; ${LANG === 'es' ? (n.descarga_es || 'Descargar') : (n.descarga_en || 'Download')}
+      </a>` : '';
+    return \`
+      <div class="news-card" ${hidden}>
         <div class="news-card-head">
-          <div class="news-status status-${n.tipo}"></div>
-          <span class="news-puerto">${puerto}</span>
-          <span class="news-fecha">${fecha}</span>
+          <div class="news-status status-\${n.tipo}"></div>
+          <span class="news-puerto">\${puerto}</span>
+          <span class="news-fecha">\${fecha}</span>
         </div>
         <div class="news-card-body">
-          <h4>${titulo}</h4>
-          <p>${contenido}</p>
+          <h4>\${titulo}</h4>
+          <p>\${contenido}</p>
+          \${dlBtn}
         </div>
       </div>
-    `;
+    \`;
   }).join('');
 };
 
