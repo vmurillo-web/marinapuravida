@@ -28,15 +28,15 @@
   },
   {
     "id": 3,
-    "fecha": "2026-04-09",
-    "puerto": "Golfito",
-    "puerto_en": "Golfito",
-    "titulo_es": "Exportacion de aceite de palma - Temporada activa",
-    "titulo_en": "Palm oil export - Active season",
-    "contenido_es": "Operaciones de exportacion de aceite de palma en curso en Puerto Golfito. Capacidad de bodega disponible. Coordinacion con INCOP confirmada. Contactar MPV para ventanas de carga y programacion.",
-    "contenido_en": "Palm oil export operations underway at Port Golfito. Storage capacity available. INCOP coordination confirmed. Contact MPV for loading windows and scheduling.",
-    "tipo": "info",
-    "autor": "MPV Golfito"
+  "fecha": "2026-04-11",
+  "puerto": "Golfito",
+  "puerto_en": "Golfito",
+  "titulo_es": "Palma aceitera: uno de cada cinco empleos en la Zona Sur depende del sector",
+  "titulo_en": "Palm oil: one in five jobs in Costa Rica's South Zone depends on the sector",
+  "contenido_es": "El sector palmero consolida su rol como motor economico de la Zona Sur. Con produccion anual de 280.000-300.000 toneladas y exportaciones superiores a 250.000 toneladas, genera entre 16.000 y 20.000 empleos directos e indirectos en Golfito, Corredores, Osa y Coto Brus — entre el 16% y 20% del empleo total regional. El flujo de exportacion genera 17 a 22 buques tanque por ano, convirtiendo la palma en carga estrategica para los puertos del Pacifico. Costa Rica destaca por eficiencia: rendimiento de 3,7 toneladas de aceite por hectarea, comparable con los paises mas tecnificados de la region. Marina Pura Vida coordina operaciones de carga de aceite de palma en Puerto Golfito.",
+  "contenido_en": "Costa Rica's palm oil sector consolidates its role as the economic engine of the South Zone. With annual production of 280,000-300,000 tons and exports exceeding 250,000 tons, it generates between 16,000 and 20,000 direct and indirect jobs in Golfito, Corredores, Osa and Coto Brus — 16% to 20% of total regional employment. Export flow generates 17 to 22 tanker vessels per year, making palm oil a strategic cargo for Pacific ports. Costa Rica stands out for efficiency: 3.7 tons of oil per hectare yield, comparable to the most advanced producers in the region. Marina Pura Vida coordinates palm oil loading operations at Port Golfito.",
+  "tipo": "info",
+  "autor": "MPV Golfito - Analisis sectorial"
   },
   {
     "id": 2,
