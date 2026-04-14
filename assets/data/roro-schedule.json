@@ -1,0 +1,141 @@
+{
+  "slot_info": {
+    "day_name_es": "Miércoles 15:00 → Jueves 15:00",
+    "day_name_en": "Wednesday 15:00 → Thursday 15:00",
+    "duration_hours": 24,
+    "buffer_hours": 1,
+    "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza si el feeder corre por condiciones climáticas.",
+    "note_en": "Free slot between end of feeder and Del Monte window. Shifts when feeder delays due to weather."
+  },
+  "berth1_current": {
+    "vessel": "Aliaga Express",
+    "line": "RAM",
+    "type": "feeder",
+    "etd_estimated": "2026-04-14T16:00:00",
+    "note": "Sigue MN AS Svenja"
+  },
+  "roro_waiting": [
+    {
+      "vessel": "Georgia Highway",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "op_hours_est": 20,
+      "status": "anchored"
+    }
+  ],
+  "planned": [
+    {
+      "vessel": "Georgia Highway",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "etb": "2026-04-20T16:00:00",
+      "etd": "2026-04-21T08:00:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "op_hours": 20,
+      "status": "anchored"
+    },
+    {
+      "vessel": "San Alfonso",
+      "line": "Grimaldi",
+      "type": "feeder",
+      "eta": "2026-04-14T21:00:00",
+      "etb": null,
+      "etd": null,
+      "moves": 863,
+      "op_hours": 24,
+      "status": "confirmed"
+    }
+  ],
+  "completed": [
+    {
+      "vessel": "Morning Celine VC603",
+      "line": "EUKOR",
+      "type": "roro",
+      "eta": "2026-04-07T06:17:00",
+      "etb": "2026-04-11T21:35:00",
+      "discharge_start": "2026-04-11T23:10:00",
+      "discharge_end": "2026-04-12T15:00:00",
+      "etd": "2026-04-12T15:50:00",
+      "units_new": 1533,
+      "units_used": 0
+    },
+    {
+      "vessel": "Opal Leader",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-02T18:00:00",
+      "etb": "2026-04-08T17:20:00",
+      "discharge_start": "2026-04-08T19:00:00",
+      "discharge_end": "2026-04-09T03:25:00",
+      "etd": "2026-04-09T04:10:00",
+      "units_new": 941,
+      "units_used": 0
+    },
+    {
+      "vessel": "Morning Carol",
+      "line": "EUKOR",
+      "type": "roro",
+      "eta": "2026-03-17T05:00:00",
+      "etb": "2026-03-18T08:48:00",
+      "discharge_start": "2026-03-18T10:40:00",
+      "discharge_end": "2026-03-19T10:40:00",
+      "etd": "2026-03-19T15:05:00",
+      "units_new": 2322,
+      "units_used": 0,
+      "delay_note": "Ramp failure delayed sailing +4.4h"
+    },
+    {
+      "vessel": "Jasper Arrow V.143",
+      "line": "KLINE",
+      "type": "roro",
+      "eta": "2026-03-13T06:00:00",
+      "etb": "2026-03-17T21:43:00",
+      "discharge_start": "2026-03-17T23:25:00",
+      "discharge_end": "2026-03-18T02:55:00",
+      "etd": "2026-03-18T03:32:00",
+      "units_new": 411,
+      "units_used": 0
+    },
+    {
+      "vessel": "Victory Ray",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-02-28T10:00:00",
+      "etb": "2026-02-28T14:00:00",
+      "discharge_start": "2026-02-28T14:00:00",
+      "discharge_end": "2026-02-28T19:30:00",
+      "etd": "2026-02-28T19:30:00",
+      "units_new": 472,
+      "units_used": 0
+    },
+    {
+      "vessel": "Dignity Leader",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-02-23T13:00:00",
+      "etb": "2026-02-26T03:00:00",
+      "discharge_start": "2026-02-26T03:00:00",
+      "discharge_end": "2026-02-26T22:00:00",
+      "etd": "2026-02-26T22:00:00",
+      "units_new": 1154,
+      "units_used": 0
+    },
+    {
+      "vessel": "RCC Asia 2026055",
+      "line": "KLINE",
+      "type": "roro",
+      "eta": "2026-02-14T23:00:00",
+      "etb": "2026-02-16T16:00:00",
+      "discharge_start": "2026-02-16T16:00:00",
+      "discharge_end": "2026-02-17T23:00:00",
+      "etd": "2026-02-17T23:00:00",
+      "units_new": 2845,
+      "units_used": 0
+    }
+  ]
+}
