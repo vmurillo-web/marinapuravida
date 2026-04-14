@@ -1,18 +1,40 @@
 {
-  "slot_info": {
-    "day_name_es": "Miércoles 15:00 → Jueves 15:00",
-    "day_name_en": "Wednesday 15:00 → Thursday 15:00",
-    "duration_hours": 24,
-    "buffer_hours": 1,
-    "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza si el feeder corre por condiciones climáticas.",
-    "note_en": "Free slot between end of feeder and Del Monte window. Shifts when feeder delays due to weather."
+  "week_windows": {
+    "updated": "2026-04-14T16:00:00",
+    "week_ref_es": "Semana 14-20 Abril 2026",
+    "week_ref_en": "Week April 14-20, 2026",
+    "feeder": {
+      "vessel": "Aliaga Express",
+      "line": "RAM",
+      "base_window_end": "2026-04-15T15:00:00",
+      "etd_estimated": "2026-04-14T16:00:00",
+      "status": "operating",
+      "absent": false
+    },
+    "del_monte": {
+      "vessel": "Del Monte Harvester",
+      "line": "Del Monte",
+      "base_window_start": "2026-04-16T15:00:00",
+      "eta_estimated": "2026-04-16T15:00:00",
+      "status": "confirmed",
+      "absent": false
+    },
+    "next_feeder": {
+      "vessel": "AS Savanna",
+      "line": "Transmares",
+      "base_window_end": "2026-04-22T15:00:00",
+      "eta_estimated": "2026-04-16T23:00:00",
+      "status": "confirmed",
+      "absent": false
+    }
   },
-  "berth1_current": {
-    "vessel": "Aliaga Express",
-    "line": "RAM",
-    "type": "feeder",
-    "etd_estimated": "2026-04-14T16:00:00",
-    "note": "Sigue MN AS Svenja"
+  "slot_config": {
+    "duration_hours": 24,
+    "buffer_after_feeder_hours": 1,
+    "buffer_before_delmont_hours": 1,
+    "avg_rate_veh_h": 90,
+    "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza en bloque cuando el feeder corre por condiciones climáticas u operacionales.",
+    "note_en": "Free slot between end of feeder and Del Monte window. Shifts as a block when feeder delays due to weather or operational conditions."
   },
   "roro_waiting": [
     {
@@ -22,7 +44,6 @@
       "eta": "2026-04-13T14:36:00",
       "units_new": 1807,
       "units_used": 45,
-      "op_hours_est": 20,
       "status": "anchored"
     }
   ],
@@ -32,8 +53,8 @@
       "line": "NYK",
       "type": "roro",
       "eta": "2026-04-13T14:36:00",
-      "etb": "2026-04-20T16:00:00",
-      "etd": "2026-04-21T08:00:00",
+      "etb": null,
+      "etd": null,
       "units_new": 1807,
       "units_used": 45,
       "op_hours": 20,
@@ -62,7 +83,10 @@
       "discharge_end": "2026-04-12T15:00:00",
       "etd": "2026-04-12T15:50:00",
       "units_new": 1533,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-04-08T15:00:00",
+      "slot_displacement_h": 78,
+      "delay_note": "Slot desplazado +78h por condiciones climáticas. Ventana base mié→jue se corrió a sáb→dom."
     },
     {
       "vessel": "Opal Leader",
@@ -74,7 +98,9 @@
       "discharge_end": "2026-04-09T03:25:00",
       "etd": "2026-04-09T04:10:00",
       "units_new": 941,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-04-08T15:00:00",
+      "slot_displacement_h": 2
     },
     {
       "vessel": "Morning Carol",
@@ -87,7 +113,9 @@
       "etd": "2026-03-19T15:05:00",
       "units_new": 2322,
       "units_used": 0,
-      "delay_note": "Ramp failure delayed sailing +4.4h"
+      "slot_base_open": "2026-03-18T15:00:00",
+      "slot_displacement_h": -6,
+      "delay_note": "Falla de rampa demoró zarpe +4.4h"
     },
     {
       "vessel": "Jasper Arrow V.143",
@@ -99,7 +127,9 @@
       "discharge_end": "2026-03-18T02:55:00",
       "etd": "2026-03-18T03:32:00",
       "units_new": 411,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-03-18T15:00:00",
+      "slot_displacement_h": -17
     },
     {
       "vessel": "Victory Ray",
@@ -111,7 +141,9 @@
       "discharge_end": "2026-02-28T19:30:00",
       "etd": "2026-02-28T19:30:00",
       "units_new": 472,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-02-25T15:00:00",
+      "slot_displacement_h": -71
     },
     {
       "vessel": "Dignity Leader",
@@ -123,7 +155,9 @@
       "discharge_end": "2026-02-26T22:00:00",
       "etd": "2026-02-26T22:00:00",
       "units_new": 1154,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-02-25T15:00:00",
+      "slot_displacement_h": 12
     },
     {
       "vessel": "RCC Asia 2026055",
@@ -135,7 +169,9 @@
       "discharge_end": "2026-02-17T23:00:00",
       "etd": "2026-02-17T23:00:00",
       "units_new": 2845,
-      "units_used": 0
+      "units_used": 0,
+      "slot_base_open": "2026-02-18T15:00:00",
+      "slot_displacement_h": -23
     }
   ]
 }
