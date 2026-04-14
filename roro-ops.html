@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>RoRo Ops — Puerto Caldera | MPV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#081826; --bg2:#0d1f2f; --surface:#0f2436; --surface2:#142940;
+      --border:rgba(255,255,255,0.09); --border2:rgba(255,255,255,0.15);
+      --text:#e8f0f7; --text2:#8aa4bc; --muted:#4d6a80;
+      --cyan:#00C8C8; --gold:#C8A96E; --navy:#0D1B2A;
+      --green:#22C55E; --yellow:#F59E0B; --red:#EF4444;
+      --green-bg:rgba(34,197,94,0.1); --yellow-bg:rgba(245,158,11,0.1); --red-bg:rgba(239,68,68,0.1);
+      --green-border:rgba(34,197,94,0.3); --yellow-border:rgba(245,158,11,0.3); --red-border:rgba(239,68,68,0.3);
+      --font:DM Sans,system-ui,sans-serif; --mono:DM Mono,monospace;
+      --radius:10px; --radius-lg:14px;
+    }
+    [data-theme="light"] {
+      --bg:#f0f4f8; --bg2:#e4eaf0; --surface:#ffffff; --surface2:#f5f8fb;
+      --border:rgba(0,0,0,0.09); --border2:rgba(0,0,0,0.15);
+      --text:#0d1b2a; --text2:#3a5a78; --muted:#7a9ab8;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+    h1,h2,h3{line-height:1.2}
+    a{color:var(--cyan);text-decoration:none}
+
+    /* LOGIN */
+    .login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100}
+    .login-box{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:2.5rem;width:340px;text-align:center}
+    .login-logo{width:52px;height:52px;border-radius:50%;background:var(--cyan);margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--navy)}
+    .login-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px}
+    .login-sub{font-size:12px;color:var(--text2);margin-bottom:1.5rem}
+    .login-select,.login-input{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-family:var(--font);font-size:13px;padding:10px 12px;margin-bottom:10px;outline:none}
+    .login-select:focus,.login-input:focus{border-color:var(--cyan)}
+    .login-btn{width:100%;background:var(--cyan);color:var(--navy);border:none;border-radius:var(--radius);font-family:var(--font);font-size:13px;font-weight:600;padding:11px;cursor:pointer}
+    .login-btn:hover{opacity:0.9}
+    .login-err{font-size:11px;color:var(--red);margin-bottom:8px;display:none}
+
+    /* NAV */
+    .navbar{position:sticky;top:0;z-index:50;background:var(--bg2);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem}
+    .nav-brand{display:flex;align-items:center;gap:10px}
+    .nav-logo{width:32px;height:32px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy)}
+    .nav-name{font-size:14px;font-weight:600;color:var(--text)}
+    .nav-sub{font-size:11px;color:var(--text2)}
+    .nav-right{display:flex;align-items:center;gap:6px}
+    .nbtn{background:var(--surface);border:1px solid var(--border2);border-radius:6px;color:var(--text2);font-family:var(--font);font-size:11px;font-weight:600;padding:5px 10px;cursor:pointer}
+    .nbtn.active{background:var(--cyan);color:var(--navy);border-color:var(--cyan)}
+    .nbtn:hover:not(.active){border-color:var(--cyan);color:var(--cyan)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+
+    /* LAYOUT */
+    .content{max-width:1200px;margin:0 auto;padding:1.25rem 1.5rem}
+    .section-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:.75rem}
+    .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1rem}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.125rem 1.25rem}
+    .card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+    .card-sub{font-size:11px;color:var(--text2);margin-bottom:1rem}
+    .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem}
+    .kpi-lbl{font-size:11px;color:var(--text2);margin-bottom:4px}
+    .kpi-val{font-size:24px;font-weight:600;color:var(--text);line-height:1}
+    .kpi-sub{font-size:11px;color:var(--text2);margin-top:3px}
+
+    /* CAPACITY BAR */
+    .cap-track{background:var(--surface2);border-radius:4px;height:8px;overflow:hidden;margin:6px 0}
+    .cap-fill{height:100%;border-radius:4px;transition:width .5s}
+
+    /* SLOT WIDGET */
+    .slot-widget{background:linear-gradient(135deg,var(--surface) 0%,var(--bg2) 100%);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem}
+    .slot-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+    .slot-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,200,200,.3);background:rgba(0,200,200,.08);padding:4px 10px;border-radius:100px}
+    .slot-timeline{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+    .slot-step{flex:1;min-width:140px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem}
+    .slot-step.active{border-color:var(--cyan);background:rgba(0,200,200,.06)}
+    .slot-step.warn{border-color:var(--yellow);background:rgba(245,158,11,.06)}
+    .slot-step.danger{border-color:var(--red);background:rgba(239,68,68,.06)}
+    .ss-lbl{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--text2);margin-bottom:4px}
+    .ss-val{font-size:13px;font-weight:600;color:var(--text)}
+    .ss-sub{font-size:11px;color:var(--text2);margin-top:2px}
+    .roro-fit-bar{background:var(--surface2);border-radius:6px;height:12px;overflow:hidden;margin:8px 0;position:relative}
+    .roro-fit-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center}
+    .fit-label{font-size:9px;font-weight:600;color:var(--navy);white-space:nowrap;padding:0 6px}
+    .slot-alert{border-radius:var(--radius);padding:.75rem 1rem;font-size:12px;font-weight:500;margin-top:.75rem;display:flex;align-items:center;gap:.5rem}
+    .alert-green{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
+    .alert-yellow{background:var(--yellow-bg);border:1px solid var(--yellow-border);color:var(--yellow)}
+    .alert-red{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red)}
+
+    /* PIPELINE */
+    .pipe-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+    .vc{min-width:170px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem;flex-shrink:0}
+    .vc.featured{border-color:var(--cyan);background:rgba(0,200,200,.05)}
+    .vc.anchored{border-color:var(--yellow);background:rgba(245,158,11,.05)}
+    .vc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+    .vc-linebadge{font-family:var(--mono);font-size:9px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--surface);border:1px solid var(--border2);color:var(--text2)}
+    .vc-status{font-size:9px;font-weight:600;padding:2px 7px;border-radius:100px}
+    .st-anchored{background:var(--yellow-bg);color:var(--yellow)}
+    .st-confirmed{background:rgba(0,200,200,.1);color:var(--cyan)}
+    .st-completed{background:var(--green-bg);color:var(--green)}
+    .vc-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
+    .vc-units{font-size:20px;font-weight:600;color:var(--cyan);line-height:1;margin:4px 0 2px}
+    .vc-detail{font-size:10px;color:var(--text2);line-height:1.5}
+
+    /* TABLES */
+    .tbl{width:100%;border-collapse:collapse;font-size:12px}
+    .tbl th{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--text2);padding:7px 8px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+    .tbl th:first-child{text-align:left}
+    .tbl td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--border);color:var(--text)}
+    .tbl td:first-child{text-align:left;color:var(--text2)}
+    .tbl tr:last-child td{border-bottom:none}
+    .tbl tr:hover td{background:var(--surface2)}
+    .htbl{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
+    .htbl th{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);white-space:nowrap;text-align:left}
+    .htbl td{padding:7px 8px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;word-break:break-word}
+    .htbl tr:last-child td{border-bottom:none}
+    .htbl tr:hover td{background:var(--surface2)}
+
+    /* FORECAST */
+    .fc-scenario{border-radius:var(--radius);padding:.875rem}
+    .fc-good{background:var(--green-bg);border:1px solid var(--green-border)}
+    .fc-bad{background:var(--yellow-bg);border:1px solid var(--yellow-border)}
+    .fc-title{font-size:11px;font-weight:600;margin-bottom:.625rem}
+    .fc-good .fc-title{color:var(--green)}
+    .fc-bad .fc-title{color:var(--yellow)}
+    .fc-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--border)}
+    .fc-row:last-child{border-bottom:none}
+    .fc-key{color:var(--text2)}
+    .fc-val{font-weight:600;color:var(--text)}
+    .slider-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text2);margin-bottom:6px}
+    input[type=range]{flex:1;accent-color:var(--cyan)}
+    .risk-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;margin-top:8px}
+    .risk-low{background:var(--green-bg);color:var(--green)}
+    .risk-med{background:var(--yellow-bg);color:var(--yellow)}
+    .risk-high{background:var(--red-bg);color:var(--red)}
+
+    /* SPC IFRAME */
+    .spc-frame{width:100%;height:500px;border:none;border-radius:var(--radius)}
+
+    @media(max-width:768px){
+      .grid-4,.grid-3{grid-template-columns:1fr 1fr}
+      .grid-2{grid-template-columns:1fr}
+      .slot-timeline{flex-direction:column}
+      .htbl{font-size:10px}
+    }
+    @media(max-width:480px){
+      .grid-4,.grid-3{grid-template-columns:1fr}
+      .content{padding:1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">⚓</div>
+    <div class="login-title">RoRo Ops — Puerto Caldera</div>
+    <div class="login-sub es">Panel operacional · Marina Pura Vida</div>
+    <div class="login-sub en" style="display:none">Operations dashboard · Marina Pura Vida</div>
+    <select class="login-select" id="user-select">
+      <option value="" class="es">Seleccionar perfil...</option>
+      <option value="mpv">MPV Internal</option>
+      <option value="eukor">EUKOR</option>
+      <option value="ww">Wallenius Wilhelmsen</option>
+    </select>
+    <input type="password" class="login-input" id="pw-input" placeholder="Contraseña / Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="login-err" id="login-err">Contraseña incorrecta / Incorrect password</div>
+    <button class="login-btn" onclick="doLogin()">
+      <span class="es">Ingresar al dashboard</span>
+      <span class="en" style="display:none">Enter dashboard</span>
+    </button>
+    <div style="margin-top:1rem;display:flex;justify-content:center;gap:6px">
+      <button class="nbtn active" id="ll-es" onclick="setLang('es')">ES</button>
+      <button class="nbtn" id="ll-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">MPV</div>
+    <div>
+      <div class="nav-name">RoRo Ops — <span id="user-label" style="color:var(--cyan)"></span></div>
+      <div class="nav-sub"><span class="live-dot"></span><span id="nav-updated"></span></div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="nbtn active" id="ln-es" onclick="setLang('es')">ES</button>
+    <button class="nbtn" id="ln-en" onclick="setLang('en')">EN</button>
+    <button class="nbtn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    <button class="nbtn" onclick="doLogout()" id="btn-exit">Salir</button>
+  </div>
+</nav>
+
+<div class="content">
+
+  <!-- YARD KPIs -->
+  <div class="section-lbl es">Estado del patio — hoy</div>
+  <div class="section-lbl en" style="display:none">Yard status — today</div>
+  <div class="grid-4">
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Vehículos en patio</div>
+      <div class="kpi-lbl en" style="display:none">Vehicles in yard</div>
+      <div class="kpi-val" id="k-yard-total">—</div>
+      <div class="kpi-sub" id="k-yard-sub">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Capacidad del patio</div>
+      <div class="kpi-lbl en" style="display:none">Yard capacity</div>
+      <div class="kpi-val" id="k-cap-pct">—</div>
+      <div class="cap-track"><div class="cap-fill" id="k-cap-bar"></div></div>
+      <div class="kpi-sub" id="k-cap-sub">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Despachados ayer</div>
+      <div class="kpi-lbl en" style="display:none">Dispatched yesterday</div>
+      <div class="kpi-val" id="k-disp">—</div>
+      <div class="kpi-sub" id="k-disp-sub">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Promedio despacho diario</div>
+      <div class="kpi-lbl en" style="display:none">Avg daily dispatch</div>
+      <div class="kpi-val" id="k-avg-disp">—</div>
+      <div class="kpi-sub es">veh/día · últimos 8 días</div>
+      <div class="kpi-sub en" style="display:none">veh/day · last 8 days</div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Productividad bruta prom.</div>
+      <div class="kpi-lbl en" style="display:none">Avg gross productivity</div>
+      <div class="kpi-val" id="k-gross">124</div>
+      <div class="kpi-sub">veh/h gross berth</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Productividad neta prom.</div>
+      <div class="kpi-lbl en" style="display:none">Avg net productivity</div>
+      <div class="kpi-val" id="k-net">95</div>
+      <div class="kpi-sub">veh/h net discharge</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-lbl es">Espera prom. ETA→ETB</div>
+      <div class="kpi-lbl en" style="display:none">Avg waiting ETA→ETB</div>
+      <div class="kpi-val" id="k-wait">—</div>
+      <div class="kpi-sub es">días en bahía promedio</div>
+      <div class="kpi-sub en" style="display:none">avg days at anchorage</div>
+    </div>
+  </div>
+
+  <!-- RORO SLOT WIDGET -->
+  <div class="slot-widget">
+    <div class="slot-header">
+      <div>
+        <div class="slot-badge">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--cyan);display:inline-block"></span>
+          <span class="es">Calculadora de Ventana RORO</span>
+          <span class="en" style="display:none">RORO Slot Calculator</span>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:6px">
+          <span class="es">Ventana base: Miércoles 15:00 → Jueves 15:00</span>
+          <span class="en" style="display:none">Base slot: Wednesday 15:00 → Thursday 15:00</span>
+        </div>
+        <div style="font-size:11px;color:var(--text2);margin-top:2px" id="slot-note-text"></div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text2)" id="slot-updated"></div>
+        <div style="font-size:11px;color:var(--text2);margin-top:4px" id="feeder-info"></div>
+      </div>
+    </div>
+
+    <div class="slot-timeline">
+      <div class="slot-step" id="step-feeder">
+        <div class="ss-lbl es">Buque en Puesto 1 ahora</div>
+        <div class="ss-lbl en" style="display:none">Current vessel Berth 1</div>
+        <div class="ss-val" id="ss-vessel">—</div>
+        <div class="ss-sub" id="ss-etd">—</div>
+      </div>
+      <div class="slot-step" id="step-open">
+        <div class="ss-lbl es">Apertura del slot</div>
+        <div class="ss-lbl en" style="display:none">Slot opens</div>
+        <div class="ss-val" id="ss-open">—</div>
+        <div class="ss-sub" id="ss-open-sub">ETD + 1h buffer</div>
+      </div>
+      <div class="slot-step" id="step-close">
+        <div class="ss-lbl es">Cierre del slot</div>
+        <div class="ss-lbl en" style="display:none">Slot closes</div>
+        <div class="ss-val" id="ss-close">—</div>
+        <div class="ss-sub">24h <span class="es">después de apertura</span><span class="en" style="display:none">after opening</span></div>
+      </div>
+      <div class="slot-step" id="step-roro">
+        <div class="ss-lbl es">RORO en espera</div>
+        <div class="ss-lbl en" style="display:none">RORO waiting</div>
+        <div class="ss-val" id="ss-roro-name">—</div>
+        <div class="ss-sub" id="ss-roro-sub">—</div>
+      </div>
+    </div>
+
+    <div id="roro-fit-section" style="display:none">
+      <div style="font-size:11px;color:var(--text2);margin-bottom:4px">
+        <span class="es">Uso del slot (24h disponibles):</span>
+        <span class="en" style="display:none">Slot usage (24h available):</span>
+      </div>
+      <div class="roro-fit-bar">
+        <div class="roro-fit-fill" id="roro-fit-fill">
+          <span class="fit-label" id="roro-fit-label"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="slot-alert" class="slot-alert"></div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="card" style="margin-bottom:1rem">
+    <div class="card-title es">Pipeline de buques — próximos atraques</div>
+    <div class="card-title en" style="display:none">Vessel pipeline — upcoming berths</div>
+    <div class="card-sub es">Puesto 1 · Planificados y en espera</div>
+    <div class="card-sub en" style="display:none">Berth 1 · Planned and anchored</div>
+    <div class="pipe-scroll" id="pipeline-container"></div>
+  </div>
+
+  <!-- FORECAST + DAILY MOVEMENT -->
+  <div class="grid-2">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-title es">Pronóstico de capacidad</div>
+      <div class="card-title en" style="display:none">Capacity forecast</div>
+      <div class="card-sub" id="fc-next-vessel">—</div>
+      <div class="slider-row">
+        <span class="es">Escenario bueno</span><span class="en" style="display:none">Good scenario</span>
+        <input type="range" min="50" max="300" value="140" id="sl-good" step="5" oninput="updateForecast()">
+        <span id="sl-good-val" style="min-width:30px;font-weight:600;color:var(--text);font-family:var(--mono)">140</span>
+      </div>
+      <div class="slider-row">
+        <span class="es">Escenario malo</span><span class="en" style="display:none">Bad scenario</span>
+        <input type="range" min="20" max="200" value="70" id="sl-bad" step="5" oninput="updateForecast()">
+        <span id="sl-bad-val" style="min-width:30px;font-weight:600;color:var(--text);font-family:var(--mono)">70</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+        <div class="fc-scenario fc-good">
+          <div class="fc-title es">Escenario favorable</div>
+          <div class="fc-title en" style="display:none">Good scenario</div>
+          <div class="fc-row"><span class="fc-key es">Patio @ ETB</span><span class="fc-key en" style="display:none">Yard @ ETB</span><span class="fc-val" id="fc-p-good">—</span></div>
+          <div class="fc-row"><span class="fc-key es">Tras descarga</span><span class="fc-key en" style="display:none">After discharge</span><span class="fc-val" id="fc-a-good">—</span></div>
+          <div class="fc-row"><span class="fc-key es">Espacio libre</span><span class="fc-key en" style="display:none">Free space</span><span class="fc-val" id="fc-s-good">—</span></div>
+        </div>
+        <div class="fc-scenario fc-bad">
+          <div class="fc-title es">Escenario conservador</div>
+          <div class="fc-title en" style="display:none">Bad scenario</div>
+          <div class="fc-row"><span class="fc-key es">Patio @ ETB</span><span class="fc-key en" style="display:none">Yard @ ETB</span><span class="fc-val" id="fc-p-bad">—</span></div>
+          <div class="fc-row"><span class="fc-key es">Tras descarga</span><span class="fc-key en" style="display:none">After discharge</span><span class="fc-val" id="fc-a-bad">—</span></div>
+          <div class="fc-row"><span class="fc-key es">Espacio libre</span><span class="fc-key en" style="display:none">Free space</span><span class="fc-val" id="fc-s-bad">—</span></div>
+        </div>
+      </div>
+      <div><span class="risk-badge" id="risk-badge"></span></div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;overflow-x:auto">
+      <div class="card-title es">Movimiento diario</div>
+      <div class="card-title en" style="display:none">Daily movement</div>
+      <div class="card-sub es">Patio y despacho · últimos 8 días</div>
+      <div class="card-sub en" style="display:none">Yard and dispatch · last 8 days</div>
+      <table class="tbl" id="daily-table">
+        <thead>
+          <tr>
+            <th id="th-date">Fecha</th>
+            <th id="th-yn" class="es">Nuevos patio</th>
+            <th class="en" style="display:none">New yard</th>
+            <th id="th-yu" class="es">Usados patio</th>
+            <th class="en" style="display:none">Used yard</th>
+            <th id="th-dn" class="es">Desp. nuevos</th>
+            <th class="en" style="display:none">New disp.</th>
+            <th id="th-du" class="es">Desp. usados</th>
+            <th class="en" style="display:none">Used disp.</th>
+          </tr>
+        </thead>
+        <tbody id="daily-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HISTORICAL VESSELS -->
+  <div class="card" style="margin-top:1rem">
+    <div class="card-title es">Buques RORO completados — histórico 2026</div>
+    <div class="card-title en" style="display:none">Completed RORO vessels — 2026 history</div>
+    <div class="card-sub es">Productividad bruta · neta · tiempos de espera en bahía</div>
+    <div class="card-sub en" style="display:none">Gross · net productivity · anchorage waiting times</div>
+    <div style="overflow-x:auto">
+      <table class="htbl" id="hist-table">
+        <thead>
+          <tr>
+            <th style="width:150px">Buque</th>
+            <th style="width:60px">Naviera</th>
+            <th style="width:80px" class="es">Nuevos</th>
+            <th style="width:70px" class="es">Usados</th>
+            <th style="width:80px" class="es">Espera</th>
+            <th style="width:110px">ETB</th>
+            <th style="width:110px">ETD</th>
+            <th style="width:80px" class="es">Prod. bruta</th>
+            <th style="width:80px" class="es">Prod. neta</th>
+            <th style="width:130px" class="es">Observación</th>
+          </tr>
+        </thead>
+        <tbody id="hist-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SPC PDF -->
+  <div class="card" style="margin-top:1rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;flex-wrap:wrap;gap:.5rem">
+      <div>
+        <div class="card-title es">Situación Portuaria Oficial — SPC Caldera</div>
+        <div class="card-title en" style="display:none">Official Port Situation — SPC Caldera</div>
+        <div class="card-sub es" style="margin-bottom:0">Fuente directa: web.spcaldera.com · Documento oficial SPC</div>
+        <div class="card-sub en" style="display:none;margin-bottom:0">Direct source: web.spcaldera.com · Official SPC document</div>
+      </div>
+      <a href="https://web.spcaldera.com/FS/DOC/SituacionPortuaria.pdf" target="_blank"
+         style="font-size:12px;font-weight:600;color:var(--cyan);background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.3);padding:6px 12px;border-radius:var(--radius)">
+        <span class="es">Abrir PDF →</span><span class="en" style="display:none">Open PDF →</span>
+      </a>
+    </div>
+    <iframe class="spc-frame" src="https://web.spcaldera.com/FS/DOC/SituacionPortuaria.pdf" title="Situación Portuaria SPC Caldera"></iframe>
+  </div>
+
+</div><!-- end content -->
+</div><!-- end dashboard -->
+
+<script>
+var LANG='es', USER='', YARD={}, SCHED={};
+var PASSWORDS={mpv:'mpvops',eukor:'eukor2026',ww:'ww2026'};
+var USER_LABELS={mpv:'MPV Internal',eukor:'EUKOR',ww:'Wallenius Wilhelmsen'};
+
+// ── AUTH ──────────────────────────────────────────────────────
+function doLogin(){
+  var u=document.getElementById('user-select').value;
+  var p=document.getElementById('pw-input').value;
+  var err=document.getElementById('login-err');
+  if(!u){err.style.display='block';err.textContent=LANG==='es'?'Selecciona un perfil':'Select a profile';return;}
+  if(p!==PASSWORDS[u]){err.style.display='block';err.textContent=LANG==='es'?'Contraseña incorrecta':'Incorrect password';return;}
+  USER=u; err.style.display='none';
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  document.getElementById('user-label').textContent=USER_LABELS[u];
+  loadData();
+}
+function doLogout(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+  USER='';
+  document.getElementById('pw-input').value='';
+  document.getElementById('user-select').value='';
+}
+
+// ── LANG / THEME ─────────────────────────────────────────────
+function setLang(l){
+  LANG=l;
+  document.documentElement.setAttribute('data-lang',l);
+  ['ll-es','ll-en','ln-es','ln-en'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.className=el.id.endsWith(l)?'nbtn active':'nbtn';
+  });
+  document.querySelectorAll('.es').forEach(function(el){el.style.display=l==='es'?'':'none'});
+  document.querySelectorAll('.en').forEach(function(el){el.style.display=l==='en'?'':'none'});
+  document.getElementById('btn-exit').textContent=l==='es'?'Salir':'Exit';
+  if(YARD.updated) renderAll();
+}
+
+function toggleTheme(){
+  var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('theme-btn').textContent=t==='dark'?'☀️':'🌙';
+}
+
+// ── DATA LOAD ─────────────────────────────────────────────────
+async function loadData(){
+  try{
+    var [y,s]=await Promise.all([
+      fetch('assets/data/roro-yard.json?v='+Date.now()).then(r=>r.json()),
+      fetch('assets/data/roro-schedule.json?v='+Date.now()).then(r=>r.json())
+    ]);
+    YARD=y; SCHED=s;
+    renderAll();
+  }catch(e){console.warn('Load error:',e);}
+}
+
+function renderAll(){
+  renderNav();
+  renderKPIs();
+  renderSlot();
+  renderPipeline();
+  updateForecast();
+  renderDailyTable();
+  renderHistTable();
+}
+
+// ── NAV ───────────────────────────────────────────────────────
+function renderNav(){
+  var d=new Date();
+  var opts={day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'};
+  var locale=LANG==='es'?'es-CR':'en-US';
+  var updated=LANG==='es'?'Datos patio: ':'Yard data: ';
+  document.getElementById('nav-updated').textContent=updated+YARD.updated+' '+YARD.updated_time;
+}
+
+// ── KPIs ──────────────────────────────────────────────────────
+function renderKPIs(){
+  var total=(YARD.yard_new||0)+(YARD.yard_used||0);
+  var cap=YARD.capacity||2500;
+  var pct=Math.round(total/cap*100);
+  var dispTotal=(YARD.dispatched_new||0)+(YARD.dispatched_used||0);
+
+  document.getElementById('k-yard-total').textContent=total.toLocaleString();
+  document.getElementById('k-yard-sub').textContent=(LANG==='es'?'Nuevos: ':'New: ')+YARD.yard_new.toLocaleString()+' · '+(LANG==='es'?'Usados: ':'Used: ')+YARD.yard_used.toLocaleString();
+  document.getElementById('k-cap-pct').textContent=pct+'%';
+  var bar=document.getElementById('k-cap-bar');
+  bar.style.width=pct+'%';
+  bar.style.background=pct>=90?'var(--red)':pct>=70?'var(--yellow)':'var(--green)';
+  document.getElementById('k-cap-sub').textContent=total.toLocaleString()+' / '+cap.toLocaleString();
+  document.getElementById('k-disp').textContent=dispTotal.toLocaleString();
+  document.getElementById('k-disp-sub').textContent=(LANG==='es'?'Nuevos: ':'New: ')+YARD.dispatched_new+' · '+(LANG==='es'?'Usados: ':'Used: ')+YARD.dispatched_used;
+
+  // Avg dispatch from history
+  if(YARD.history&&YARD.history.length){
+    var total_disp=YARD.history.reduce(function(s,r){return s+r.disp_new+r.disp_used;},0);
+    var avg=Math.round(total_disp/YARD.history.length);
+    document.getElementById('k-avg-disp').textContent=avg.toLocaleString();
+  }
+
+  // Avg wait from completed RORO
+  var completed=SCHED.completed||[];
+  if(completed.length){
+    var totalWait=completed.reduce(function(s,v){
+      var eta=new Date(v.eta),etb=new Date(v.etb);
+      return s+(etb-eta)/86400000;
+    },0);
+    var avgWait=(totalWait/completed.length).toFixed(1);
+    document.getElementById('k-wait').textContent=avgWait+' d';
+  }
+
+  // Productivity
+  var withDischarge=completed.filter(function(v){return v.discharge_start&&v.discharge_end;});
+  if(withDischarge.length){
+    var avgGross=Math.round(completed.filter(function(v){return v.etb&&v.etd;}).reduce(function(s,v){
+      var h=(new Date(v.etd)-new Date(v.etb))/3600000;
+      return h>0?s+(v.units_new+v.units_used)/h:s;
+    },0)/completed.length);
+    var avgNet=Math.round(withDischarge.reduce(function(s,v){
+      var h=(new Date(v.discharge_end)-new Date(v.discharge_start))/3600000;
+      return h>0?s+(v.units_new+v.units_used)/h:s;
+    },0)/withDischarge.length);
+    document.getElementById('k-gross').textContent=avgGross;
+    document.getElementById('k-net').textContent=avgNet;
+  }
+}
+
+// ── SLOT CALCULATOR ───────────────────────────────────────────
+function renderSlot(){
+  var curr=SCHED.berth1_current;
+  if(!curr)return;
+
+  var etd=new Date(curr.etd_estimated);
+  var slotOpen=new Date(etd.getTime()+(SCHED.slot_info.buffer_hours||1)*3600000);
+  var slotClose=new Date(slotOpen.getTime()+SCHED.slot_info.duration_hours*3600000);
+
+  var fmt=function(d){
+    return d.toLocaleDateString(LANG==='es'?'es-CR':'en-US',{weekday:'short',day:'numeric',month:'short'})+' '+
+           d.toLocaleTimeString(LANG==='es'?'es-CR':'en-US',{hour:'2-digit',minute:'2-digit'});
+  };
+
+  document.getElementById('ss-vessel').textContent=curr.vessel+' ('+curr.type.toUpperCase()+')';
+  document.getElementById('ss-etd').textContent=(LANG==='es'?'ETD est.: ':'ETD est.: ')+fmt(etd);
+  document.getElementById('ss-open').textContent=fmt(slotOpen);
+  document.getElementById('ss-close').textContent=fmt(slotClose);
+  document.getElementById('slot-updated').textContent=(LANG==='es'?'Calculado: ':'Calculated: ')+new Date().toLocaleTimeString(LANG==='es'?'es-CR':'en-US',{hour:'2-digit',minute:'2-digit'});
+
+  var noteEl=document.getElementById('slot-note-text');
+  noteEl.textContent=LANG==='es'?SCHED.slot_info.note_es:SCHED.slot_info.note_en;
+
+  // RORO waiting
+  var waiting=SCHED.roro_waiting||[];
+  var alertEl=document.getElementById('slot-alert');
+  var fitSection=document.getElementById('roro-fit-section');
+
+  if(waiting.length>0){
+    var roro=waiting[0];
+    var units=(roro.units_new||0)+(roro.units_used||0);
+    var rate=YARD.avg_rate_veh_h||90;
+    var hoursNeeded=units/rate;
+    var slotHours=SCHED.slot_info.duration_hours;
+    var pct=Math.min(100,Math.round(hoursNeeded/slotHours*100));
+    var etaDate=new Date(roro.eta);
+    var daysWaiting=Math.round((new Date()-etaDate)/86400000);
+
+    document.getElementById('ss-roro-name').textContent=roro.vessel;
+    document.getElementById('ss-roro-sub').textContent=units.toLocaleString()+' '+(LANG==='es'?'veh · ':' veh · ')+daysWaiting+(LANG==='es'?' días en bahía':' days anchored');
+
+    fitSection.style.display='block';
+    var fill=document.getElementById('roro-fit-fill');
+    fill.style.width=pct+'%';
+    fill.style.background=pct<=85?'var(--green)':pct<=100?'var(--yellow)':'var(--red)';
+    document.getElementById('roro-fit-label').textContent=Math.round(hoursNeeded)+'h / '+slotHours+'h';
+
+    if(pct<=85){
+      alertEl.className='slot-alert alert-green';
+      alertEl.innerHTML='✓ '+(LANG==='es'?roro.vessel+' cabe en el slot ('+Math.round(hoursNeeded)+'h de '+slotHours+'h disponibles). Apertura estimada: '+fmt(slotOpen):roro.vessel+' fits in slot ('+Math.round(hoursNeeded)+'h of '+slotHours+'h available). Estimated opening: '+fmt(slotOpen));
+      document.getElementById('step-roro').className='slot-step active';
+    } else if(pct<=100){
+      alertEl.className='slot-alert alert-yellow';
+      alertEl.innerHTML='⚠ '+(LANG==='es'?roro.vessel+' usa '+pct+'% del slot ('+Math.round(hoursNeeded)+'h). Ajustado, sin margen para segundo buque.':roro.vessel+' uses '+pct+'% of slot ('+Math.round(hoursNeeded)+'h). Tight — no room for a second vessel.');
+      document.getElementById('step-roro').className='slot-step warn';
+    } else {
+      alertEl.className='slot-alert alert-red';
+      alertEl.innerHTML='✗ '+(LANG==='es'?roro.vessel+' necesita '+Math.round(hoursNeeded)+'h — excede el slot de '+slotHours+'h. Coordinar con SPC.':roro.vessel+' needs '+Math.round(hoursNeeded)+'h — exceeds the '+slotHours+'h slot. Coordinate with SPC.');
+      document.getElementById('step-roro').className='slot-step danger';
+    }
+
+    document.getElementById('step-open').className='slot-step active';
+    document.getElementById('step-close').className='slot-step';
+  } else {
+    document.getElementById('ss-roro-name').textContent=LANG==='es'?'Sin RORO en espera':'No RORO waiting';
+    document.getElementById('ss-roro-sub').textContent='';
+    fitSection.style.display='none';
+    alertEl.className='slot-alert alert-green';
+    alertEl.innerHTML='✓ '+(LANG==='es'?'Slot disponible · Apertura: '+fmt(slotOpen):'Slot available · Opens: '+fmt(slotOpen));
+  }
+}
+
+// ── PIPELINE ──────────────────────────────────────────────────
+function renderPipeline(){
+  var planned=SCHED.planned||[];
+  var container=document.getElementById('pipeline-container');
+  container.innerHTML='';
+  planned.forEach(function(v){
+    var units=(v.units_new||0)+(v.units_used||0)||v.moves||0;
+    var isRoro=v.type==='roro';
+    var statusClass=v.status==='anchored'?'vc anchored':v.status==='confirmed'?'vc':isRoro?'vc featured':'vc';
+    var statusLabel=v.status==='anchored'?(LANG==='es'?'En bahía':'Anchored'):(LANG==='es'?'Confirmado':'Confirmed');
+    var statusBadge=v.status==='anchored'?'st-anchored':'st-confirmed';
+    var etaFmt=v.eta?new Date(v.eta).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'—';
+    var etbFmt=v.etb?new Date(v.etb).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'—';
+    var subDetail=isRoro?(LANG==='es'?'Nuevos: ':'New: ')+(v.units_new||0).toLocaleString()+(v.units_used?(' · '+(LANG==='es'?'Usados: ':'Used: ')+v.units_used):''):(v.moves?v.moves.toLocaleString()+' moves':'');
+    var highlight=USER==='eukor'&&v.line==='EUKOR'||USER==='ww'&&(v.line==='WW'||v.line==='Wallenius');
+    var div=document.createElement('div');
+    div.className=statusClass+(highlight?' featured':'');
+    div.innerHTML='<div class="vc-top"><span class="vc-linebadge">'+v.line+'</span><span class="vc-status '+statusBadge+'">'+statusLabel+'</span></div>'+
+      '<div class="vc-name">'+v.vessel+'</div>'+
+      '<div class="vc-units" style="color:'+(isRoro?'var(--cyan)':'var(--gold)')+'">'+units.toLocaleString()+'</div>'+
+      (isRoro?'<div class="vc-detail">'+subDetail+'</div>':'')+
+      '<div class="vc-detail" style="margin-top:4px">ETA: '+etaFmt+'</div>'+
+      '<div class="vc-detail">ETB: '+etbFmt+'</div>'+
+      (v.op_hours?'<div class="vc-detail">'+(LANG==='es'?'Op: ':'Op: ')+v.op_hours+'h</div>':'');
+    container.appendChild(div);
+  });
+}
+
+// ── FORECAST ──────────────────────────────────────────────────
+function updateForecast(){
+  var good=parseInt(document.getElementById('sl-good').value);
+  var bad=parseInt(document.getElementById('sl-bad').value);
+  document.getElementById('sl-good-val').textContent=good;
+  document.getElementById('sl-bad-val').textContent=bad;
+
+  var planned=SCHED.planned||[];
+  var nextRoro=planned.find(function(v){return v.type==='roro'&&v.etb;});
+  if(!nextRoro){
+    document.getElementById('fc-next-vessel').textContent=LANG==='es'?'Sin próximo RORO confirmado':'No next RORO confirmed';
+    return;
+  }
+
+  var etb=new Date(nextRoro.etb);
+  var daysUntil=Math.max(0,Math.ceil((etb-new Date())/86400000));
+  var current=(YARD.yard_new||0)+(YARD.yard_used||0);
+  var incoming=(nextRoro.units_new||0)+(nextRoro.units_used||0);
+  var cap=YARD.capacity||2500;
+
+  document.getElementById('fc-next-vessel').textContent=(LANG==='es'?'Próximo: ':'Next: ')+nextRoro.vessel+' · ETB '+etb.toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short'})+' · '+daysUntil+(LANG==='es'?' días':' days');
+
+  var pgood=Math.max(0,current-good*daysUntil);
+  var pbad=Math.max(0,current-bad*daysUntil);
+  var agood=pgood+incoming;
+  var abad=pbad+incoming;
+  var sgood=cap-agood;
+  var sbad=cap-abad;
+
+  document.getElementById('fc-p-good').textContent=pgood.toLocaleString();
+  document.getElementById('fc-a-good').textContent=agood.toLocaleString();
+  document.getElementById('fc-s-good').textContent=(sgood>0?'+':'')+sgood.toLocaleString();
+  document.getElementById('fc-p-bad').textContent=pbad.toLocaleString();
+  document.getElementById('fc-a-bad').textContent=abad.toLocaleString();
+  document.getElementById('fc-s-bad').textContent=(sbad>0?'+':'')+sbad.toLocaleString();
+
+  var risk=sbad<0?'HIGH':sgood<0?'MEDIUM':'LOW';
+  var badge=document.getElementById('risk-badge');
+  badge.textContent='Pipeline risk: '+risk;
+  badge.className='risk-badge '+(risk==='HIGH'?'risk-high':risk==='MEDIUM'?'risk-med':'risk-low');
+}
+
+// ── DAILY TABLE ───────────────────────────────────────────────
+function renderDailyTable(){
+  var tbody=document.getElementById('daily-tbody');
+  tbody.innerHTML='';
+  var history=[...(YARD.history||[])].reverse();
+  history.forEach(function(row,i){
+    var tr=document.createElement('tr');
+    if(i===0) tr.style.fontWeight='600';
+    tr.innerHTML='<td>'+row.date+'</td>'+
+      '<td>'+row.yard_new.toLocaleString()+'</td>'+
+      '<td>'+row.yard_used.toLocaleString()+'</td>'+
+      '<td>'+row.disp_new.toLocaleString()+'</td>'+
+      '<td>'+row.disp_used.toLocaleString()+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+// ── HISTORICAL TABLE ──────────────────────────────────────────
+function renderHistTable(){
+  var tbody=document.getElementById('hist-tbody');
+  tbody.innerHTML='';
+  var completed=SCHED.completed||[];
+  completed.forEach(function(v){
+    var units=(v.units_new||0)+(v.units_used||0);
+    var waitH=v.eta&&v.etb?Math.round((new Date(v.etb)-new Date(v.eta))/3600000):null;
+    var waitD=waitH?Math.round(waitH/24*10)/10:null;
+    var grossH=v.etb&&v.etd?(new Date(v.etd)-new Date(v.etb))/3600000:null;
+    var netH=v.discharge_start&&v.discharge_end?(new Date(v.discharge_end)-new Date(v.discharge_start))/3600000:null;
+    var gross=grossH&&grossH>0?Math.round(units/grossH):null;
+    var net=netH&&netH>0?Math.round(units/netH):null;
+    var etbFmt=v.etb?new Date(v.etb).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'—';
+    var etdFmt=v.etd?new Date(v.etd).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'—';
+    var highlight=USER==='eukor'&&v.line==='EUKOR'||USER==='ww'&&(v.line==='WW'||v.line==='Wallenius');
+    var tr=document.createElement('tr');
+    if(highlight) tr.style.background='rgba(0,200,200,0.05)';
+    tr.innerHTML='<td style="font-weight:'+(highlight?600:400)+'">'+v.vessel+'</td>'+
+      '<td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;background:var(--surface2);border:1px solid var(--border2)">'+v.line+'</span></td>'+
+      '<td style="text-align:right">'+v.units_new.toLocaleString()+'</td>'+
+      '<td style="text-align:right">'+v.units_used.toLocaleString()+'</td>'+
+      '<td style="text-align:right">'+(waitD!==null?waitD+'d / '+waitH+'h':'—')+'</td>'+
+      '<td>'+etbFmt+'</td>'+
+      '<td>'+etdFmt+'</td>'+
+      '<td style="text-align:right">'+(gross?gross+' veh/h':'—')+'</td>'+
+      '<td style="text-align:right">'+(net?net+' veh/h':'—')+'</td>'+
+      '<td style="font-size:10px;color:var(--yellow)">'+(v.delay_note||'')+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+setLang('es');
+</script>
+</body>
+</html>
