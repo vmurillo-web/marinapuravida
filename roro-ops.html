@@ -406,7 +406,6 @@
             <th class="r" id="th-yu">Usados patio</th>
             <th class="r" id="th-dn">Desp. nuevos</th>
             <th class="r" id="th-du">Desp. usados</th>
-            <th class="l" id="th-ctx">Contexto P1 / P4</th>
           </tr>
         </thead>
         <tbody id="daily-tbody"></tbody>
@@ -418,7 +417,7 @@
   <div class="card" style="margin-bottom:1rem">
     <div class="ctitle" id="carrier-title">Distribución por naviera — 2026</div>
     <div class="csub" id="carrier-sub">Buques completados · unidades descargadas · productividad promedio</div>
-    <div id="carrier-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
+    <div id="carrier-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px"></div>
   </div>
 
   <!-- HISTORICAL -->
@@ -684,11 +683,13 @@ function renderSlot(){
   var feederDispH=Math.round(hDiff(feederBase,feederETD));
   var feederAbsent=ww.feeder.absent===true;
 
-  document.getElementById('w-feeder-vessel').textContent=feederAbsent?
-    (LANG==='es'?'Sin buque feeder esta semana':'No feeder this week'):
-    ww.feeder.vessel+(ww.feeder.vessel_voyage?' V.'+ww.feeder.vessel_voyage:'');
+  var feederLabel=feederAbsent?(LANG==='es'?'Sin buque feeder esta semana':'No feeder this week'):ww.feeder.vessel+(ww.feeder.vessel_voyage?' V.'+ww.feeder.vessel_voyage:'');
+  if(ww.berth1_sequence&&ww.berth1_sequence.length>1){
+    feederLabel=ww.berth1_sequence.map(function(b){return b.vessel;}).join(' → ');
+  }
+  document.getElementById('w-feeder-vessel').textContent=feederLabel;
   var fwServ=document.getElementById('w-feeder-service');
-  if(fwServ) fwServ.textContent=ww.feeder.window_service||'';
+  if(fwServ) fwServ.textContent=ww.feeder.note||ww.feeder.window_service||'';
   document.getElementById('w-feeder-etd').textContent=feederAbsent?
     (LANG==='es'?'Ventana libre':'Window free'):
     'ETD: '+fmtD(feederETD,LANG);
@@ -912,103 +913,122 @@ function updateForecast(){
 // ── CARRIER SUMMARY ──────────────────────────────────────────
 function renderCarriers(){
   var comp=S.completed||[];
-  if(!comp.length)return;
+  var waiting=S.roro_waiting||[];
+  var all=comp.concat(waiting.map(function(v){return Object.assign({},v,{_waiting:true});}));
+  if(!all.length)return;
+
+  // Build carrier map including waiting vessels
   var map={};
-  comp.forEach(function(v){
+  all.forEach(function(v){
     var l=v.line;
-    if(!map[l])map[l]={line:l,ships:0,units_new:0,units_used:0,gross_sum:0,gross_n:0,wait_sum:0,vessels:[]};
-    map[l].ships++;
+    if(!map[l])map[l]={line:l,ships:0,units_new:0,units_used:0,wait_sum:0,wait_n:0,vessels:[]};
     map[l].units_new+=v.units_new||0;
     map[l].units_used+=v.units_used||0;
-    if(v.etb&&v.etd){
-      var h=hDiff(new Date(v.etb),new Date(v.etd));
-      var u=(v.units_new||0)+(v.units_used||0);
-      if(h>0){map[l].gross_sum+=Math.round(u/h);map[l].gross_n++;}
+    if(v.eta&&(v.etb||v.etb_tentative)){
+      var etb=v.etb||v.etb_tentative;
+      map[l].wait_sum+=(new Date(etb)-new Date(v.eta))/86400000;
+      map[l].wait_n++;
     }
-    if(v.eta&&v.etb) map[l].wait_sum+=dDiff(new Date(v.eta),new Date(v.etb));
-    // Store individual vessel detail
-    var netH=v.discharge_start&&v.discharge_end?hDiff(new Date(v.discharge_start),new Date(v.discharge_end)):null;
-    var units=(v.units_new||0)+(v.units_used||0);
-    var net=netH&&netH>0?Math.round(units/netH):null;
-    var waitD=v.eta&&v.etb?dDiff(new Date(v.eta),new Date(v.etb)):null;
-    map[l].vessels.push({
-      vessel:v.vessel,
-      voyage:v.vessel_voyage||'',
-      units_new:v.units_new||0,
-      units_used:v.units_used||0,
-      etb:v.etb,
-      net:net,
-      waitD:waitD,
-      delay_note:v.delay_note||''
-    });
+    map[l].ships++;
+    map[l].vessels.push(v);
   });
+
   var carriers=Object.values(map).sort(function(a,b){return (b.units_new+b.units_used)-(a.units_new+a.units_used);});
   var COLORS={EUKOR:'var(--cyan)',NYK:'var(--gold)',KLINE:'var(--blue)',default:'var(--text2)'};
+
   var grid=document.getElementById('carrier-grid');
   if(!grid)return;
   grid.innerHTML='';
 
-  // Grand totals row
-  var grandNew=carriers.reduce(function(s,c){return s+c.units_new;},0);
-  var grandUsed=carriers.reduce(function(s,c){return s+c.units_used;},0);
-  var grandShips=carriers.reduce(function(s,c){return s+c.ships;},0);
-  var totalDiv=document.createElement('div');
-  totalDiv.style.cssText='grid-column:1/-1;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:.875rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem';
-  totalDiv.innerHTML=
-    '<div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)">'+(LANG==='es'?'Total acumulado 2026':'2026 accumulated total')+'</div>'+
+  // Grand total bar
+  var gn=carriers.reduce(function(s,c){return s+c.units_new;},0);
+  var gu=carriers.reduce(function(s,c){return s+c.units_used;},0);
+  var gs=carriers.reduce(function(s,c){return s+c.ships;},0);
+  var tot=document.createElement('div');
+  tot.style.cssText='grid-column:1/-1;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.25rem';
+  tot.innerHTML=
+    '<span style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)">'+(LANG==='es'?'Total acumulado 2026':'2026 accumulated total')+'</span>'+
     '<div style="display:flex;gap:2rem;flex-wrap:wrap">'+
-      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+grandShips+'</div></div>'+
-      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Unidades nuevas':'New units')+'</div><div style="font-size:20px;font-weight:600;color:var(--cyan)">'+grandNew.toLocaleString()+'</div></div>'+
-      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Unidades usadas':'Used units')+'</div><div style="font-size:20px;font-weight:600;color:var(--gold)">'+grandUsed.toLocaleString()+'</div></div>'+
-      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Total</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+(grandNew+grandUsed).toLocaleString()+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+gs+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">'+(LANG==='es'?'Nuevos':'New')+'</div><div style="font-size:20px;font-weight:600;color:var(--cyan)">'+gn.toLocaleString()+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">'+(LANG==='es'?'Usados':'Used')+'</div><div style="font-size:20px;font-weight:600;color:var(--gold)">'+gu.toLocaleString()+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">Total</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+(gn+gu).toLocaleString()+'</div></div>'+
     '</div>';
-  grid.appendChild(totalDiv);
+  grid.appendChild(tot);
 
   carriers.forEach(function(c){
     var total=c.units_new+c.units_used;
-    var avgGross=c.gross_n>0?Math.round(c.gross_sum/c.gross_n):null;
-    var avgWait=c.ships>0?(c.wait_sum/c.ships).toFixed(1):null;
+    var avgWait=c.wait_n>0?(c.wait_sum/c.wait_n).toFixed(1):null;
     var color=COLORS[c.line]||COLORS.default;
     var highlight=USER==='eukor'&&c.line==='EUKOR'||USER==='ww'&&(c.line==='WW'||c.line==='Wallenius');
-    var div=document.createElement('div');
-    div.style.cssText='background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.875rem;'+(highlight?'border-color:var(--cyan);background:rgba(0,200,200,.05)':'');
 
-    // Individual vessels list
-    var vesselRows=c.vessels.map(function(v){
-      var etbStr=v.etb?new Date(v.etb).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short'}):'—';
-      return '<tr>'+
-        '<td style="padding:3px 4px;font-size:10px;color:var(--text)">'+v.vessel+(v.voyage?' <span style="color:var(--muted)">'+v.voyage+'</span>':'')+'</td>'+
-        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--cyan)">'+v.units_new.toLocaleString()+'</td>'+
-        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--gold)">'+v.units_used.toLocaleString()+'</td>'+
-        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--text2)">'+etbStr+'</td>'+
-        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--text2)">'+(v.net?v.net+' veh/h':'—')+'</td>'+
-        (v.delay_note?'<td style="padding:3px 4px;font-size:9px;color:var(--yellow)">⚠ '+v.delay_note.substring(0,40)+'...</td>':'<td></td>')+
-      '</tr>';
+    // Vessel rows
+    var vesselHTML=c.vessels.map(function(v){
+      var isWaiting=v._waiting||v.status==='anchored';
+      var etb=v.etb||v.etb_tentative;
+      var etd=v.etd||v.etd_tentative;
+      var waitH=v.eta&&etb?(new Date(etb)-new Date(v.eta))/3600000:null;
+      var waitD=waitH?Math.round(waitH/24*10)/10:null;
+      var waitChipColor=waitD&&waitD>2?'background:rgba(239,68,68,.1);color:var(--red);border-color:rgba(239,68,68,.3)':'background:var(--surface2);color:var(--text2);border-color:var(--border)';
+      var fmtDT=function(iso){
+        if(!iso)return '—';
+        var d=new Date(iso);
+        return d.toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString(LANG==='es'?'es-CR':'en-US',{hour:'2-digit',minute:'2-digit'});
+      };
+      var tentLabel=isWaiting?(LANG==='es'?' tent.':' tent.'):'';
+      return '<div style="padding:.625rem 1rem;border-bottom:1px solid var(--border)">'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'+
+          '<div>'+
+            '<span style="font-size:13px;font-weight:600;color:var(--text)">'+v.vessel+'</span>'+
+            '<span style="font-size:10px;color:var(--muted);margin-left:5px">'+( v.vessel_voyage||v.voyage||'')+'</span>'+
+          '</div>'+
+          (isWaiting?'<span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.3)">'+(LANG==='es'?'En bahía':'Anchored')+'</span>':'<span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:var(--g-bg);color:var(--green);border:1px solid var(--g-br)">'+(LANG==='es'?'Completado':'Completed')+'</span>')+
+        '</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:7px">'+
+          '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 7px;text-align:center">'+
+            '<div style="font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">ETA</div>'+
+            '<div style="font-size:11px;font-weight:500;color:var(--text);line-height:1.3">'+fmtDT(v.eta)+'</div>'+
+          '</div>'+
+          '<div style="background:var(--surface2);border:1px solid '+(isWaiting?'rgba(0,200,200,.4)':'var(--border)')+';border-radius:6px;padding:4px 7px;text-align:center">'+
+            '<div style="font-size:9px;color:'+(isWaiting?'var(--cyan)':'var(--text2)')+';text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">ETB'+tentLabel+'</div>'+
+            '<div style="font-size:11px;font-weight:500;color:'+(isWaiting?'var(--cyan)':'var(--text)')+';line-height:1.3">'+fmtDT(etb)+'</div>'+
+          '</div>'+
+          '<div style="background:var(--surface2);border:1px solid '+(isWaiting?'rgba(200,169,110,.4)':'var(--border)')+';border-radius:6px;padding:4px 7px;text-align:center">'+
+            '<div style="font-size:9px;color:'+(isWaiting?'var(--gold)':'var(--text2)')+';text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">ETD'+tentLabel+'</div>'+
+            '<div style="font-size:11px;font-weight:500;color:'+(isWaiting?'var(--gold)':'var(--text)')+';line-height:1.3">'+fmtDT(etd)+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;align-items:center;gap:12px">'+
+          '<div style="display:flex;align-items:center;gap:4px">'+
+            '<span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block"></span>'+
+            '<span style="font-size:10px;color:var(--text2)">'+(LANG==='es'?'Nuevos':'New')+'</span>'+
+            '<span style="font-size:12px;font-weight:600;color:var(--text);margin-left:3px">'+(v.units_new||0).toLocaleString()+'</span>'+
+          '</div>'+
+          '<div style="display:flex;align-items:center;gap:4px">'+
+            '<span style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block"></span>'+
+            '<span style="font-size:10px;color:var(--text2)">'+(LANG==='es'?'Usados':'Used')+'</span>'+
+            '<span style="font-size:12px;font-weight:600;color:var(--text);margin-left:3px">'+(v.units_used||0).toLocaleString()+'</span>'+
+          '</div>'+
+          (waitD!==null?'<div style="margin-left:auto;font-size:10px;padding:2px 8px;border-radius:100px;border:1px solid;'+waitChipColor+'">'+waitD+'d '+(LANG==='es'?'bahía':'anchored')+'</div>':'')+
+        '</div>'+
+      '</div>';
     }).join('');
 
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--surface2);border:1px solid '+(highlight?'var(--cyan)':'var(--border)')+';border-radius:var(--r);overflow:hidden;'+(highlight?'background:rgba(0,200,200,.03)':'');
+
     div.innerHTML=
-      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'+
-        '<span style="font-family:var(--mono);font-size:13px;font-weight:600;color:'+color+'">'+c.line+'</span>'+
-        '<span style="font-family:var(--mono);font-size:18px;font-weight:600;color:var(--text)">'+total.toLocaleString()+' <span style="font-size:11px;color:var(--text2)">veh</span></span>'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;padding:.875rem 1rem .5rem">'+
+        '<span style="font-size:15px;font-weight:600;color:'+color+'">'+c.line+'</span>'+
+        '<span style="font-size:22px;font-weight:600;color:var(--text)">'+total.toLocaleString()+' <span style="font-size:12px;font-weight:400;color:var(--text2)">veh</span></span>'+
       '</div>'+
-      '<div style="display:flex;gap:1rem;margin-bottom:8px;flex-wrap:wrap">'+
-        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+c.ships+'</div></div>'+
-        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Nuevos':'New')+'</div><div style="font-size:14px;font-weight:600;color:var(--cyan)">'+c.units_new.toLocaleString()+'</div></div>'+
-        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Usados':'Used')+'</div><div style="font-size:14px;font-weight:600;color:var(--gold)">'+c.units_used.toLocaleString()+'</div></div>'+
-        (avgGross?'<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Prod. bruta':'Gross')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+avgGross+' veh/h</div></div>':'')+
-        (avgWait?'<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Espera prom.':'Avg wait')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+avgWait+'d</div></div>':'')+
+      '<div style="display:grid;grid-template-columns:repeat(4,1fr);padding:.25rem 1rem .75rem;border-bottom:1px solid var(--border)">'+
+        '<div style="text-align:center"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+c.ships+'</div></div>'+
+        '<div style="text-align:center"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">'+(LANG==='es'?'Nuevos':'New')+'</div><div style="font-size:14px;font-weight:600;color:var(--cyan)">'+c.units_new.toLocaleString()+'</div></div>'+
+        '<div style="text-align:center"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">'+(LANG==='es'?'Usados':'Used')+'</div><div style="font-size:14px;font-weight:600;color:var(--gold)">'+c.units_used.toLocaleString()+'</div></div>'+
+        '<div style="text-align:center"><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">'+(LANG==='es'?'Espera prom.':'Avg wait')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+(avgWait?avgWait+'d':'—')+'</div></div>'+
       '</div>'+
-      '<table style="width:100%;border-collapse:collapse;margin-top:6px;border-top:1px solid var(--border)">'+
-        '<thead><tr>'+
-          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:left;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Buque':'Vessel')+'</th>'+
-          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Nuevos':'New')+'</th>'+
-          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Usados':'Used')+'</th>'+
-          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">ETB</th>'+
-          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Prod. neta':'Net prod.')+'</th>'+
-          '<th></th>'+
-        '</tr></thead>'+
-        '<tbody>'+vesselRows+'</tbody>'+
-      '</table>';
+      vesselHTML;
     grid.appendChild(div);
   });
 }
@@ -1022,14 +1042,13 @@ function renderDaily(){
   h.forEach(function(r,i){
     var tr=document.createElement('tr');
     if(i===0)tr.style.fontWeight='600';
-    var ctx=LANG==='es'?(r.context_es||''):(r.context_en||'');
     var dispColor=r.disp_new>=250?'var(--green)':r.disp_new>=150?'var(--cyan)':'var(--text)';
+    var dispW=r.disp_new>=250?'600':'400';
     tr.innerHTML='<td class="l">'+r.date+'</td>'+
       '<td class="r">'+r.yard_new.toLocaleString()+'</td>'+
       '<td class="r">'+r.yard_used.toLocaleString()+'</td>'+
-      '<td class="r" style="color:'+dispColor+';font-weight:'+(r.disp_new>=250?'600':'400')+'">'+r.disp_new.toLocaleString()+'</td>'+
-      '<td class="r">'+r.disp_used.toLocaleString()+'</td>'+
-      '<td class="l" style="font-size:10px;color:var(--text2)">'+ctx+'</td>';
+      '<td class="r" style="color:'+dispColor+';font-weight:'+dispW+'">'+r.disp_new.toLocaleString()+'</td>'+
+      '<td class="r">'+r.disp_used.toLocaleString()+'</td>';
     tb.appendChild(tr);
   });
 }
