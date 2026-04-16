@@ -3,49 +3,72 @@
     "updated": "2026-04-15T16:00:00",
     "week_ref_es": "Semana 15-21 Abril 2026",
     "week_ref_en": "Week April 15-21, 2026",
+    "berth1_sequence": [
+      {
+        "vessel": "AS Svenja",
+        "vessel_voyage": "0212",
+        "window_service": "Ventana Feeder — Sábado 10:00",
+        "line": "RAM",
+        "type": "feeder",
+        "status": "operating",
+        "etd_estimated": "2026-04-16T02:00:00",
+        "op_hours": 24
+      },
+      {
+        "vessel": "AS Pamela",
+        "vessel_voyage": "0216",
+        "window_service": "Ventana — Domingo 23:00",
+        "line": "RAM",
+        "type": "feeder",
+        "status": "next",
+        "etb": "2026-04-16T00:01:00",
+        "etd_estimated": "2026-04-16T14:00:00",
+        "op_hours": 14
+      }
+    ],
     "feeder": {
-      "vessel": "Georgia Highway",
-      "vessel_voyage": "V.128A",
-      "window_service": "Slot RORO Mié→Jue (desplazado +29h)",
-      "line": "NYK",
-      "base_window_end": "2026-04-17T15:00:00",
-      "etd_estimated": "2026-04-17T12:00:00",
+      "vessel": "AS Svenja",
+      "vessel_voyage": "0212",
+      "window_service": "Ventana Feeder — Sábado 10:00",
+      "line": "RAM",
+      "base_window_end": "2026-04-16T14:00:00",
+      "etd_estimated": "2026-04-16T14:00:00",
       "status": "operating",
       "absent": false,
-      "note": "RORO descargando. ETD est. 17 abr 12:00. Próximo: Del Monte Harvester 16 abr 15:00"
+      "note": "AS Svenja operando ahora + AS Pamela inmediatamente después. ETD conjunto ~16 abr 14:00"
     },
     "del_monte": {
       "vessel": "Del Monte Harvester",
       "vessel_voyage": "0219",
       "window_service": "Ventana Del Monte — Jueves 15:00",
       "line": "Del Monte",
-      "base_window_start": "2026-04-16T15:00:00",
-      "eta_estimated": "2026-04-16T15:00:00",
+      "base_window_start": "2026-04-17T12:01:00",
+      "eta_estimated": "2026-04-17T12:01:00",
       "status": "confirmed",
       "absent": false,
-      "note": "473 ctrs / 14h op. Calados 6.8/7.8"
+      "note": "473 ctrs / 12h op. ETB confirmado 17 abr 12:01 per programación portuaria"
     },
     "next_feeder": {
       "vessel": "San Alfonso",
       "vessel_voyage": "0190",
       "window_service": "Ventana Feeder — Sábado 10:00",
       "line": "Grimaldi",
-      "base_window_end": "2026-04-18T10:00:00",
-      "eta_estimated": "2026-04-14T21:00:00",
+      "base_window_end": "2026-04-19T23:00:00",
+      "eta_estimated": "2026-04-19T23:00:00",
       "status": "confirmed",
       "absent": false,
-      "note": "867 mov. Ventana SAB 18 abr 10:00"
+      "note": "867 mov. ETB estimado SAB 19 abr 23:00 per programación"
     },
     "future_feeder": {
       "vessel": "AS Savanna",
       "vessel_voyage": "TBD",
       "window_service": "Ventana AS Savanna service — Martes 00:01",
       "line": "Transmares",
-      "base_window_end": "2026-04-28T15:00:00",
-      "eta_estimated": "2026-04-28T02:00:00",
+      "base_window_end": "2026-04-22T11:00:00",
+      "eta_estimated": "2026-04-22T11:00:00",
       "status": "confirmed",
       "absent": false,
-      "note": "Anteriormente estaba ETA 16 abr — actualizado a 28 abr en PDF 14 abr 16:00"
+      "note": "Estima atracar 22/04 a las 11:00 hrs per programación portuaria"
     }
   },
   "slot_config": {
@@ -56,8 +79,36 @@
     "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza en bloque cuando el feeder corre. El nombre del buque en la ventana puede cambiar — lo que importa es la ventana del servicio.",
     "note_en": "Free slot between end of feeder and Del Monte window. Shifts as a block when feeder delays. The vessel name on the window may change — what matters is the service window."
   },
-  "roro_waiting": [],
+  "roro_waiting": [
+    {
+      "vessel": "Georgia Highway",
+      "vessel_voyage": "V.128A",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "etb_tentative": "2026-04-16T13:00:00",
+      "etd_tentative": "2026-04-17T12:00:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "op_hours_est": 16,
+      "status": "anchored",
+      "note": "ETB tentativo 16 abr 13:00 — después de AS Svenja + AS Pamela"
+    }
+  ],
   "planned": [
+    {
+      "vessel": "Georgia Highway",
+      "vessel_voyage": "V.128A",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "etb": "2026-04-16T13:00:00",
+      "etd": "2026-04-17T12:00:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "op_hours": 16,
+      "status": "anchored"
+    },
     {
       "vessel": "A.Idefix",
       "vessel_voyage": "0191",
@@ -78,52 +129,15 @@
       "line": "Grimaldi",
       "type": "feeder",
       "eta": "2026-04-14T21:00:00",
-      "etb": "2026-04-18T10:00:00",
+      "etb": "2026-04-19T23:00:00",
       "etd": null,
       "moves": 867,
-      "op_hours": 25,
+      "op_hours": 24,
       "status": "confirmed",
-      "note": "Ventana SAB 18 abr 10:00"
+      "note": "Ventana SAB 19 abr 23:00"
     }
   ],
   "completed": [
-    {
-      "vessel": "Georgia Highway",
-      "vessel_voyage": "V.128A",
-      "window_service": "Slot RORO Mié→Jue (desplazado +29h)",
-      "line": "NYK",
-      "type": "roro",
-      "eta": "2026-04-13T14:36:00",
-      "etb": "2026-04-16T20:00:00",
-      "discharge_start": "2026-04-16T21:00:00",
-      "discharge_end": "2026-04-17T11:00:00",
-      "etd": "2026-04-17T12:00:00",
-      "units_new": 1807,
-      "units_used": 45,
-      "op_hours_assigned": 20,
-      "op_hours_actual": 16,
-      "slot_base_open": "2026-04-15T15:00:00",
-      "slot_displacement_h": 29,
-      "window_compliance_pct": 80,
-      "delay_note": "Slot desplazado +29h. Base Mié 15 abr 15:00 → real Jue 16 abr 20:00"
-    },
-    {
-      "vessel": "Georgia Highway",
-      "vessel_voyage": "V.128A",
-      "window_service": "Slot RORO Mié→Jue (desplazado)",
-      "line": "NYK",
-      "type": "roro",
-      "eta": "2026-04-13T14:36:00",
-      "etb": "2026-04-16T20:00:00",
-      "discharge_start": "2026-04-16T21:00:00",
-      "discharge_end": "2026-04-17T12:00:00",
-      "etd": "2026-04-17T12:00:00",
-      "units_new": 1807,
-      "units_used": 45,
-      "slot_base_open": "2026-04-15T15:00:00",
-      "slot_displacement_h": 29,
-      "delay_note": "Slot desplazado +29h. Base Mié 15 abr 15:00 → real Jue 16 abr 20:00. Feeder Aliaga Express corrió por condiciones operacionales."
-    },
     {
       "vessel": "Morning Celine",
       "vessel_voyage": "VC603",
