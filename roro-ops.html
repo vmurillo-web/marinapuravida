@@ -287,6 +287,7 @@
       <div class="win-box win-feeder" id="win-feeder">
         <div class="win-lbl" id="wl-feeder">Feeder actual — Puesto 1</div>
         <div class="win-vessel" id="w-feeder-vessel">—</div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:2px" id="w-feeder-service"></div>
         <div class="win-time" id="w-feeder-etd">—</div>
         <div class="win-base" id="w-feeder-base">—</div>
         <div class="win-disp" id="w-feeder-disp"></div>
@@ -303,6 +304,7 @@
       <div class="win-box win-delmont" id="win-delmont">
         <div class="win-lbl" id="wl-delmont">Del Monte — próxima entrada</div>
         <div class="win-vessel" id="w-dm-vessel">—</div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:2px" id="w-dm-service"></div>
         <div class="win-time" id="w-dm-eta">—</div>
         <div class="win-base" id="w-dm-base">—</div>
         <div class="win-disp" id="w-dm-disp"></div>
@@ -404,11 +406,19 @@
             <th class="r" id="th-yu">Usados patio</th>
             <th class="r" id="th-dn">Desp. nuevos</th>
             <th class="r" id="th-du">Desp. usados</th>
+            <th class="l" id="th-ctx">Contexto P1 / P4</th>
           </tr>
         </thead>
         <tbody id="daily-tbody"></tbody>
       </table>
     </div>
+  </div>
+
+  <!-- CARRIER SUMMARY -->
+  <div class="card" style="margin-bottom:1rem">
+    <div class="ctitle" id="carrier-title">Distribución por naviera — 2026</div>
+    <div class="csub" id="carrier-sub">Buques completados · unidades descargadas · productividad promedio</div>
+    <div id="carrier-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
   </div>
 
   <!-- HISTORICAL -->
@@ -419,17 +429,18 @@
       <table class="htbl">
         <thead>
           <tr>
-            <th id="hth-vessel" style="min-width:150px">Buque</th>
-            <th id="hth-line" style="min-width:60px">Naviera</th>
-            <th id="hth-new" style="min-width:65px">Nuevos</th>
-            <th id="hth-used" style="min-width:65px">Usados</th>
-            <th id="hth-wait" style="min-width:80px">Espera</th>
-            <th id="hth-etb" style="min-width:110px">ETB</th>
-            <th id="hth-etd" style="min-width:110px">ETD</th>
-            <th id="hth-gross" style="min-width:80px">Prod. bruta</th>
-            <th id="hth-net" style="min-width:80px">Prod. neta</th>
-            <th id="hth-disp" style="min-width:80px">Desplaz. slot</th>
-            <th id="hth-note" style="min-width:120px">Observación</th>
+            <th style="min-width:150px"><span class="es">Buque</span><span class="en" style="display:none">Vessel</span></th>
+            <th style="min-width:60px"><span class="es">Naviera</span><span class="en" style="display:none">Line</span></th>
+            <th style="min-width:65px;text-align:right"><span class="es">Nuevos</span><span class="en" style="display:none">New</span></th>
+            <th style="min-width:65px;text-align:right"><span class="es">Usados</span><span class="en" style="display:none">Used</span></th>
+            <th style="min-width:80px;text-align:right"><span class="es">Espera</span><span class="en" style="display:none">Wait</span></th>
+            <th style="min-width:110px">ETB</th>
+            <th style="min-width:110px">ETD</th>
+            <th style="min-width:80px;text-align:right"><span class="es">Prod. bruta</span><span class="en" style="display:none">Gross prod.</span></th>
+            <th style="min-width:80px;text-align:right"><span class="es">Prod. neta</span><span class="en" style="display:none">Net prod.</span></th>
+            <th style="min-width:90px;text-align:center"><span class="es">Cumplim. ventana</span><span class="en" style="display:none">Window compliance</span></th>
+            <th style="min-width:80px;text-align:center"><span class="es">Desplaz. slot</span><span class="en" style="display:none">Slot shift</span></th>
+            <th style="min-width:120px"><span class="es">Observación</span><span class="en" style="display:none">Note</span></th>
           </tr>
         </thead>
         <tbody id="hist-tbody"></tbody>
@@ -568,7 +579,10 @@ function applyStaticLang(l){
     'spc-title':{es:'Situación Portuaria Oficial — SPC Caldera',en:'Official Port Situation — SPC Caldera'},
     'spc-sub':{es:'Fuente directa: web.spcaldera.com · Actualizado 06:00 y 16:00 hrs',en:'Direct source: web.spcaldera.com · Updated 06:00 and 16:00 hrs'},
     'spc-link':{es:'Ver PDF SPC →',en:'View SPC PDF →'},
-    'w-roro-base':{es:'Base: Mié 15:00 → Jue 15:00',en:'Base: Wed 15:00 → Thu 15:00'}
+    'carrier-title':{es:'Distribución por naviera — 2026',en:'Carrier distribution — 2026'},
+    'carrier-sub':{es:'Buques completados · unidades descargadas · productividad promedio',en:'Completed vessels · discharged units · avg productivity'},
+    'w-roro-base':{es:'Base: Mié 15:00 → Jue 15:00',en:'Base: Wed 15:00 → Thu 15:00'},
+    'th-ctx':{es:'Contexto P1 / P4',en:'Context Berth 1 / 4'}
   };
   Object.keys(T).forEach(function(id){
     var el=document.getElementById(id);
@@ -603,6 +617,7 @@ function renderAll(){
   updateForecast();
   renderDaily();
   renderHist();
+  renderCarriers();
 }
 
 // ── NAV ────────────────────────────────────────────────────────
@@ -671,7 +686,9 @@ function renderSlot(){
 
   document.getElementById('w-feeder-vessel').textContent=feederAbsent?
     (LANG==='es'?'Sin buque feeder esta semana':'No feeder this week'):
-    ww.feeder.vessel+' ('+ww.feeder.line+')';
+    ww.feeder.vessel+(ww.feeder.vessel_voyage?' V.'+ww.feeder.vessel_voyage:'');
+  var fwServ=document.getElementById('w-feeder-service');
+  if(fwServ) fwServ.textContent=ww.feeder.window_service||'';
   document.getElementById('w-feeder-etd').textContent=feederAbsent?
     (LANG==='es'?'Ventana libre':'Window free'):
     'ETD: '+fmtD(feederETD,LANG);
@@ -735,7 +752,9 @@ function renderSlot(){
   // ── DEL MONTE display
   document.getElementById('w-dm-vessel').textContent=dmAbsent?
     (LANG==='es'?'Sin Del Monte confirmado':'No Del Monte confirmed'):
-    ww.del_monte.vessel;
+    ww.del_monte.vessel+(ww.del_monte.vessel_voyage?' V.'+ww.del_monte.vessel_voyage:'');
+  var dmwServ=document.getElementById('w-dm-service');
+  if(dmwServ) dmwServ.textContent=ww.del_monte.window_service||'';
   document.getElementById('w-dm-eta').textContent=dmETB?
     'ETA: '+fmtD(dmETB,LANG):
     (LANG==='es'?'Por confirmar':'TBC');
@@ -890,6 +909,111 @@ function updateForecast(){
   chip.className='risk-chip '+(risk==='HIGH'?'rk-h':risk==='MEDIUM'?'rk-m':'rk-l');
 }
 
+// ── CARRIER SUMMARY ──────────────────────────────────────────
+function renderCarriers(){
+  var comp=S.completed||[];
+  if(!comp.length)return;
+  var map={};
+  comp.forEach(function(v){
+    var l=v.line;
+    if(!map[l])map[l]={line:l,ships:0,units_new:0,units_used:0,gross_sum:0,gross_n:0,wait_sum:0,vessels:[]};
+    map[l].ships++;
+    map[l].units_new+=v.units_new||0;
+    map[l].units_used+=v.units_used||0;
+    if(v.etb&&v.etd){
+      var h=hDiff(new Date(v.etb),new Date(v.etd));
+      var u=(v.units_new||0)+(v.units_used||0);
+      if(h>0){map[l].gross_sum+=Math.round(u/h);map[l].gross_n++;}
+    }
+    if(v.eta&&v.etb) map[l].wait_sum+=dDiff(new Date(v.eta),new Date(v.etb));
+    // Store individual vessel detail
+    var netH=v.discharge_start&&v.discharge_end?hDiff(new Date(v.discharge_start),new Date(v.discharge_end)):null;
+    var units=(v.units_new||0)+(v.units_used||0);
+    var net=netH&&netH>0?Math.round(units/netH):null;
+    var waitD=v.eta&&v.etb?dDiff(new Date(v.eta),new Date(v.etb)):null;
+    map[l].vessels.push({
+      vessel:v.vessel,
+      voyage:v.vessel_voyage||'',
+      units_new:v.units_new||0,
+      units_used:v.units_used||0,
+      etb:v.etb,
+      net:net,
+      waitD:waitD,
+      delay_note:v.delay_note||''
+    });
+  });
+  var carriers=Object.values(map).sort(function(a,b){return (b.units_new+b.units_used)-(a.units_new+a.units_used);});
+  var COLORS={EUKOR:'var(--cyan)',NYK:'var(--gold)',KLINE:'var(--blue)',default:'var(--text2)'};
+  var grid=document.getElementById('carrier-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+
+  // Grand totals row
+  var grandNew=carriers.reduce(function(s,c){return s+c.units_new;},0);
+  var grandUsed=carriers.reduce(function(s,c){return s+c.units_used;},0);
+  var grandShips=carriers.reduce(function(s,c){return s+c.ships;},0);
+  var totalDiv=document.createElement('div');
+  totalDiv.style.cssText='grid-column:1/-1;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:.875rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem';
+  totalDiv.innerHTML=
+    '<div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)">'+(LANG==='es'?'Total acumulado 2026':'2026 accumulated total')+'</div>'+
+    '<div style="display:flex;gap:2rem;flex-wrap:wrap">'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+grandShips+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Unidades nuevas':'New units')+'</div><div style="font-size:20px;font-weight:600;color:var(--cyan)">'+grandNew.toLocaleString()+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Unidades usadas':'Used units')+'</div><div style="font-size:20px;font-weight:600;color:var(--gold)">'+grandUsed.toLocaleString()+'</div></div>'+
+      '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Total</div><div style="font-size:20px;font-weight:600;color:var(--text)">'+(grandNew+grandUsed).toLocaleString()+'</div></div>'+
+    '</div>';
+  grid.appendChild(totalDiv);
+
+  carriers.forEach(function(c){
+    var total=c.units_new+c.units_used;
+    var avgGross=c.gross_n>0?Math.round(c.gross_sum/c.gross_n):null;
+    var avgWait=c.ships>0?(c.wait_sum/c.ships).toFixed(1):null;
+    var color=COLORS[c.line]||COLORS.default;
+    var highlight=USER==='eukor'&&c.line==='EUKOR'||USER==='ww'&&(c.line==='WW'||c.line==='Wallenius');
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:.875rem;'+(highlight?'border-color:var(--cyan);background:rgba(0,200,200,.05)':'');
+
+    // Individual vessels list
+    var vesselRows=c.vessels.map(function(v){
+      var etbStr=v.etb?new Date(v.etb).toLocaleDateString(LANG==='es'?'es-CR':'en-US',{day:'numeric',month:'short'}):'—';
+      return '<tr>'+
+        '<td style="padding:3px 4px;font-size:10px;color:var(--text)">'+v.vessel+(v.voyage?' <span style="color:var(--muted)">'+v.voyage+'</span>':'')+'</td>'+
+        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--cyan)">'+v.units_new.toLocaleString()+'</td>'+
+        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--gold)">'+v.units_used.toLocaleString()+'</td>'+
+        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--text2)">'+etbStr+'</td>'+
+        '<td style="padding:3px 4px;font-size:10px;text-align:right;color:var(--text2)">'+(v.net?v.net+' veh/h':'—')+'</td>'+
+        (v.delay_note?'<td style="padding:3px 4px;font-size:9px;color:var(--yellow)">⚠ '+v.delay_note.substring(0,40)+'...</td>':'<td></td>')+
+      '</tr>';
+    }).join('');
+
+    div.innerHTML=
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'+
+        '<span style="font-family:var(--mono);font-size:13px;font-weight:600;color:'+color+'">'+c.line+'</span>'+
+        '<span style="font-family:var(--mono);font-size:18px;font-weight:600;color:var(--text)">'+total.toLocaleString()+' <span style="font-size:11px;color:var(--text2)">veh</span></span>'+
+      '</div>'+
+      '<div style="display:flex;gap:1rem;margin-bottom:8px;flex-wrap:wrap">'+
+        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Buques':'Vessels')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+c.ships+'</div></div>'+
+        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Nuevos':'New')+'</div><div style="font-size:14px;font-weight:600;color:var(--cyan)">'+c.units_new.toLocaleString()+'</div></div>'+
+        '<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Usados':'Used')+'</div><div style="font-size:14px;font-weight:600;color:var(--gold)">'+c.units_used.toLocaleString()+'</div></div>'+
+        (avgGross?'<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Prod. bruta':'Gross')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+avgGross+' veh/h</div></div>':'')+
+        (avgWait?'<div><div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">'+(LANG==='es'?'Espera prom.':'Avg wait')+'</div><div style="font-size:14px;font-weight:600;color:var(--text)">'+avgWait+'d</div></div>':'')+
+      '</div>'+
+      '<table style="width:100%;border-collapse:collapse;margin-top:6px;border-top:1px solid var(--border)">'+
+        '<thead><tr>'+
+          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:left;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Buque':'Vessel')+'</th>'+
+          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Nuevos':'New')+'</th>'+
+          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Usados':'Used')+'</th>'+
+          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">ETB</th>'+
+          '<th style="padding:3px 4px;font-size:9px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.07em">'+(LANG==='es'?'Prod. neta':'Net prod.')+'</th>'+
+          '<th></th>'+
+        '</tr></thead>'+
+        '<tbody>'+vesselRows+'</tbody>'+
+      '</table>';
+    grid.appendChild(div);
+  });
+}
+
+
 // ── DAILY TABLE ───────────────────────────────────────────────
 function renderDaily(){
   var tb=document.getElementById('daily-tbody');
@@ -898,7 +1022,14 @@ function renderDaily(){
   h.forEach(function(r,i){
     var tr=document.createElement('tr');
     if(i===0)tr.style.fontWeight='600';
-    tr.innerHTML='<td class="l">'+r.date+'</td><td class="r">'+r.yard_new.toLocaleString()+'</td><td class="r">'+r.yard_used.toLocaleString()+'</td><td class="r">'+r.disp_new.toLocaleString()+'</td><td class="r">'+r.disp_used.toLocaleString()+'</td>';
+    var ctx=LANG==='es'?(r.context_es||''):(r.context_en||'');
+    var dispColor=r.disp_new>=250?'var(--green)':r.disp_new>=150?'var(--cyan)':'var(--text)';
+    tr.innerHTML='<td class="l">'+r.date+'</td>'+
+      '<td class="r">'+r.yard_new.toLocaleString()+'</td>'+
+      '<td class="r">'+r.yard_used.toLocaleString()+'</td>'+
+      '<td class="r" style="color:'+dispColor+';font-weight:'+(r.disp_new>=250?'600':'400')+'">'+r.disp_new.toLocaleString()+'</td>'+
+      '<td class="r">'+r.disp_used.toLocaleString()+'</td>'+
+      '<td class="l" style="font-size:10px;color:var(--text2)">'+ctx+'</td>';
     tb.appendChild(tr);
   });
 }
@@ -925,7 +1056,7 @@ function renderHist(){
     var tr=document.createElement('tr');
     if(highlight)tr.style.background='rgba(0,200,200,0.05)';
     tr.innerHTML=
-      '<td style="font-weight:'+(highlight?600:400)+'">'+v.vessel+'</td>'+
+      '<td style="font-weight:'+(highlight?600:400)+'">'+v.vessel+(v.vessel_voyage?' <span style="font-size:9px;color:var(--muted)">'+v.vessel_voyage+'</span>':'')+'<div style="font-size:9px;color:var(--text2)">'+( v.window_service||'')+'</div></td>'+
       '<td><span class="linebadge">'+v.line+'</span></td>'+
       '<td style="text-align:right">'+(v.units_new||0).toLocaleString()+'</td>'+
       '<td style="text-align:right">'+(v.units_used||0).toLocaleString()+'</td>'+
@@ -935,6 +1066,14 @@ function renderHist(){
       '<td style="text-align:right">'+(gross?gross+' veh/h':'—')+'</td>'+
       '<td style="text-align:right">'+(net?net+' veh/h':'—')+'</td>'+
       '<td style="text-align:center">'+dispChip+'</td>'+
+      '<td style="text-align:center">'+(v.op_hours_assigned&&v.op_hours_actual?
+        (function(){
+          var pct=Math.round(v.op_hours_actual/v.op_hours_assigned*100);
+          var col=pct<=100?'var(--green)':'var(--red)';
+          return '<span style="font-size:10px;font-weight:600;color:'+col+'">'+pct+'%</span>'+
+                 '<div style="font-size:9px;color:var(--text2)">'+v.op_hours_actual+'h/'+v.op_hours_assigned+'h</div>';
+        })()
+      :'—')+'</td>'+
       '<td style="font-size:10px;color:var(--yellow)">'+(v.delay_note||'')+'</td>';
     tb.appendChild(tr);
   });
