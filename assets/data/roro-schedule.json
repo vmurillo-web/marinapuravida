@@ -1,31 +1,51 @@
 {
   "week_windows": {
-    "updated": "2026-04-14T16:00:00",
-    "week_ref_es": "Semana 14-20 Abril 2026",
-    "week_ref_en": "Week April 14-20, 2026",
+    "updated": "2026-04-15T16:00:00",
+    "week_ref_es": "Semana 15-21 Abril 2026",
+    "week_ref_en": "Week April 15-21, 2026",
     "feeder": {
-      "vessel": "Aliaga Express",
-      "line": "RAM",
-      "base_window_end": "2026-04-15T15:00:00",
-      "etd_estimated": "2026-04-14T16:00:00",
+      "vessel": "Georgia Highway",
+      "vessel_voyage": "V.128A",
+      "window_service": "Slot RORO Mié→Jue (desplazado +29h)",
+      "line": "NYK",
+      "base_window_end": "2026-04-17T15:00:00",
+      "etd_estimated": "2026-04-17T12:00:00",
       "status": "operating",
-      "absent": false
+      "absent": false,
+      "note": "RORO descargando. ETD est. 17 abr 12:00. Próximo: Del Monte Harvester 16 abr 15:00"
     },
     "del_monte": {
       "vessel": "Del Monte Harvester",
+      "vessel_voyage": "0219",
+      "window_service": "Ventana Del Monte — Jueves 15:00",
       "line": "Del Monte",
       "base_window_start": "2026-04-16T15:00:00",
       "eta_estimated": "2026-04-16T15:00:00",
       "status": "confirmed",
-      "absent": false
+      "absent": false,
+      "note": "473 ctrs / 14h op. Calados 6.8/7.8"
     },
     "next_feeder": {
-      "vessel": "AS Savanna",
-      "line": "Transmares",
-      "base_window_end": "2026-04-22T15:00:00",
-      "eta_estimated": "2026-04-16T23:00:00",
+      "vessel": "San Alfonso",
+      "vessel_voyage": "0190",
+      "window_service": "Ventana Feeder — Sábado 10:00",
+      "line": "Grimaldi",
+      "base_window_end": "2026-04-18T10:00:00",
+      "eta_estimated": "2026-04-14T21:00:00",
       "status": "confirmed",
-      "absent": false
+      "absent": false,
+      "note": "867 mov. Ventana SAB 18 abr 10:00"
+    },
+    "future_feeder": {
+      "vessel": "AS Savanna",
+      "vessel_voyage": "TBD",
+      "window_service": "Ventana AS Savanna service — Martes 00:01",
+      "line": "Transmares",
+      "base_window_end": "2026-04-28T15:00:00",
+      "eta_estimated": "2026-04-28T02:00:00",
+      "status": "confirmed",
+      "absent": false,
+      "note": "Anteriormente estaba ETA 16 abr — actualizado a 28 abr en PDF 14 abr 16:00"
     }
   },
   "slot_config": {
@@ -33,48 +53,81 @@
     "buffer_after_feeder_hours": 1,
     "buffer_before_delmont_hours": 1,
     "avg_rate_veh_h": 90,
-    "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza en bloque cuando el feeder corre por condiciones climáticas u operacionales.",
-    "note_en": "Free slot between end of feeder and Del Monte window. Shifts as a block when feeder delays due to weather or operational conditions."
+    "note_es": "Slot libre entre fin de feeder y inicio de Del Monte. Se desplaza en bloque cuando el feeder corre. El nombre del buque en la ventana puede cambiar — lo que importa es la ventana del servicio.",
+    "note_en": "Free slot between end of feeder and Del Monte window. Shifts as a block when feeder delays. The vessel name on the window may change — what matters is the service window."
   },
-  "roro_waiting": [
-    {
-      "vessel": "Georgia Highway",
-      "line": "NYK",
-      "type": "roro",
-      "eta": "2026-04-13T14:36:00",
-      "units_new": 1807,
-      "units_used": 45,
-      "status": "anchored"
-    }
-  ],
+  "roro_waiting": [],
   "planned": [
     {
-      "vessel": "Georgia Highway",
-      "line": "NYK",
+      "vessel": "A.Idefix",
+      "vessel_voyage": "0191",
+      "line": "RAM",
       "type": "roro",
-      "eta": "2026-04-13T14:36:00",
+      "eta": "2026-04-25T04:00:00",
       "etb": null,
       "etd": null,
-      "units_new": 1807,
-      "units_used": 45,
-      "op_hours": 20,
-      "status": "anchored"
+      "units_new": 950,
+      "units_used": 0,
+      "op_hours": 24,
+      "status": "confirmed",
+      "note": "Ventana SABADOS 05:01 hrs"
     },
     {
       "vessel": "San Alfonso",
+      "vessel_voyage": "0190",
       "line": "Grimaldi",
       "type": "feeder",
       "eta": "2026-04-14T21:00:00",
-      "etb": null,
+      "etb": "2026-04-18T10:00:00",
       "etd": null,
-      "moves": 863,
-      "op_hours": 24,
-      "status": "confirmed"
+      "moves": 867,
+      "op_hours": 25,
+      "status": "confirmed",
+      "note": "Ventana SAB 18 abr 10:00"
     }
   ],
   "completed": [
     {
-      "vessel": "Morning Celine VC603",
+      "vessel": "Georgia Highway",
+      "vessel_voyage": "V.128A",
+      "window_service": "Slot RORO Mié→Jue (desplazado +29h)",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "etb": "2026-04-16T20:00:00",
+      "discharge_start": "2026-04-16T21:00:00",
+      "discharge_end": "2026-04-17T11:00:00",
+      "etd": "2026-04-17T12:00:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "op_hours_assigned": 20,
+      "op_hours_actual": 16,
+      "slot_base_open": "2026-04-15T15:00:00",
+      "slot_displacement_h": 29,
+      "window_compliance_pct": 80,
+      "delay_note": "Slot desplazado +29h. Base Mié 15 abr 15:00 → real Jue 16 abr 20:00"
+    },
+    {
+      "vessel": "Georgia Highway",
+      "vessel_voyage": "V.128A",
+      "window_service": "Slot RORO Mié→Jue (desplazado)",
+      "line": "NYK",
+      "type": "roro",
+      "eta": "2026-04-13T14:36:00",
+      "etb": "2026-04-16T20:00:00",
+      "discharge_start": "2026-04-16T21:00:00",
+      "discharge_end": "2026-04-17T12:00:00",
+      "etd": "2026-04-17T12:00:00",
+      "units_new": 1807,
+      "units_used": 45,
+      "slot_base_open": "2026-04-15T15:00:00",
+      "slot_displacement_h": 29,
+      "delay_note": "Slot desplazado +29h. Base Mié 15 abr 15:00 → real Jue 16 abr 20:00. Feeder Aliaga Express corrió por condiciones operacionales."
+    },
+    {
+      "vessel": "Morning Celine",
+      "vessel_voyage": "VC603",
+      "window_service": "Slot RORO Mié→Jue (desplazado sáb→dom)",
       "line": "EUKOR",
       "type": "roro",
       "eta": "2026-04-07T06:17:00",
@@ -86,10 +139,14 @@
       "units_used": 0,
       "slot_base_open": "2026-04-08T15:00:00",
       "slot_displacement_h": 78,
-      "delay_note": "Slot desplazado +78h por condiciones climáticas. Ventana base mié→jue se corrió a sáb→dom."
+      "p1_context": "AS Svenja (feeder) P1",
+      "p4_context": "Maple Arrow (cereales) P4",
+      "delay_note": "Slot desplazado +78h por condiciones climáticas. Ventana base Mié 8 abr → real Sáb 11 abr 21:35"
     },
     {
       "vessel": "Opal Leader",
+      "vessel_voyage": "F04228",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "NYK",
       "type": "roro",
       "eta": "2026-04-02T18:00:00",
@@ -100,10 +157,14 @@
       "units_new": 941,
       "units_used": 0,
       "slot_base_open": "2026-04-08T15:00:00",
-      "slot_displacement_h": 2
+      "slot_displacement_h": 2,
+      "p1_context": "Puesto 1 libre",
+      "p4_context": "Maple Arrow P4"
     },
     {
       "vessel": "Morning Carol",
+      "vessel_voyage": "V.193",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "EUKOR",
       "type": "roro",
       "eta": "2026-03-17T05:00:00",
@@ -118,7 +179,9 @@
       "delay_note": "Falla de rampa demoró zarpe +4.4h"
     },
     {
-      "vessel": "Jasper Arrow V.143",
+      "vessel": "Jasper Arrow",
+      "vessel_voyage": "V.143",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "KLINE",
       "type": "roro",
       "eta": "2026-03-13T06:00:00",
@@ -133,6 +196,8 @@
     },
     {
       "vessel": "Victory Ray",
+      "vessel_voyage": "V.72",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "NYK",
       "type": "roro",
       "eta": "2026-02-28T10:00:00",
@@ -147,6 +212,8 @@
     },
     {
       "vessel": "Dignity Leader",
+      "vessel_voyage": "V.215",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "NYK",
       "type": "roro",
       "eta": "2026-02-23T13:00:00",
@@ -160,7 +227,9 @@
       "slot_displacement_h": 12
     },
     {
-      "vessel": "RCC Asia 2026055",
+      "vessel": "RCC Asia",
+      "vessel_voyage": "2026055",
+      "window_service": "Slot RORO Mié→Jue",
       "line": "KLINE",
       "type": "roro",
       "eta": "2026-02-14T23:00:00",

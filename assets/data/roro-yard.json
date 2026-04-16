@@ -1,20 +1,111 @@
 {
-  "updated": "2026-04-14",
+  "updated": "2026-04-15",
   "updated_time": "09:00",
-  "yard_new": 1823,
+  "yard_new": 1634,
   "yard_used": 0,
   "dispatched_new": 0,
   "dispatched_used": 0,
   "capacity": 2500,
   "avg_rate_veh_h": 90,
   "history": [
-    {"date": "06 Apr", "yard_new": 597,  "yard_used": 0, "disp_new": 100, "disp_used": 0},
-    {"date": "07 Apr", "yard_new": 497,  "yard_used": 0, "disp_new": 0,   "disp_used": 0},
-    {"date": "08 Apr", "yard_new": 368,  "yard_used": 0, "disp_new": 129, "disp_used": 0},
-    {"date": "09 Apr", "yard_new": 1180, "yard_used": 0, "disp_new": 92,  "disp_used": 0},
-    {"date": "10 Apr", "yard_new": 1088, "yard_used": 0, "disp_new": 127, "disp_used": 0},
-    {"date": "11 Apr", "yard_new": 961,  "yard_used": 0, "disp_new": 327, "disp_used": 0},
-    {"date": "12 Apr", "yard_new": 634,  "yard_used": 0, "disp_new": 134, "disp_used": 0},
-    {"date": "13 Apr", "yard_new": 2033, "yard_used": 0, "disp_new": 210, "disp_used": 0}
+    {
+      "date": "06 Apr",
+      "yard_new": 597,
+      "yard_used": 0,
+      "disp_new": 100,
+      "disp_used": 0,
+      "p1": "AS Pamela (feeder)",
+      "p4": "Great 61 (cereales)",
+      "context_es": "AS Pamela P1 + Great 61 P4 cereales",
+      "context_en": "AS Pamela P1 + Great 61 P4 grains"
+    },
+    {
+      "date": "07 Apr",
+      "yard_new": 497,
+      "yard_used": 0,
+      "disp_new": 0,
+      "disp_used": 0,
+      "p1": "AS Svenja (feeder)",
+      "p4": "Great 61 (cereales)",
+      "context_es": "AS Svenja P1 + Great 61 P4. Sin despacho",
+      "context_en": "AS Svenja P1 + Great 61 P4. No dispatch"
+    },
+    {
+      "date": "08 Apr",
+      "yard_new": 368,
+      "yard_used": 0,
+      "disp_new": 129,
+      "disp_used": 0,
+      "p1": "AS Svenja (feeder)",
+      "p4": "Maple Arrow (cereales)",
+      "context_es": "AS Svenja P1 + Maple Arrow P4 cereales",
+      "context_en": "AS Svenja P1 + Maple Arrow P4 grains"
+    },
+    {
+      "date": "09 Apr",
+      "yard_new": 1180,
+      "yard_used": 0,
+      "disp_new": 92,
+      "disp_used": 0,
+      "p1": "Opal Leader (RORO - descargando)",
+      "p4": "Maple Arrow (cereales)",
+      "context_es": "Opal Leader P1 descargando 941 veh + Maple Arrow P4",
+      "context_en": "Opal Leader P1 discharging 941 veh + Maple Arrow P4"
+    },
+    {
+      "date": "10 Apr",
+      "yard_new": 1088,
+      "yard_used": 0,
+      "disp_new": 127,
+      "disp_used": 0,
+      "p1": "Aliaga Express (feeder)",
+      "p4": "Maple Arrow + Merganser (petcoke)",
+      "context_es": "Aliaga Express P1 + Maple Arrow/Merganser P4",
+      "context_en": "Aliaga Express P1 + Maple Arrow/Merganser P4"
+    },
+    {
+      "date": "11 Apr",
+      "yard_new": 961,
+      "yard_used": 0,
+      "disp_new": 327,
+      "disp_used": 0,
+      "p1": "AS Svenja (feeder - atracó SAB 10:00)",
+      "p4": "Maple Arrow (cereales - último día)",
+      "context_es": "⭐ MÁXIMO: AS Svenja P1 + Maple Arrow P4 + Sábado + Morning Celine en fondeo generó presión de despacho",
+      "context_en": "⭐ PEAK: AS Svenja P1 + Maple Arrow P4 + Saturday + Morning Celine anchored created dispatch pressure"
+    },
+    {
+      "date": "12 Apr",
+      "yard_new": 634,
+      "yard_used": 0,
+      "disp_new": 134,
+      "disp_used": 0,
+      "p1": "AS Svenja (feeder) → Morning Celine atracó 21:35",
+      "p4": "Merganser (petcoke)",
+      "context_es": "AS Svenja P1 + Morning Celine atracó 21:35 + Merganser P4",
+      "context_en": "AS Svenja P1 + Morning Celine berthed 21:35 + Merganser P4"
+    },
+    {
+      "date": "13 Apr",
+      "yard_new": 2033,
+      "yard_used": 0,
+      "disp_new": 210,
+      "disp_used": 0,
+      "p1": "Morning Celine (RORO - descargando 1533 veh)",
+      "p4": "Merganser (petcoke)",
+      "context_es": "Morning Celine P1 descargando 1533 veh + Merganser P4",
+      "context_en": "Morning Celine P1 discharging 1533 veh + Merganser P4"
+    },
+    {
+      "date": "15 Apr",
+      "yard_new": 1634,
+      "yard_used": 0,
+      "disp_new": 0,
+      "disp_used": 0,
+      "p1": "Georgia Highway (RORO - descargando desde 16 abr 20:00)",
+      "p4": "PMS Enzian (cereales)",
+      "context_es": "Sin despacho. Georgia Highway en muelle desde noche. PMS Enzian P4",
+      "context_en": "No dispatch. Georgia Highway at berth since last night. PMS Enzian P4"
+    }
   ]
 }
