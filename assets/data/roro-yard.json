@@ -1,7 +1,7 @@
 {
-  "updated": "2026-04-15",
-  "updated_time": "09:00",
-  "yard_new": 1634,
+  "updated": "2026-04-19",
+  "updated_time": "13:45",
+  "yard_new": 756,
   "yard_used": 0,
   "dispatched_new": 0,
   "dispatched_used": 0,
@@ -97,15 +97,70 @@
       "context_en": "Morning Celine P1 discharging 1533 veh + Merganser P4"
     },
     {
+      "date": "14 Apr",
+      "yard_new": 1823,
+      "yard_used": 0,
+      "disp_new": 189,
+      "disp_used": 0,
+      "p1": "Morning Celine (RORO - finalizando descarga)",
+      "p4": "Merganser (petcoke)",
+      "context_es": "Morning Celine P1 finalizando + Merganser P4",
+      "context_en": "Morning Celine P1 finishing + Merganser P4"
+    },
+    {
       "date": "15 Apr",
       "yard_new": 1634,
       "yard_used": 0,
+      "disp_new": 212,
+      "disp_used": 0,
+      "p1": "AS Svenja (feeder)",
+      "p4": "PMS Enzian (cereales)",
+      "context_es": "AS Svenja P1 feeder + PMS Enzian P4. Georgia Highway en bahía",
+      "context_en": "AS Svenja P1 feeder + PMS Enzian P4. Georgia Highway anchored"
+    },
+    {
+      "date": "16 Apr",
+      "yard_new": 1422,
+      "yard_used": 0,
+      "disp_new": 211,
+      "disp_used": 0,
+      "p1": "AS Svenja → AS Pamela (feeders) → Georgia Highway (RORO 13:00)",
+      "p4": "PMS Enzian (cereales)",
+      "context_es": "AS Svenja + AS Pamela feeders + Georgia Highway ETB 13:00. Despacho 211 veh",
+      "context_en": "AS Svenja + AS Pamela feeders + Georgia Highway ETB 13:00. Dispatch 211 veh"
+    },
+    {
+      "date": "17 Apr",
+      "yard_new": 1211,
+      "yard_used": 0,
+      "disp_new": 225,
+      "disp_used": 0,
+      "p1": "Georgia Highway (RORO - en bahía) / Del Monte Harvester 0219 (ETD 15:00)",
+      "p4": "PMS Enzian (cereales)",
+      "context_es": "Del Monte Harvester zarpó 15:00. Georgia Highway aún en bahía. Despacho 225",
+      "context_en": "Del Monte Harvester departed 15:00. Georgia Highway still anchored. Dispatch 225"
+    },
+    {
+      "date": "18 Apr",
+      "yard_new": 986,
+      "yard_used": 0,
+      "disp_new": 230,
+      "disp_used": 0,
+      "p1": "NYK Silvia (feeder) + Norwegian Encore (crucero)",
+      "p4": "Whitewing (fertilizante) / Merganser zarpó",
+      "context_es": "NYK Silvia + Norwegian Encore P1. Whitewing en P4. Georgia Highway sigue en bahía",
+      "context_en": "NYK Silvia + Norwegian Encore P1. Whitewing at P4. Georgia Highway still anchored"
+    },
+    {
+      "date": "19 Apr",
+      "yard_new": 756,
+      "yard_used": 0,
       "disp_new": 0,
       "disp_used": 0,
-      "p1": "Georgia Highway (RORO - descargando desde 16 abr 20:00)",
-      "p4": "PMS Enzian (cereales)",
-      "context_es": "Sin despacho. Georgia Highway en muelle desde noche. PMS Enzian P4",
-      "context_en": "No dispatch. Georgia Highway at berth since last night. PMS Enzian P4"
+      "p1": "San Alfonso atracó 21:35 (feeder)",
+      "p4": "Ioannis Theo (maíz) + PMS Enzian fondeado",
+      "context_es": "Sin despacho (domingo). San Alfonso atracó 21:35. Ioannis Theo P4. Georgia Highway sigue en bahía",
+      "context_en": "No dispatch (Sunday). San Alfonso berthed 21:35. Ioannis Theo P4. Georgia Highway still anchored"
     }
   ]
 }
