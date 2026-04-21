@@ -171,16 +171,68 @@
     .rk-m{background:var(--y-bg);color:var(--yellow)}
     .rk-h{background:var(--r-bg);color:var(--red)}
 
+    /* BERTH CALL OPTIMIZER */
+    .bco-hdr{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+    .bco-toggle{display:flex;gap:2px;background:var(--bg2);padding:3px;border-radius:8px;border:1px solid var(--border)}
+    .bco-tbtn{font-size:11px;padding:5px 12px;border:none;background:transparent;color:var(--text2);border-radius:6px;cursor:pointer;font-family:var(--font);font-weight:600}
+    .bco-tbtn.active{background:var(--surface);color:var(--cyan)}
+    .bco-tbtn:disabled{opacity:.35;cursor:not-allowed}
+    .bco-grid{display:grid;grid-template-columns:2fr 1.1fr;gap:14px;margin-bottom:14px}
+    .bco-hmap{background:var(--surface2);border-radius:var(--r);padding:12px}
+    .bco-hmap-title{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-weight:600;margin-bottom:10px}
+    .bco-days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+    .bco-day{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;position:relative;min-height:58px}
+    .bco-day-lbl{font-size:10px;font-weight:600;line-height:1}
+    .bco-day-val{font-size:16px;font-weight:700;line-height:1.1;margin-top:2px;font-family:var(--mono)}
+    .bco-day-hint{font-size:9px;margin-top:1px;opacity:.75}
+    .bco-day.l-hi{background:#1D9E75;color:#fff;border:2px solid #04342C}
+    .bco-day.l-md{background:#378ADD;color:#fff}
+    .bco-day.l-lo{background:#85B7EB;color:#042C53}
+    .bco-day.l-min{background:#F7C1C1;color:#501313}
+    .bco-day.l-no{background:rgba(255,255,255,.05);color:var(--text2);border:1px dashed var(--border2)}
+    [data-theme="light"] .bco-day.l-lo{background:#B5D4F4;color:#042C53}
+    .bco-legend{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--text2);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+    .bco-lg-chip{display:flex;align-items:center;gap:4px}
+    .bco-lg-sw{width:10px;height:10px;border-radius:2px;display:inline-block}
+    .bco-side{display:flex;flex-direction:column;gap:10px}
+    .bco-card{border-radius:var(--r);padding:10px 12px}
+    .bco-card-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;opacity:.9}
+    .bco-card-val{font-size:15px;font-weight:700;margin-top:3px;line-height:1.2}
+    .bco-card-sub{font-size:11px;opacity:.75;margin-top:3px}
+    .bco-card.bco-win{background:rgba(29,158,117,.12);border-left:3px solid #1D9E75;color:var(--text)}
+    .bco-card.bco-win .bco-card-lbl{color:#5DCAA5}
+    .bco-card.bco-neutral{background:var(--surface2)}
+    .bco-card.bco-alert{background:rgba(245,158,11,.12);border-left:3px solid var(--yellow);color:var(--text)}
+    .bco-card.bco-alert .bco-card-lbl{color:var(--yellow)}
+    .bco-tbl{width:100%;border-collapse:collapse;font-size:12px}
+    .bco-tbl th{text-align:right;padding:5px 8px;font-weight:500;color:var(--text2);font-size:11px;border-bottom:1px solid var(--border)}
+    .bco-tbl th:first-child{text-align:left}
+    .bco-tbl td{padding:5px 8px;text-align:right;font-family:var(--mono)}
+    .bco-tbl td:first-child{text-align:left;font-family:var(--font)}
+    .bco-tbl tr.peak td{background:rgba(29,158,117,.08);color:#5DCAA5;font-weight:600}
+    .bco-tbl tr.low td{color:#F09595}
+    .bco-tbl tr.holiday td{color:var(--yellow)}
+    .bco-banner{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:var(--r);padding:10px 12px;margin-bottom:12px;display:none;align-items:center;gap:10px;font-size:12px;color:var(--yellow)}
+    .bco-banner.show{display:flex}
+    .bco-banner-icon{font-size:16px}
+    .bco-banner-txt strong{color:var(--text);font-weight:600}
+    .bco-method{background:var(--surface2);border-radius:var(--r);padding:9px 12px;font-size:11px;color:var(--text2);line-height:1.5;margin-top:10px}
+    .bco-method strong{color:var(--text)}
+
     @media(max-width:900px){
       .chain{grid-template-columns:1fr;gap:.5rem}
       .chain-arrow{display:none}
       .etb-grid{grid-template-columns:1fr 1fr}
       .g4,.g3{grid-template-columns:1fr 1fr}
+      .bco-grid{grid-template-columns:1fr}
+      .bco-day{min-height:52px}
+      .bco-day-val{font-size:14px}
     }
     @media(max-width:560px){
       .g4,.g3,.g2{grid-template-columns:1fr}
       .wrap{padding:1rem}
       .etb-grid{grid-template-columns:1fr}
+      .bco-days{gap:4px}
     }
   </style>
 </head>
@@ -413,6 +465,80 @@
     </div>
   </div>
 
+  <!-- BERTH CALL OPTIMIZER -->
+  <div class="card" style="margin-bottom:1rem">
+    <div class="bco-hdr">
+      <div>
+        <div class="ctitle" id="bco-title">Berth Call Optimizer — Patrón semanal de despacho</div>
+        <div class="csub" id="bco-sub">Para planificación de recalada RORO · días óptimos y ventanas a evitar</div>
+      </div>
+      <div class="bco-toggle" role="tablist" aria-label="Período de análisis">
+        <button class="bco-tbtn active" data-period="14" onclick="setBcoPeriod(14)">14d</button>
+        <button class="bco-tbtn" data-period="30" onclick="setBcoPeriod(30)">30d</button>
+        <button class="bco-tbtn" data-period="60" onclick="setBcoPeriod(60)">60d</button>
+        <button class="bco-tbtn" data-period="90" onclick="setBcoPeriod(90)">90d</button>
+      </div>
+    </div>
+
+    <div class="bco-banner" id="bco-banner">
+      <span class="bco-banner-icon">⚠</span>
+      <div class="bco-banner-txt" id="bco-banner-txt"></div>
+    </div>
+
+    <div class="bco-grid">
+      <div class="bco-hmap">
+        <div class="bco-hmap-title" id="bco-hmap-title">Heatmap semanal — promedio veh/día</div>
+        <div class="bco-days" id="bco-days"></div>
+        <div class="bco-legend">
+          <div class="bco-lg-chip"><span class="bco-lg-sw" style="background:#F7C1C1"></span><span id="lg-lo">Bajo</span></div>
+          <div class="bco-lg-chip"><span class="bco-lg-sw" style="background:#85B7EB"></span><span id="lg-md">Medio</span></div>
+          <div class="bco-lg-chip"><span class="bco-lg-sw" style="background:#378ADD"></span><span id="lg-hi">Alto</span></div>
+          <div class="bco-lg-chip"><span class="bco-lg-sw" style="background:#1D9E75"></span><span id="lg-pk">Pico</span></div>
+          <div class="bco-lg-chip"><span class="bco-lg-sw" style="background:transparent;border:1px dashed var(--border2)"></span><span id="lg-no">Sin data</span></div>
+          <div class="bco-lg-chip" style="color:var(--yellow)"><span id="lg-hol">🎌 Feriado CR</span></div>
+        </div>
+      </div>
+
+      <div class="bco-side">
+        <div class="bco-card bco-win">
+          <div class="bco-card-lbl" id="bco-win-lbl">Ventana óptima</div>
+          <div class="bco-card-val" id="bco-win-val">—</div>
+          <div class="bco-card-sub" id="bco-win-sub">—</div>
+        </div>
+        <div class="bco-card bco-neutral">
+          <div class="bco-card-lbl" id="bco-ratio-lbl">Yard clearance ratio</div>
+          <div class="bco-card-val" id="bco-ratio-val">—</div>
+          <div class="bco-card-sub" id="bco-ratio-sub">—</div>
+        </div>
+        <div class="bco-card bco-alert">
+          <div class="bco-card-lbl" id="bco-alert-lbl">Evitar</div>
+          <div class="bco-card-val" id="bco-alert-val">—</div>
+          <div class="bco-card-sub" id="bco-alert-sub">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="bco-tbl" id="bco-tbl">
+        <thead>
+          <tr>
+            <th id="bco-th-day">Día</th>
+            <th id="bco-th-avg">Promedio</th>
+            <th id="bco-th-min">Mínimo</th>
+            <th id="bco-th-max">Máximo</th>
+            <th id="bco-th-n">N días</th>
+            <th id="bco-th-cont">Contribución</th>
+          </tr>
+        </thead>
+        <tbody id="bco-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="bco-method" id="bco-method">
+      <strong>Método:</strong> Promedio de despacho agrupado por día de la semana. N = días muestreados. Días en feriado CR se excluyen del cálculo (se muestran aparte). Más días → mayor confiabilidad.
+    </div>
+  </div>
+
   <!-- CARRIER SUMMARY -->
   <div class="card" style="margin-bottom:1rem">
     <div class="ctitle" id="carrier-title">Distribución por naviera — 2026</div>
@@ -437,7 +563,6 @@
             <th style="min-width:110px">ETD</th>
             <th style="min-width:80px;text-align:right"><span class="es">Prod. bruta</span><span class="en" style="display:none">Gross prod.</span></th>
             <th style="min-width:80px;text-align:right"><span class="es">Prod. neta</span><span class="en" style="display:none">Net prod.</span></th>
-            <th style="min-width:90px;text-align:center"><span class="es">Cumplim. ventana</span><span class="en" style="display:none">Window compliance</span></th>
             <th style="min-width:80px;text-align:center"><span class="es">Desplaz. slot</span><span class="en" style="display:none">Slot shift</span></th>
             <th style="min-width:120px"><span class="es">Observación</span><span class="en" style="display:none">Note</span></th>
           </tr>
@@ -562,6 +687,25 @@ function applyStaticLang(l){
     'th-yu':{es:'Usados patio',en:'Used in yard'},
     'th-dn':{es:'Desp. nuevos',en:'New disp.'},
     'th-du':{es:'Desp. usados',en:'Used disp.'},
+    'bco-title':{es:'Berth Call Optimizer — Patrón semanal de despacho',en:'Berth Call Optimizer — Weekly dispatch pattern'},
+    'bco-sub':{es:'Para planificación de recalada RORO · días óptimos y ventanas a evitar',en:'For RORO port call planning · optimal days and windows to avoid'},
+    'bco-hmap-title':{es:'Heatmap semanal — promedio veh/día',en:'Weekly heatmap — avg veh/day'},
+    'lg-lo':{es:'Bajo',en:'Low'},
+    'lg-md':{es:'Medio',en:'Medium'},
+    'lg-hi':{es:'Alto',en:'High'},
+    'lg-pk':{es:'Pico',en:'Peak'},
+    'lg-no':{es:'Sin data',en:'No data'},
+    'lg-hol':{es:'🎌 Feriado CR',en:'🎌 CR Holiday'},
+    'bco-win-lbl':{es:'Ventana óptima',en:'Optimal window'},
+    'bco-ratio-lbl':{es:'Yard clearance ratio',en:'Yard clearance ratio'},
+    'bco-alert-lbl':{es:'Evitar',en:'Avoid'},
+    'bco-th-day':{es:'Día',en:'Day'},
+    'bco-th-avg':{es:'Promedio',en:'Average'},
+    'bco-th-min':{es:'Mínimo',en:'Min'},
+    'bco-th-max':{es:'Máximo',en:'Max'},
+    'bco-th-n':{es:'N días',en:'N days'},
+    'bco-th-cont':{es:'Contribución',en:'Contribution'},
+    'bco-method':{es:'<strong>Método:</strong> Promedio de despacho agrupado por día de la semana. N = días muestreados. Días en feriado CR se excluyen del cálculo (se muestran aparte). Más días → mayor confiabilidad.',en:'<strong>Method:</strong> Dispatch average grouped by weekday. N = days sampled. CR holidays excluded from calculation (shown separately). More days → higher confidence.'},
     'hist-title':{es:'Buques RORO completados — Histórico 2026',en:'Completed RORO vessels — 2026 history'},
     'hist-sub':{es:'Productividad · tiempos de espera · desplazamiento de ventana',en:'Productivity · waiting times · window displacement'},
     'hth-vessel':{es:'Buque',en:'Vessel'},
@@ -581,11 +725,15 @@ function applyStaticLang(l){
     'carrier-title':{es:'Distribución por naviera — 2026',en:'Carrier distribution — 2026'},
     'carrier-sub':{es:'Buques completados · unidades descargadas · productividad promedio',en:'Completed vessels · discharged units · avg productivity'},
     'w-roro-base':{es:'Base: Mié 15:00 → Jue 15:00',en:'Base: Wed 15:00 → Thu 15:00'},
-    'th-ctx':{es:'Contexto P1 / P4',en:'Context Berth 1 / 4'}
+
   };
   Object.keys(T).forEach(function(id){
     var el=document.getElementById(id);
-    if(el&&T[id][l])el.textContent=T[id][l];
+    if(el&&T[id][l]){
+      // Si la traducción contiene HTML (ej. <strong>), usar innerHTML
+      if(T[id][l].indexOf('<')>=0)el.innerHTML=T[id][l];
+      else el.textContent=T[id][l];
+    }
   });
 }
 
@@ -615,6 +763,7 @@ function renderAll(){
   renderPipeline();
   updateForecast();
   renderDaily();
+  renderBCO();
   renderHist();
   renderCarriers();
 }
@@ -1053,6 +1202,252 @@ function renderDaily(){
   });
 }
 
+// ── BERTH CALL OPTIMIZER ──────────────────────────────────────
+var BCO_PERIOD=14;
+var BCO_DOW_ES=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+var BCO_DOW_EN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var BCO_DOW_FULL_ES=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var BCO_DOW_FULL_EN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var BCO_MONTHS={'Jan':0,'Feb':1,'Mar':2,'Apr':3,'May':4,'Jun':5,'Jul':6,'Aug':7,'Sep':8,'Oct':9,'Nov':10,'Dec':11,
+                'Ene':0,'Abr':3,'Ago':7,'Dic':11};
+
+// Feriados CR (fijos + Semana Santa 2026)
+// Source: Ministerio de Trabajo CR - días feriados de pago obligatorio y no obligatorio
+var BCO_HOLIDAYS_CR={
+  '2026-01-01':'Año Nuevo',
+  '2026-04-01':'Miércoles Santo',
+  '2026-04-02':'Jueves Santo',
+  '2026-04-03':'Viernes Santo',
+  '2026-04-11':'Día de Juan Santamaría',
+  '2026-05-01':'Día del Trabajo',
+  '2026-07-25':'Anexión de Nicoya',
+  '2026-08-02':'Virgen de los Ángeles',
+  '2026-08-15':'Día de la Madre',
+  '2026-09-15':'Independencia',
+  '2026-12-01':'Día de la Abolición del Ejército',
+  '2026-12-25':'Navidad'
+};
+
+function parseHistDate(dateStr){
+  // "06 Apr" -> Date 2026-04-06 (asume año actual del dataset)
+  var parts=dateStr.trim().split(/\s+/);
+  if(parts.length<2)return null;
+  var day=parseInt(parts[0],10);
+  var month=BCO_MONTHS[parts[1]];
+  if(month===undefined||isNaN(day))return null;
+  var year=2026; // [fallback] si dataset cambia de año, ajustar aquí
+  return new Date(year,month,day);
+}
+
+function isoDate(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function setBcoPeriod(days){
+  BCO_PERIOD=days;
+  document.querySelectorAll('.bco-tbtn').forEach(function(b){
+    b.classList.toggle('active',parseInt(b.dataset.period,10)===days);
+  });
+  renderBCO();
+}
+
+function renderBCO(){
+  var L=LANG==='es';
+  var history=(Y.history||[]);
+  if(!history.length)return;
+  
+  // Filtrar por período
+  var sorted=history.map(function(r){
+    var d=parseHistDate(r.date);
+    return d?{date:d,iso:isoDate(d),disp:r.disp_new||0,yard:r.yard_new||0,raw:r}:null;
+  }).filter(Boolean).sort(function(a,b){return a.date-b.date;});
+  
+  // Últimos N días disponibles (si dataset es más chico, usa lo que tenga)
+  var filtered=sorted.slice(-BCO_PERIOD);
+  
+  // Disable toggles que excedan data disponible
+  document.querySelectorAll('.bco-tbtn').forEach(function(b){
+    var p=parseInt(b.dataset.period,10);
+    b.disabled=sorted.length<Math.min(p,7); // al menos 7 para tener 1 semana completa
+  });
+  
+  // Separar feriados
+  var workDays=[];
+  var holidays=[];
+  filtered.forEach(function(r){
+    if(BCO_HOLIDAYS_CR[r.iso]){
+      holidays.push(Object.assign({},r,{holidayName:BCO_HOLIDAYS_CR[r.iso]}));
+    } else {
+      workDays.push(r);
+    }
+  });
+  
+  // Agrupar por día de semana (solo workDays)
+  var byDow={};
+  for(var i=0;i<7;i++)byDow[i]={total:0,count:0,values:[]};
+  workDays.forEach(function(r){
+    var dow=r.date.getDay();
+    byDow[dow].total+=r.disp;
+    byDow[dow].count++;
+    byDow[dow].values.push(r.disp);
+  });
+  
+  // Stats
+  var stats={};
+  var maxAvg=0,minAvg=Infinity;
+  for(var d=0;d<7;d++){
+    var g=byDow[d];
+    var avg=g.count?g.total/g.count:0;
+    var mn=g.count?Math.min.apply(null,g.values):0;
+    var mx=g.count?Math.max.apply(null,g.values):0;
+    stats[d]={avg:avg,min:mn,max:mx,count:g.count,total:g.total};
+    if(g.count>0){
+      if(avg>maxAvg)maxAvg=avg;
+      if(avg<minAvg)minAvg=avg;
+    }
+  }
+  if(minAvg===Infinity)minAvg=0;
+  
+  // Rangos para colorear (cuartiles dinámicos basados en datos reales)
+  var thresh={
+    peak:maxAvg*0.90,  // top 10% del max
+    hi:maxAvg*0.60,
+    md:maxAvg*0.30,
+    lo:0
+  };
+  
+  // Render heatmap (L-D)
+  var dowOrder=[1,2,3,4,5,6,0]; // Lun-Dom
+  var dowNames=L?BCO_DOW_ES:BCO_DOW_EN;
+  var daysEl=document.getElementById('bco-days');
+  daysEl.innerHTML='';
+  
+  // Detectar feriados que caen en días específicos de semana
+  var holidayDows={};
+  holidays.forEach(function(h){holidayDows[h.date.getDay()]=h.holidayName;});
+  
+  dowOrder.forEach(function(dow){
+    var s=stats[dow];
+    var el=document.createElement('div');
+    el.className='bco-day';
+    var holName=holidayDows[dow];
+    if(s.count===0 && !holName){
+      el.className+=' l-no';
+      el.innerHTML='<div class="bco-day-lbl">'+dowNames[dow]+'</div><div class="bco-day-val" style="font-size:11px">—</div>';
+    } else if(holName){
+      el.className+=' l-min';
+      el.style.border='2px solid var(--yellow)';
+      el.innerHTML='<div class="bco-day-lbl">'+dowNames[dow]+' 🎌</div>'+
+        '<div class="bco-day-val">'+(s.count?Math.round(s.avg):'—')+'</div>'+
+        '<div class="bco-day-hint" style="font-size:8px">'+holName.substring(0,10)+'</div>';
+    } else {
+      var cls=s.avg>=thresh.peak?'l-hi':s.avg>=thresh.hi?'l-md':s.avg>=thresh.md?'l-lo':'l-min';
+      if(cls==='l-hi')el.className+=' l-hi'; // verde pico
+      else if(s.avg===maxAvg && s.count>0)el.className+=' l-hi';
+      else if(s.avg>=thresh.hi)el.className+=' l-md';
+      else if(s.avg>=thresh.md)el.className+=' l-lo';
+      else el.className+=' l-min';
+      var star=s.avg===maxAvg?' ★':'';
+      el.innerHTML='<div class="bco-day-lbl">'+dowNames[dow]+star+'</div>'+
+        '<div class="bco-day-val">'+Math.round(s.avg)+'</div>'+
+        '<div class="bco-day-hint">N='+s.count+'</div>';
+    }
+    daysEl.appendChild(el);
+  });
+  
+  // KPI cards
+  var best=null,worst=null;
+  for(var d=0;d<7;d++){
+    if(stats[d].count===0)continue;
+    if(!best||stats[d].avg>best.avg)best={dow:d,avg:stats[d].avg};
+    if(!worst||stats[d].avg<worst.avg)worst={dow:d,avg:stats[d].avg};
+  }
+  var dowFull=L?BCO_DOW_FULL_ES:BCO_DOW_FULL_EN;
+  
+  if(best){
+    // Ventana óptima: para maximizar descarga, ETA 1-2 días antes del mejor día
+    var bestDay=best.dow;
+    var etaDay1=(bestDay-2+7)%7;
+    var etaDay2=(bestDay-1+7)%7;
+    var winVal=(L?'ETA ':'ETA ')+dowFull[etaDay1].substring(0,3)+'/'+dowFull[etaDay2].substring(0,3)+(L?' → descarga ':' → discharge ')+dowFull[bestDay];
+    document.getElementById('bco-win-val').textContent=winVal;
+    document.getElementById('bco-win-sub').textContent=L?'Máxima evacuación pre-descarga · '+Math.round(best.avg)+' veh/día':'Max pre-discharge clearance · '+Math.round(best.avg)+' veh/day';
+  } else {
+    document.getElementById('bco-win-val').textContent='—';
+    document.getElementById('bco-win-sub').textContent=L?'Sin datos suficientes':'Insufficient data';
+  }
+  
+  // Ratio
+  if(best && worst && worst.avg>0){
+    var ratio=(best.avg/worst.avg).toFixed(1);
+    document.getElementById('bco-ratio-val').textContent=ratio+'x';
+    document.getElementById('bco-ratio-sub').textContent=dowFull[best.dow].substring(0,3)+(L?' vs ':' vs ')+dowFull[worst.dow].substring(0,3)+' · N='+filtered.length;
+  } else if(best){
+    document.getElementById('bco-ratio-val').textContent='—';
+    document.getElementById('bco-ratio-sub').textContent=L?'Domingo sin despacho':'Sunday no dispatch';
+  } else {
+    document.getElementById('bco-ratio-val').textContent='—';
+    document.getElementById('bco-ratio-sub').textContent='—';
+  }
+  
+  // Alert (evitar)
+  if(worst){
+    var avoidPct=best?Math.round((1-worst.avg/best.avg)*100):0;
+    document.getElementById('bco-alert-val').textContent=(L?'Evitar ETA ':'Avoid ETA ')+dowFull[worst.dow].toLowerCase();
+    document.getElementById('bco-alert-sub').textContent=L?'Despacho cae '+avoidPct+'% · aduanas cerradas':'Dispatch drops '+avoidPct+'% · customs closed';
+  }
+  
+  // Tabla
+  var tbody=document.getElementById('bco-tbody');
+  tbody.innerHTML='';
+  var totalAll=0;
+  for(var d2=0;d2<7;d2++)totalAll+=stats[d2].total;
+  dowOrder.forEach(function(dow){
+    var s=stats[dow];
+    var tr=document.createElement('tr');
+    var holName=holidayDows[dow];
+    if(best&&dow===best.dow)tr.className='peak';
+    else if(worst&&dow===worst.dow&&s.count>0)tr.className='low';
+    if(holName)tr.className='holiday';
+    var contrib=totalAll>0?Math.round(100*s.total/totalAll):0;
+    var nameCell=dowFull[dow]+(holName?' 🎌':'');
+    if(s.count===0){
+      tr.innerHTML='<td>'+nameCell+'</td><td colspan="5" style="text-align:center;color:var(--muted)">—</td>';
+    } else {
+      tr.innerHTML='<td>'+nameCell+'</td>'+
+        '<td><strong>'+Math.round(s.avg)+'</strong></td>'+
+        '<td>'+s.min+'</td>'+
+        '<td>'+s.max+'</td>'+
+        '<td>'+s.count+'</td>'+
+        '<td>'+contrib+'%</td>';
+    }
+    tbody.appendChild(tr);
+  });
+  
+  // Banner de congestión yard >85% capacidad
+  var cap=Y.capacity||2500;
+  var current=(Y.yard_new||0)+(Y.yard_used||0);
+  var occPct=Math.round(100*current/cap);
+  var banner=document.getElementById('bco-banner');
+  var bannerTxt=document.getElementById('bco-banner-txt');
+  if(occPct>=85){
+    banner.classList.add('show');
+    bannerTxt.innerHTML=L?
+      '<strong>Riesgo de congestión:</strong> Patio al '+occPct+'% de capacidad ('+current.toLocaleString()+'/'+cap.toLocaleString()+' veh). Acelerar despacho o considerar desplazar próxima recalada.'
+      :'<strong>Congestion risk:</strong> Yard at '+occPct+'% capacity ('+current.toLocaleString()+'/'+cap.toLocaleString()+' veh). Accelerate dispatch or consider delaying next port call.';
+  } else if(occPct>=70){
+    banner.classList.add('show');
+    banner.style.color='var(--cyan)';
+    banner.style.background='rgba(0,200,200,.08)';
+    banner.style.border='1px solid rgba(0,200,200,.2)';
+    bannerTxt.innerHTML=L?
+      '<strong>Patio al '+occPct+'%:</strong> Monitorear. Próxima recalada RORO puede requerir despacho acelerado.'
+      :'<strong>Yard at '+occPct+'%:</strong> Monitor. Next RORO call may need accelerated dispatch.';
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
 // ── HISTORICAL TABLE ──────────────────────────────────────────
 function renderHist(){
   var tb=document.getElementById('hist-tbody');
@@ -1085,14 +1480,6 @@ function renderHist(){
       '<td style="text-align:right">'+(gross?gross+' veh/h':'—')+'</td>'+
       '<td style="text-align:right">'+(net?net+' veh/h':'—')+'</td>'+
       '<td style="text-align:center">'+dispChip+'</td>'+
-      '<td style="text-align:center">'+(v.op_hours_assigned&&v.op_hours_actual?
-        (function(){
-          var pct=Math.round(v.op_hours_actual/v.op_hours_assigned*100);
-          var col=pct<=100?'var(--green)':'var(--red)';
-          return '<span style="font-size:10px;font-weight:600;color:'+col+'">'+pct+'%</span>'+
-                 '<div style="font-size:9px;color:var(--text2)">'+v.op_hours_actual+'h/'+v.op_hours_assigned+'h</div>';
-        })()
-      :'—')+'</td>'+
       '<td style="font-size:10px;color:var(--yellow)">'+(v.delay_note||'')+'</td>';
     tb.appendChild(tr);
   });
