@@ -3,134 +3,397 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marina Pura Vida — Superyacht <em>Services</em> | Costa Rica</title>
-  <meta name="description" content="Dedicated page for superyacht transit, MDO bunkering, SINAC permits and logistics in Costa Rica — especially Port Golfito and Golfo Dulce. We are building something exceptional for captains and operators. Marina Pura Vida, maritime agency Costa Rica.">
-  <meta name="keywords" content="superyacht agent costa rica, yacht services golfito, bunkering MDO golfito, superyacht transit costa rica, marina bahia golfito agent">
+  <title>Marina Pura Vida — Superyacht Services | Costa Rica</title>
+  <meta name="description" content="Clearance IN/OUT, customs agent, temporary import regime and full superyacht services at all Costa Rican marinas. Marina Pura Vida — maritime agency Costa Rica.">
+  <meta name="keywords" content="superyacht agent costa rica, yacht clearance golfito, yacht customs costa rica, temporary import yacht costa rica, marina bahia golfito, marina pez vela, marina flamingo">
   <link rel="canonical" href="https://marinapuravida.com/yachts.html">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
-    .cs-hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0A2535 100%);
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 2rem;
-    }
-    .cs-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(0,200,200,0.1) 0%, transparent 65%);
-    }
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,200,200,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,200,200,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .cs-content {
-      position: relative;
-      z-index: 2;
-      max-width: 640px;
-    }
-    .cs-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-    .cs-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(0,200,200,0.12);
-      border: 1px solid rgba(0,200,200,0.3);
-      color: var(--cyan);
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-      margin-bottom: 1.5rem;
-    }
-    .cs-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      animation: pulse 2s infinite;
-    }
-    .cs-title { color: #fff; margin-bottom: 1rem; }
-    .cs-title em { color: var(--cyan); }
-    .cs-desc { color: rgba(255,255,255,0.55); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2.5rem; }
-    .cs-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .cs-back { 
-      position: fixed; top: 1.25rem; left: 1.5rem; z-index: 100;
-      display: flex; align-items: center; gap: 0.5rem;
-      color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 600;
-      transition: color 0.2s;
-    }
-    .cs-back:hover { color: var(--cyan); }
-    .cs-nav-controls {
-      position: fixed; top: 1.25rem; right: 1.5rem; z-index: 100;
-      display: flex; gap: 0.5rem; align-items: center;
-    }
+    :root{--cy:#00C8C8;--cy2:#009EA0;--nv:#0D1B2A;--nv2:#132233;--nv3:#1E3248;--tx:#e8f0f7;--tx2:#8aa4bc;--mt:#4d6a80;--gd:#C8A96E;--r:10px;--rl:16px;--trans:.2s ease}
+    [data-theme="light"]{--nv:#f0f5fa;--nv2:#e2eaf2;--nv3:#d4dfe9;--tx:#0D1B2A;--tx2:#3a5a78;--mt:#7a9ab8}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--nv);color:var(--tx);line-height:1.6}
+    a{color:var(--cy);text-decoration:none}
+    .es,.en{transition:opacity .15s}
+
+    /* NAV */
+    .ynav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.5rem;background:rgba(13,27,42,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+    [data-theme="light"] .ynav{background:rgba(240,245,250,.92)}
+    .ynav-brand{display:flex;align-items:center;gap:.625rem;color:var(--tx);font-weight:600;font-size:.9rem}
+    .ynav-logo{width:28px;height:28px;border-radius:50%;background:var(--cy);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--nv)}
+    .ynav-r{display:flex;align-items:center;gap:.5rem}
+    .ynav-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--tx2);font-family:'DM Mono',monospace;font-size:.7rem;padding:4px 9px;cursor:pointer;transition:all var(--trans)}
+    .ynav-btn:hover,.ynav-btn.act{background:var(--cy);color:var(--nv);border-color:var(--cy)}
+    [data-theme="light"] .ynav-btn{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1)}
+
+    /* HERO */
+    .yhero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:7rem 1.5rem 4rem}
+    .yhero-bg{position:absolute;inset:0}
+    .yhero-img{width:100%;height:100%;object-fit:cover;opacity:.2;filter:saturate(.65)}
+    .yhero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.97) 0%,rgba(13,27,42,.72) 60%,rgba(13,27,42,.4) 100%)}
+    .yhero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,200,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,200,.03) 1px,transparent 1px);background-size:64px 64px}
+    .yhero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .yhero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.28);color:var(--cy);padding:.35rem .875rem;border-radius:100px;font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+    .yhero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cy);animation:pulse 2s infinite}
+    .yhero-h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:1.25rem;letter-spacing:-.02em}
+    .yhero-h1 strong{font-weight:600}
+    .yhero-h1 em{color:var(--cy);font-style:italic}
+    .yhero-desc{color:rgba(255,255,255,.52);font-size:.98rem;line-height:1.8;margin-bottom:2rem}
+    .yhero-ctas{display:flex;gap:.75rem;flex-wrap:wrap}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+    .ystat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--rl);padding:1.25rem;text-align:center}
+    .ystat-num{font-family:'DM Mono',monospace;font-size:2rem;font-weight:500;color:var(--cy);line-height:1}
+    .ystat-lbl{font-size:.7rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-top:.35rem}
+
+    /* SECTIONS */
+    .ysec{padding:5rem 1.5rem}
+    .ycon{max-width:1100px;margin:0 auto}
+    .slbl{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cy);margin-bottom:.5rem}
+    .sh2{font-size:clamp(1.55rem,3.5vw,2.3rem);font-weight:300;color:var(--tx);line-height:1.2;margin-bottom:.75rem;letter-spacing:-.01em}
+    .sh2 em{color:var(--cy);font-style:italic;font-weight:300}
+    .sdesc{color:var(--tx2);font-size:.92rem;line-height:1.75;max-width:620px}
+
+    /* SERVICE CARDS */
+    .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.875rem;margin-top:2.25rem}
+    .svc{background:var(--nv2);border:1px solid rgba(255,255,255,.07);border-radius:var(--rl);padding:1.375rem;display:flex;flex-direction:column;gap:.875rem;transition:all var(--trans);position:relative;overflow:hidden}
+    [data-theme="light"] .svc{border-color:rgba(0,0,0,.08)}
+    .svc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac,var(--cy));opacity:0;transition:opacity var(--trans)}
+    .svc:hover{border-color:var(--ac,var(--cy));transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+    .svc:hover::after{opacity:1}
+    .svc-head{display:flex;align-items:flex-start;gap:.75rem}
+    .svc-ico{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .svc-nm{font-size:.98rem;font-weight:600;color:var(--tx);line-height:1.2}
+    .svc-sub{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+    .svc-body{font-size:.83rem;color:var(--tx2);line-height:1.7}
+    .svc-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+    .stag{font-size:.65rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:4px;background:rgba(0,200,200,.07);border:1px solid rgba(0,200,200,.16);color:var(--cy)}
+    .svc-foot{margin-top:auto;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between}
+    [data-theme="light"] .svc-foot{border-top-color:rgba(0,0,0,.07)}
+    .svc-foot-lbl{font-size:.72rem;color:var(--mt)}
+    .svc-lnk{font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.3rem;transition:gap var(--trans)}
+    .svc-lnk:hover{gap:.55rem}
+
+    /* STAY FEATURE */
+    .stay-box{background:linear-gradient(135deg,var(--nv2),var(--nv3));border:1px solid rgba(0,200,200,.18);border-radius:var(--rl);padding:2.25rem;margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .stay-t{font-size:1.45rem;font-weight:300;color:var(--tx);margin-bottom:.625rem;line-height:1.3}
+    .stay-t strong{font-weight:600;color:var(--cy)}
+    .stay-p{color:var(--tx2);font-size:.85rem;line-height:1.75;margin-bottom:1.375rem}
+    .stay-opts{display:flex;flex-direction:column;gap:.5rem}
+    .sopt{display:flex;align-items:center;gap:.75rem;background:rgba(0,200,200,.05);border:1px solid rgba(0,200,200,.13);border-radius:var(--r);padding:.75rem .875rem}
+    .sopt-d{font-family:'DM Mono',monospace;font-size:1.05rem;font-weight:500;color:var(--cy);min-width:52px}
+    .sopt-i{flex:1}
+    .sopt-t{font-size:.83rem;font-weight:600;color:var(--tx);margin-bottom:1px}
+    .sopt-s{font-size:.72rem;color:var(--tx2)}
+    .sopt-b{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);color:#22C55E;font-size:.67rem;font-weight:600;padding:2px 8px;border-radius:100px;white-space:nowrap;margin-left:auto}
+
+    /* MAP */
+    #marina-map{height:400px;border-radius:var(--rl);overflow:hidden;border:1px solid rgba(255,255,255,.08);margin-bottom:1.25rem}
+    [data-theme="light"] #marina-map{border-color:rgba(0,0,0,.1)}
+    .marina-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.625rem}
+    .mcard{background:var(--nv2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:.75rem .875rem;display:flex;align-items:flex-start;gap:.625rem;cursor:pointer;transition:all var(--trans)}
+    [data-theme="light"] .mcard{border-color:rgba(0,0,0,.07)}
+    .mcard:hover,.mcard.act{border-color:var(--cy);background:rgba(0,200,200,.05)}
+    .mdot{width:9px;height:9px;border-radius:50%;background:var(--cy);flex-shrink:0;margin-top:5px;box-shadow:0 0 0 3px rgba(0,200,200,.18)}
+    .mnm{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.25}
+    .mde{font-size:.73rem;color:var(--tx2);margin-top:2px;line-height:1.45}
+    .mco{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--mt);margin-top:4px}
+
+    /* CTA */
+    .ycta{background:var(--nv);border-top:1px solid rgba(0,200,200,.13);padding:4rem 1.5rem;text-align:center}
+    .ycta h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:300;color:var(--tx);margin-bottom:.625rem}
+    .ycta p{color:var(--tx2);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;font-size:.92rem;line-height:1.75}
+    .ycta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+    /* BTNS */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.35rem;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;border:none;cursor:pointer;transition:all var(--trans);text-decoration:none;line-height:1}
+    .btn-p{background:var(--cy);color:var(--nv)}
+    .btn-p:hover{background:var(--cy2)}
+    .btn-o{background:transparent;color:var(--cy);border:1px solid rgba(0,200,200,.38)}
+    .btn-o:hover{background:rgba(0,200,200,.08);border-color:var(--cy)}
+    .btn-wa{background:#25D366;color:#fff}
+    .btn-wa:hover{opacity:.9}
+
+    /* WA FLOAT */
+    #wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform var(--trans)}
+    #wa-float:hover{transform:scale(1.1)}
+
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    @media(max-width:860px){.yhero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(4,1fr)}.stay-box{grid-template-columns:1fr}}
+    @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr}.ysec{padding:3rem 1rem}}
   </style>
 </head>
 <body>
-  <a href="index.html" class="cs-back">← <span class="es">Volver al inicio</span><span class="en">Back to home</span></a>
-  <div class="cs-nav-controls">
-    <button class="nav-btn lang-btn lang-active" data-lang="es">ES</button>
-    <button class="nav-btn lang-btn" data-lang="en">EN</button>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀️</button>
-  </div>
 
-  <section class="cs-hero" style="position:relative;">
-    <div style="position:absolute;inset:0;overflow:hidden;z-index:0;">
-      <img src="assets/img/service-yacht.webp" alt="" aria-hidden="true"
-           style="width:100%;height:100%;object-fit:cover;opacity:0.18;filter:saturate(0.6);">
-    </div>
-    <div class="hero-grid"></div>
-    <div class="cs-content">
-      <span class="cs-icon">⛵</span>
-      <div class="cs-badge">
-        <span class="es">Próximamente</span><span class="en">Coming Soon</span>
-      </div>
-      <h1 class="cs-title">
-        <span class="es">Servicios para <em>Superyates</em></span>
-        <span class="en">Superyacht <em>Services</em></span>
-      </h1>
-      <p class="cs-desc">
-        <span class="es">Página especializada en tránsito, bunkering MDO, permisos SINAC y logística para superyates en Costa Rica — especialmente Puerto Golfito y el Golfo Dulce. Estamos construyendo algo extraordinario para capitanes y operadores.</span>
-        <span class="en">Dedicated page for superyacht transit, MDO bunkering, SINAC permits and logistics in Costa Rica — especially Port Golfito and Golfo Dulce. We are building something exceptional for captains and operators.</span>
-      </p>
-      <div class="cs-ctas">
-        <a href="index.html#contact" class="btn btn-primary">
-          <span class="es">Consultar ahora →</span><span class="en">Contact us now →</span>
-        </a>
-        <a href="https://wa.me/50688509403" target="_blank" rel="noopener"
-           class="btn" style="background:#25D366;color:#fff">
-          <span class="es">WhatsApp</span><span class="en">WhatsApp</span>
-        </a>
-      </div>
-      <p style="margin-top:2rem;color:rgba(255,255,255,0.3);font-size:0.8rem">
-        ops@marinapuravida.com &nbsp;·&nbsp; +506 8850.9403
-      </p>
-    </div>
-  </section>
-
-  <a id="wa-float" href="https://wa.me/50688509403" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+<nav class="ynav">
+  <a href="index.html" class="ynav-brand">
+    <div class="ynav-logo">⚓</div>
+    <span>Marina Pura Vida</span>
   </a>
+  <div class="ynav-r">
+    <button class="ynav-btn act" id="ly-es" onclick="setLang('es')">ES</button>
+    <button class="ynav-btn" id="ly-en" onclick="setLang('en')">EN</button>
+    <button class="ynav-btn" id="ly-theme" onclick="toggleTheme()">☀️</button>
+    <a href="index.html#contact" class="btn btn-p" style="padding:.42rem .9rem;font-size:.78rem">
+      <span class="es">Contacto</span><span class="en" style="display:none">Contact</span>
+    </a>
+  </div>
+</nav>
 
-  <script src="assets/js/main.js"></script>
+<!-- HERO -->
+<section class="yhero">
+  <div class="yhero-bg">
+    <img src="assets/img/service-yacht.webp" alt="" aria-hidden="true" class="yhero-img">
+    <div class="yhero-ov"></div>
+    <div class="yhero-grid"></div>
+  </div>
+  <div class="yhero-inner">
+    <div>
+      <div class="yhero-badge">
+        <span class="es">Agencia Especializada Superyates</span>
+        <span class="en" style="display:none">Dedicated Superyacht Agency</span>
+      </div>
+      <h1 class="yhero-h1">
+        <strong>Superyacht</strong><br>
+        Services<br>
+        <em>Costa Rica</em>
+      </h1>
+      <p class="yhero-desc">
+        <span class="es">Clearance IN/OUT en todas las marinas, agente aduanal, Stay &amp; Cruising Permits y logística completa para su escala en Costa Rica.</span>
+        <span class="en" style="display:none">Clearance IN/OUT at all marinas, customs agent, Stay &amp; Cruising Permits and full logistics for your Costa Rica port call.</span>
+      </p>
+      <div class="yhero-ctas">
+        <a href="#servicios" class="btn btn-p"><span class="es">Ver servicios ↓</span><span class="en" style="display:none">View services ↓</span></a>
+        <a href="https://wa.me/50688509403" target="_blank" rel="noopener" class="btn btn-wa">⚡ WhatsApp 24/7</a>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="ystat"><div class="ystat-num">5+</div><div class="ystat-lbl"><span class="es">Marinas</span><span class="en" style="display:none">Marinas</span></div></div>
+      <div class="ystat"><div class="ystat-num">24/7</div><div class="ystat-lbl"><span class="es">Respuesta</span><span class="en" style="display:none">Response</span></div></div>
+      <div class="ystat"><div class="ystat-num">6+</div><div class="ystat-lbl"><span class="es">Puertos</span><span class="en" style="display:none">Ports</span></div></div>
+      <div class="ystat"><div class="ystat-num">12m</div><div class="ystat-lbl"><span class="es">Stay permit</span><span class="en" style="display:none">Stay permit</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="ysec" id="servicios">
+  <div class="ycon">
+    <div class="slbl es">Servicios especializados</div>
+    <div class="slbl en" style="display:none">Specialized services</div>
+    <h2 class="sh2"><span class="es">Todo lo que necesita <em>su yate</em></span><span class="en" style="display:none">Everything your <em>yacht needs</em></span></h2>
+    <p class="sdesc"><span class="es">Un solo punto de contacto para clearance, aduana, logística y permanencia en todas las marinas de Costa Rica.</span><span class="en" style="display:none">One point of contact for clearance, customs, logistics and stay permits at every marina in Costa Rica.</span></p>
+
+    <div class="svc-grid">
+
+      <div class="svc" style="--ac:#22C55E">
+        <div class="svc-head">
+          <div class="svc-ico" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">🟢</div>
+          <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada · Todas las marinas</span><span class="en" style="display:none">Entry · All marinas</span></div></div>
+        </div>
+        <p class="svc-body"><span class="es">Entrada oficial de su embarcación en todas las marinas y puertos de Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera y más. Coordinación con Migración, Policía Fronteriza y Aduanas.</span><span class="en" style="display:none">Official vessel entry at all marinas and ports in Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera and more. Coordination with Immigration, Border Police and Customs.</span></p>
+        <div class="svc-tags"><span class="stag">Migración</span><span class="stag">Policía Fronteriza</span><span class="stag">Aduana DGA</span><span class="stag">SINAC</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">Todas las marinas del país</span><span class="en" style="display:none">All marinas nationwide</span></span>
+          <a href="https://wa.me/50688509403?text=Clearance%20IN%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#22C55E"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
+        </div>
+      </div>
+
+      <div class="svc" style="--ac:#EF4444">
+        <div class="svc-head">
+          <div class="svc-ico" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">🔴</div>
+          <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Salida · Todas las marinas</span><span class="en" style="display:none">Departure · All marinas</span></div></div>
+        </div>
+        <p class="svc-body"><span class="es">Despacho oficial de salida en todos los puertos. Coordinamos zarpe con autoridades, desaduanamiento y documentación completa para su siguiente destino.</span><span class="en" style="display:none">Official departure clearance at all ports. We coordinate with authorities, vessel de-customs and complete documentation for your next destination.</span></p>
+        <div class="svc-tags"><span class="stag">Zarpe oficial</span><span class="stag">Desaduanamiento</span><span class="stag">Migración</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">24h antes del zarpe</span><span class="en" style="display:none">24h before departure</span></span>
+          <a href="https://wa.me/50688509403?text=Clearance%20OUT%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#EF4444"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
+        </div>
+      </div>
+
+      <div class="svc" style="--ac:#F59E0B">
+        <div class="svc-head">
+          <div class="svc-ico" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📋</div>
+          <div><div class="svc-nm"><span class="es">Agente Aduanal</span><span class="en" style="display:none">Customs Agent</span></div><div class="svc-sub" style="color:#F59E0B">DGA · TICA · SINAC</div></div>
+        </div>
+        <p class="svc-body"><span class="es">Representación aduanal certificada ante la DGA. TICA, importación temporal, partes de reparación, provisiones y cualquier trámite durante su estadía.</span><span class="en" style="display:none">Certified customs representation with the DGA. TICA, temporary import, spare parts, provisions and any customs process during your stay.</span></p>
+        <div class="svc-tags"><span class="stag">TICA</span><span class="stag">DUA</span><span class="stag">Spare parts</span><span class="stag">Provisioning</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">In-house, sin terceros</span><span class="en" style="display:none">In-house, no third parties</span></span>
+          <a href="https://wa.me/50688509403?text=Agente%20aduanal%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#F59E0B"><span class="es">Consultar →</span><span class="en" style="display:none">Inquire →</span></a>
+        </div>
+      </div>
+
+      <div class="svc" style="--ac:#818CF8">
+        <div class="svc-head">
+          <div class="svc-ico" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2)">🚢</div>
+          <div><div class="svc-nm"><span class="es">Transporte de Yate</span><span class="en" style="display:none">Yacht Transport</span></div><div class="svc-sub" style="color:#818CF8"><span class="es">Traslado entre marinas</span><span class="en" style="display:none">Transfer between marinas</span></div></div>
+        </div>
+        <p class="svc-body"><span class="es">Traslado de su embarcación entre marinas — capitán de contrato, tripulación, combustible y papeleo. También coordinamos flete terrestre para embarcaciones menores.</span><span class="en" style="display:none">Vessel transfer between marinas — delivery captain, crew, fuel, and paperwork. We also coordinate land transport for smaller vessels.</span></p>
+        <div class="svc-tags"><span class="stag">Delivery captain</span><span class="stag">Golfito → Quepos</span><span class="stag">Pacífico → Atlántico</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">Cotización en 2h</span><span class="en" style="display:none">Quote in 2h</span></span>
+          <a href="https://wa.me/50688509403?text=Transporte%20de%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#818CF8"><span class="es">Cotizar →</span><span class="en" style="display:none">Quote →</span></a>
+        </div>
+      </div>
+
+      <div class="svc" style="--ac:#00C8C8">
+        <div class="svc-head">
+          <div class="svc-ico">⛽</div>
+          <div><div class="svc-nm">Bunkering MDO</div><div class="svc-sub"><span class="es">Combustible · Golfito · Caldera</span><span class="en" style="display:none">Fuel · Golfito · Caldera</span></div></div>
+        </div>
+        <p class="svc-body"><span class="es">Suministro de Marine Diesel Oil en Golfito (Pier 1) y Caldera. Coordinación con proveedor, papeleo RECOPE y entrega directa al costado del buque.</span><span class="en" style="display:none">Marine Diesel Oil supply at Golfito (Pier 1) and Caldera. Supplier coordination, RECOPE paperwork and direct delivery alongside.</span></p>
+        <div class="svc-tags"><span class="stag">MDO</span><span class="stag">Golfito Pier 1</span><span class="stag">Caldera</span><span class="stag">BDN incluido</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">Precio spot diario</span><span class="en" style="display:none">Daily spot price</span></span>
+          <a href="https://wa.me/50688509403?text=Bunkering%20MDO%20yate" target="_blank" rel="noopener" class="svc-lnk"><span class="es">Precio hoy →</span><span class="en" style="display:none">Today's price →</span></a>
+        </div>
+      </div>
+
+      <div class="svc" style="--ac:#34D399">
+        <div class="svc-head">
+          <div class="svc-ico" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2)">🍽️</div>
+          <div><div class="svc-nm"><span class="es">Provisiones & Tripulación</span><span class="en" style="display:none">Provisioning & Crew</span></div><div class="svc-sub" style="color:#34D399"><span class="es">Logística a bordo</span><span class="en" style="display:none">On-board logistics</span></div></div>
+        </div>
+        <p class="svc-body"><span class="es">Víveres, agua, repuestos y suministros con entrega al muelle. Cambios de tripulación — visas, transporte, hotel y coordinación de vuelos internacionales.</span><span class="en" style="display:none">Food, water, spare parts and supplies delivered to the berth. Crew changes — visas, transportation, hotel and international flight coordination.</span></p>
+        <div class="svc-tags"><span class="stag">Víveres</span><span class="stag">Crew change</span><span class="stag">Spare parts</span><span class="stag">Médico</span></div>
+        <div class="svc-foot">
+          <span class="svc-foot-lbl"><span class="es">Entrega en 24h</span><span class="en" style="display:none">Delivery in 24h</span></span>
+          <a href="https://wa.me/50688509403?text=Provisiones%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#34D399"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STAY & CRUISING PERMITS -->
+    <div class="stay-box">
+      <div>
+        <div class="slbl es" style="margin-bottom:.625rem">Régimen de permanencia</div>
+        <div class="slbl en" style="display:none;margin-bottom:.625rem">Vessel stay regime</div>
+        <h3 class="stay-t"><span class="es"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span><span class="en" style="display:none"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span></h3>
+        <p class="stay-p"><span class="es">Los yates extranjeros pueden permanecer en Costa Rica bajo Importación Temporal sin pagar impuestos de importación. Gestionamos el proceso completo ante la DGA — solicitud, prórroga y documentación de salida.</span><span class="en" style="display:none">Foreign yachts may remain in Costa Rica under Temporary Import without paying import taxes. We manage the entire process with the DGA — application, extensions and departure documentation.</span></p>
+        <a href="https://wa.me/50688509403?text=Importacion%20temporal%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-o"><span class="es">Consultar régimen →</span><span class="en" style="display:none">Inquire about regime →</span></a>
+      </div>
+      <div class="stay-opts">
+        <div class="sopt">
+          <div class="sopt-d">3 m</div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Importación Temporal Base</span><span class="en" style="display:none">Base Temporary Import</span></div><div class="sopt-s"><span class="es">Entrada inicial · prorrogable</span><span class="en" style="display:none">Initial entry · extendable</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+        </div>
+        <div class="sopt">
+          <div class="sopt-d">6 m</div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Primera prórroga</span><span class="en" style="display:none">First extension</span></div><div class="sopt-s"><span class="es">Extensión ante Aduana</span><span class="en" style="display:none">Extension with Customs</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+        </div>
+        <div class="sopt">
+          <div class="sopt-d">12 m</div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Permanencia extendida</span><span class="en" style="display:none">Extended stay</span></div><div class="sopt-s"><span class="es">Segunda prórroga · DGA + MOPT</span><span class="en" style="display:none">Second extension · DGA + MOPT</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARINA MAP -->
+<section class="ysec" id="marinas" style="background:var(--nv2)">
+  <div class="ycon">
+    <div class="slbl es">Red de marinas</div>
+    <div class="slbl en" style="display:none">Marina network</div>
+    <h2 class="sh2"><span class="es">Cobertura en <em>todas las marinas</em></span><span class="en" style="display:none">Coverage at <em>every marina</em></span></h2>
+    <p class="sdesc" style="margin-bottom:1.375rem"><span class="es">Operamos en las principales marinas del Pacífico costarricense. Toca una marina para ver su ubicación.</span><span class="en" style="display:none">We operate at all major marinas on the Costa Rican Pacific. Tap a marina to see its location.</span></p>
+    <div id="marina-map"></div>
+    <div class="marina-grid" id="marina-list"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ycta">
+  <h2><span class="es">¿Listo para su escala en <em style="color:var(--cy);font-style:italic">Costa Rica</em>?</span><span class="en" style="display:none">Ready for your <em style="color:var(--cy);font-style:italic">Costa Rica</em> port call?</span></h2>
+  <p><span class="es">Respondemos en menos de 2 horas. Disponibles 24/7 para cualquier consulta operacional.</span><span class="en" style="display:none">We respond within 2 hours. Available 24/7 for any operational inquiry.</span></p>
+  <div class="ycta-btns">
+    <a href="https://wa.me/50688509403?text=Superyacht%20services%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-wa">⚡ WhatsApp 24/7</a>
+    <a href="mailto:ops@marinapuravida.com" class="btn btn-o">ops@marinapuravida.com</a>
+    <a href="index.html" class="btn btn-o"><span class="es">← Inicio</span><span class="en" style="display:none">← Home</span></a>
+  </div>
+  <p style="margin-top:1.5rem;color:var(--mt);font-size:.78rem">+506 8850.9403 &nbsp;·&nbsp; +506 7050.0037</p>
+</section>
+
+<a id="wa-float" href="https://wa.me/50688509403" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+</a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+const MARINAS=[
+  {id:'golfito',  name:'Marina Bahía Golfito', de:'Full-service marina in the heart of Golfito Bay',         ds:'Marina de servicio completo en el corazón de la Bahía de Golfito', lat:8.63710,  lng:-83.16905},
+  {id:'banana',   name:'Marina Banana Bay',    de:'Boutique marina in Golfito with personalized service',   ds:'Marina boutique en Golfito con servicio personalizado',           lat:8.62259,  lng:-83.15256},
+  {id:'pezvela',  name:'Marina Pez Vela',      de:'Modern marina in Quepos with world-class facilities',    ds:'Marina moderna en Quepos con instalaciones de clase mundial',      lat:9.42695,  lng:-84.16888},
+  {id:'flamingo', name:'Marina Flamingo',      de:'Premier marina on the Gold Coast',                       ds:'Marina premier en la Costa de Oro',                               lat:10.44044, lng:-85.78807},
+  {id:'papagayo', name:'Marina Papagayo',      de:'Luxury marina in Papagayo Peninsula',                    ds:'Marina de lujo en la Península de Papagayo',                      lat:10.64081, lng:-85.65377},
+];
+
+function initMarinaMap(){
+  const el=document.getElementById('marina-map');
+  if(!el||typeof L==='undefined')return;
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const map=L.map('marina-map',{center:[9.5,-84.2],zoom:7,scrollWheelZoom:false});
+  const dark='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+  const light='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  const att='&copy; OSM &copy; CARTO';
+  let tile=L.tileLayer(isDark?dark:light,{attribution:att,maxZoom:18}).addTo(map);
+  new MutationObserver(()=>{const nd=document.documentElement.getAttribute('data-theme')==='dark';map.removeLayer(tile);tile=L.tileLayer(nd?dark:light,{attribution:att,maxZoom:18}).addTo(map);}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  const mkIco=(active)=>L.divIcon({className:'',html:`<div style="width:${active?40:32}px;height:${active?40:32}px;background:${active?'#00C8C8':'#0D1B2A'};border:2.5px solid #00C8C8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${active?'1rem':'.82rem'};box-shadow:0 0 0 ${active?8:4}px rgba(0,200,200,${active?.25:.12});cursor:pointer;transition:all .2s">⚓</div>`,iconSize:[active?40:32,active?40:32],iconAnchor:[active?20:16,active?20:16],popupAnchor:[0,-22]});
+
+  const markers={};
+  const lang=()=>document.documentElement.getAttribute('data-lang')||'es';
+
+  MARINAS.forEach(m=>{
+    const mk=L.marker([m.lat,m.lng],{icon:mkIco(false)}).addTo(map);
+    mk.bindPopup(`<div style="font-family:DM Sans,sans-serif;min-width:175px"><div style="font-family:DM Mono,monospace;font-size:.62rem;color:#00C8C8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">⚓ Marina</div><div style="font-size:.92rem;font-weight:600;color:#0D1B2A;margin-bottom:3px">${m.name}</div><div style="font-size:.75rem;color:#4d6a80">${lang()==='es'?m.ds:m.de}</div><div style="font-size:.63rem;font-family:DM Mono,monospace;color:#8aa4bc;margin-top:5px">${m.lat.toFixed(5)}°N · ${Math.abs(m.lng).toFixed(5)}°W</div></div>`,{maxWidth:230});
+    markers[m.id]=mk;
+    mk.on('click',()=>{document.querySelectorAll('.mcard').forEach(c=>c.classList.remove('act'));const c=document.querySelector('[data-mid="'+m.id+'"]');if(c){c.classList.add('act');c.scrollIntoView({behavior:'smooth',block:'nearest'});}});
+  });
+
+  const list=document.getElementById('marina-list');
+  if(list){
+    list.innerHTML='';
+    MARINAS.forEach(m=>{
+      const c=document.createElement('div');
+      c.className='mcard'; c.dataset.mid=m.id;
+      c.innerHTML='<div class="mdot"></div><div><div class="mnm">'+m.name+'</div><div class="mde"><span class="es">'+m.ds+'</span><span class="en" style="display:none">'+m.de+'</span></div><div class="mco">'+m.lat.toFixed(5)+'°N &nbsp; '+Math.abs(m.lng).toFixed(5)+'°W</div></div>';
+      c.onclick=()=>{
+        document.querySelectorAll('.mcard').forEach(x=>{x.classList.remove('act');markers[x.dataset.mid]&&markers[x.dataset.mid].setIcon(mkIco(false));});
+        c.classList.add('act');
+        markers[m.id].setIcon(mkIco(true));
+        map.flyTo([m.lat,m.lng],11,{duration:1.1});
+        markers[m.id].openPopup();
+      };
+      list.appendChild(c);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded',initMarinaMap);
+
+function setLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.querySelectorAll('.es').forEach(e=>e.style.display=l==='es'?'':'none');
+  document.querySelectorAll('.en').forEach(e=>e.style.display=l==='en'?'':'none');
+  document.getElementById('ly-es').classList.toggle('act',l==='es');
+  document.getElementById('ly-en').classList.toggle('act',l==='en');
+}
+function toggleTheme(){
+  const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('ly-theme').textContent=t==='dark'?'☀️':'🌙';
+}
+setLang('es');
+</script>
 </body>
 </html>
