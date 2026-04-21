@@ -57,7 +57,7 @@
     .sdesc{color:var(--tx2);font-size:.92rem;line-height:1.75;max-width:620px}
 
     /* SERVICE CARDS */
-    .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.875rem;margin-top:2.25rem}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.25rem}
     .svc{background:var(--nv2);border:1px solid rgba(255,255,255,.07);border-radius:var(--rl);padding:1.375rem;display:flex;flex-direction:column;gap:.875rem;transition:all var(--trans);position:relative;overflow:hidden}
     [data-theme="light"] .svc{border-color:rgba(0,0,0,.08)}
     .svc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac,var(--cy));opacity:0;transition:opacity var(--trans)}
@@ -120,6 +120,26 @@
     #wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform var(--trans)}
     #wa-float:hover{transform:scale(1.1)}
 
+
+    /* HERO ACTION CARDS */
+    .hero-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem}
+    .hact{display:flex;flex-direction:column;gap:.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--rl);padding:1.125rem 1.25rem;cursor:pointer;transition:all var(--trans);text-decoration:none;position:relative;overflow:hidden}
+    .hact::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity var(--trans)}
+    .hact:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+    .hact:hover::before{opacity:1}
+    .hact-in{--hc:#22C55E}.hact-in::before{background:#22C55E}.hact-in:hover{border-color:rgba(34,197,94,.4)}
+    .hact-out{--hc:#EF4444}.hact-out::before{background:#EF4444}.hact-out:hover{border-color:rgba(239,68,68,.4)}
+    .hact-cus{--hc:#F59E0B}.hact-cus::before{background:#F59E0B}.hact-cus:hover{border-color:rgba(245,158,11,.4)}
+    .hact-map{--hc:#00C8C8}.hact-map::before{background:#00C8C8}.hact-map:hover{border-color:rgba(0,200,200,.4)}
+    .hact-stay{--hc:#34D399}.hact-stay::before{background:#34D399}.hact-stay:hover{border-color:rgba(52,211,153,.4)}
+    .hact-transport{--hc:#818CF8}.hact-transport::before{background:#818CF8}.hact-transport:hover{border-color:rgba(129,140,248,.4)}
+    .hact-icon{font-size:1.4rem;line-height:1;margin-bottom:.25rem}
+    .hact-label{font-size:.95rem;font-weight:600;color:#fff;line-height:1.2}
+    .hact-sub{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:1px}
+    .hact-arr{position:absolute;bottom:.875rem;right:1rem;font-size:1rem;color:var(--hc);opacity:.6;transition:all var(--trans)}
+    .hact:hover .hact-arr{opacity:1;transform:translateX(3px)}
+    @media(max-width:680px){.hero-actions{grid-template-columns:1fr 1fr}}
+    @media(max-width:860px){.svc-grid{grid-template-columns:1fr}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     @media(max-width:860px){.yhero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(4,1fr)}.stay-box{grid-template-columns:1fr}}
     @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr}.ysec{padding:3rem 1rem}}
@@ -152,28 +172,60 @@
   <div class="yhero-inner">
     <div>
       <div class="yhero-badge">
-        <span class="es">Agencia Especializada Superyates</span>
-        <span class="en" style="display:none">Dedicated Superyacht Agency</span>
+        <span class="es">Agencia Especializada · Superyates &amp; Yates</span>
+        <span class="en" style="display:none">Dedicated Agency · Superyachts &amp; Yachts</span>
       </div>
       <h1 class="yhero-h1">
-        <strong>Superyacht</strong><br>
+        <strong><span class="es">Superyates &amp; Yates</span><span class="en" style="display:none">Superyachts &amp; Yachts</span></strong><br>
         Services<br>
         <em>Costa Rica</em>
       </h1>
       <p class="yhero-desc">
-        <span class="es">Clearance IN/OUT en todas las marinas, agente aduanal, Stay &amp; Cruising Permits y logística completa para su escala en Costa Rica.</span>
-        <span class="en" style="display:none">Clearance IN/OUT at all marinas, customs agent, Stay &amp; Cruising Permits and full logistics for your Costa Rica port call.</span>
+        <span class="es">Clearance IN/OUT, agente aduanal, Stay &amp; Cruising Permits y transporte entre marinas para superyates y yates en Costa Rica.</span>
+        <span class="en" style="display:none">Clearance IN/OUT, customs agent, Stay &amp; Cruising Permits and marina-to-marina transport for superyachts and yachts in Costa Rica.</span>
       </p>
       <div class="yhero-ctas">
         <a href="#servicios" class="btn btn-p"><span class="es">Ver servicios ↓</span><span class="en" style="display:none">View services ↓</span></a>
         <a href="https://wa.me/50688509403" target="_blank" rel="noopener" class="btn btn-wa">⚡ WhatsApp 24/7</a>
       </div>
     </div>
-    <div class="stats-grid">
-      <div class="ystat"><div class="ystat-num">5+</div><div class="ystat-lbl"><span class="es">Marinas</span><span class="en" style="display:none">Marinas</span></div></div>
-      <div class="ystat"><div class="ystat-num">24/7</div><div class="ystat-lbl"><span class="es">Respuesta</span><span class="en" style="display:none">Response</span></div></div>
-      <div class="ystat"><div class="ystat-num">6+</div><div class="ystat-lbl"><span class="es">Puertos</span><span class="en" style="display:none">Ports</span></div></div>
-      <div class="ystat"><div class="ystat-num">12m</div><div class="ystat-lbl"><span class="es">Stay permit</span><span class="en" style="display:none">Stay permit</span></div></div>
+    <div class="hero-actions">
+      <a href="#servicios" class="hact hact-in">
+        <div class="hact-icon">🟢</div>
+        <div class="hact-label">Clearance IN</div>
+        <div class="hact-sub"><span class="es">Entrada oficial</span><span class="en" style="display:none">Official entry</span></div>
+        <div class="hact-arr">→</div>
+      </a>
+      <a href="#servicios" class="hact hact-out">
+        <div class="hact-icon">🔴</div>
+        <div class="hact-label">Clearance OUT</div>
+        <div class="hact-sub"><span class="es">Zarpe oficial</span><span class="en" style="display:none">Official departure</span></div>
+        <div class="hact-arr">→</div>
+      </a>
+      <a href="#servicios" class="hact hact-cus">
+        <div class="hact-icon">📋</div>
+        <div class="hact-label"><span class="es">Aduana</span><span class="en" style="display:none">Customs</span></div>
+        <div class="hact-sub"><span class="es">Agente DGA</span><span class="en" style="display:none">DGA Agent</span></div>
+        <div class="hact-arr">→</div>
+      </a>
+      <a href="#marinas" class="hact hact-map">
+        <div class="hact-icon">🗺️</div>
+        <div class="hact-label"><span class="es">Marinas</span><span class="en" style="display:none">Marinas</span></div>
+        <div class="hact-sub"><span class="es">Ver mapa</span><span class="en" style="display:none">View map</span></div>
+        <div class="hact-arr">→</div>
+      </a>
+      <a href="#servicios" class="hact hact-stay">
+        <div class="hact-icon">📅</div>
+        <div class="hact-label">Stay Permits</div>
+        <div class="hact-sub"><span class="es">6m · 1 año · 2 años</span><span class="en" style="display:none">6m · 1yr · 2yr</span></div>
+        <div class="hact-arr">→</div>
+      </a>
+      <a href="https://wa.me/50688509403?text=Transporte%20de%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="hact hact-transport">
+        <div class="hact-icon">🚢</div>
+        <div class="hact-label">Transport</div>
+        <div class="hact-sub"><span class="es">Traslado entre marinas</span><span class="en" style="display:none">Marina to marina</span></div>
+        <div class="hact-arr">→</div>
+      </a>
     </div>
   </div>
 </section>
@@ -191,10 +243,10 @@
       <div class="svc" style="--ac:#22C55E">
         <div class="svc-head">
           <div class="svc-ico" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">🟢</div>
-          <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada · Todas las marinas</span><span class="en" style="display:none">Entry · All marinas</span></div></div>
+          <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada oficial · Todas las marinas</span><span class="en" style="display:none">Official entry · All marinas</span></div></div>
         </div>
         <p class="svc-body"><span class="es">Entrada oficial de su embarcación en todas las marinas y puertos de Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera y más. Coordinación con Migración, Policía Fronteriza y Aduanas.</span><span class="en" style="display:none">Official vessel entry at all marinas and ports in Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera and more. Coordination with Immigration, Border Police and Customs.</span></p>
-        <div class="svc-tags"><span class="stag">Migración</span><span class="stag">Policía Fronteriza</span><span class="stag">Aduana DGA</span><span class="stag">SINAC</span></div>
+        <div class="svc-tags"><span class="stag">Salud / Sanidad</span><span class="stag">Migración</span><span class="stag">Aduana DGA</span><span class="stag">Cuarentena</span></div>
         <div class="svc-foot">
           <span class="svc-foot-lbl"><span class="es">Todas las marinas del país</span><span class="en" style="display:none">All marinas nationwide</span></span>
           <a href="https://wa.me/50688509403?text=Clearance%20IN%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#22C55E"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
@@ -204,10 +256,10 @@
       <div class="svc" style="--ac:#EF4444">
         <div class="svc-head">
           <div class="svc-ico" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">🔴</div>
-          <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Salida · Todas las marinas</span><span class="en" style="display:none">Departure · All marinas</span></div></div>
+          <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Zarpe oficial · Todas las marinas</span><span class="en" style="display:none">Official departure · All marinas</span></div></div>
         </div>
         <p class="svc-body"><span class="es">Despacho oficial de salida en todos los puertos. Coordinamos zarpe con autoridades, desaduanamiento y documentación completa para su siguiente destino.</span><span class="en" style="display:none">Official departure clearance at all ports. We coordinate with authorities, vessel de-customs and complete documentation for your next destination.</span></p>
-        <div class="svc-tags"><span class="stag">Zarpe oficial</span><span class="stag">Desaduanamiento</span><span class="stag">Migración</span></div>
+        <div class="svc-tags"><span class="stag">Zarpe oficial</span><span class="stag">Aduana</span><span class="stag">Migración</span></div>
         <div class="svc-foot">
           <span class="svc-foot-lbl"><span class="es">24h antes del zarpe</span><span class="en" style="display:none">24h before departure</span></span>
           <a href="https://wa.me/50688509403?text=Clearance%20OUT%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#EF4444"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
@@ -219,50 +271,11 @@
           <div class="svc-ico" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📋</div>
           <div><div class="svc-nm"><span class="es">Agente Aduanal</span><span class="en" style="display:none">Customs Agent</span></div><div class="svc-sub" style="color:#F59E0B">DGA · TICA · SINAC</div></div>
         </div>
-        <p class="svc-body"><span class="es">Representación aduanal certificada ante la DGA. TICA, importación temporal, partes de reparación, provisiones y cualquier trámite durante su estadía.</span><span class="en" style="display:none">Certified customs representation with the DGA. TICA, temporary import, spare parts, provisions and any customs process during your stay.</span></p>
+        <p class="svc-body"><span class="es">Somos su agente aduanal en Costa Rica. Si su yate llega en un yacht transport, actuamos como su representante ante la DGA desde el momento del desembarque — importación temporal, TICA, repuestos y cualquier trámite durante su estadía.</span><span class="en" style="display:none">We act as your dedicated customs agent in Costa Rica. Whether your yacht arrives on a yacht transport or under its own power, we represent you before the DGA from the moment of arrival — temporary import, TICA, spare parts and all customs processes during your stay.</span></p>
         <div class="svc-tags"><span class="stag">TICA</span><span class="stag">DUA</span><span class="stag">Spare parts</span><span class="stag">Provisioning</span></div>
         <div class="svc-foot">
           <span class="svc-foot-lbl"><span class="es">In-house, sin terceros</span><span class="en" style="display:none">In-house, no third parties</span></span>
           <a href="https://wa.me/50688509403?text=Agente%20aduanal%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#F59E0B"><span class="es">Consultar →</span><span class="en" style="display:none">Inquire →</span></a>
-        </div>
-      </div>
-
-      <div class="svc" style="--ac:#818CF8">
-        <div class="svc-head">
-          <div class="svc-ico" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2)">🚢</div>
-          <div><div class="svc-nm"><span class="es">Transporte de Yate</span><span class="en" style="display:none">Yacht Transport</span></div><div class="svc-sub" style="color:#818CF8"><span class="es">Traslado entre marinas</span><span class="en" style="display:none">Transfer between marinas</span></div></div>
-        </div>
-        <p class="svc-body"><span class="es">Traslado de su embarcación entre marinas — capitán de contrato, tripulación, combustible y papeleo. También coordinamos flete terrestre para embarcaciones menores.</span><span class="en" style="display:none">Vessel transfer between marinas — delivery captain, crew, fuel, and paperwork. We also coordinate land transport for smaller vessels.</span></p>
-        <div class="svc-tags"><span class="stag">Delivery captain</span><span class="stag">Golfito → Quepos</span><span class="stag">Pacífico → Atlántico</span></div>
-        <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">Cotización en 2h</span><span class="en" style="display:none">Quote in 2h</span></span>
-          <a href="https://wa.me/50688509403?text=Transporte%20de%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#818CF8"><span class="es">Cotizar →</span><span class="en" style="display:none">Quote →</span></a>
-        </div>
-      </div>
-
-      <div class="svc" style="--ac:#00C8C8">
-        <div class="svc-head">
-          <div class="svc-ico">⛽</div>
-          <div><div class="svc-nm">Bunkering MDO</div><div class="svc-sub"><span class="es">Combustible · Golfito · Caldera</span><span class="en" style="display:none">Fuel · Golfito · Caldera</span></div></div>
-        </div>
-        <p class="svc-body"><span class="es">Suministro de Marine Diesel Oil en Golfito (Pier 1) y Caldera. Coordinación con proveedor, papeleo RECOPE y entrega directa al costado del buque.</span><span class="en" style="display:none">Marine Diesel Oil supply at Golfito (Pier 1) and Caldera. Supplier coordination, RECOPE paperwork and direct delivery alongside.</span></p>
-        <div class="svc-tags"><span class="stag">MDO</span><span class="stag">Golfito Pier 1</span><span class="stag">Caldera</span><span class="stag">BDN incluido</span></div>
-        <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">Precio spot diario</span><span class="en" style="display:none">Daily spot price</span></span>
-          <a href="https://wa.me/50688509403?text=Bunkering%20MDO%20yate" target="_blank" rel="noopener" class="svc-lnk"><span class="es">Precio hoy →</span><span class="en" style="display:none">Today's price →</span></a>
-        </div>
-      </div>
-
-      <div class="svc" style="--ac:#34D399">
-        <div class="svc-head">
-          <div class="svc-ico" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2)">🍽️</div>
-          <div><div class="svc-nm"><span class="es">Provisiones & Tripulación</span><span class="en" style="display:none">Provisioning & Crew</span></div><div class="svc-sub" style="color:#34D399"><span class="es">Logística a bordo</span><span class="en" style="display:none">On-board logistics</span></div></div>
-        </div>
-        <p class="svc-body"><span class="es">Víveres, agua, repuestos y suministros con entrega al muelle. Cambios de tripulación — visas, transporte, hotel y coordinación de vuelos internacionales.</span><span class="en" style="display:none">Food, water, spare parts and supplies delivered to the berth. Crew changes — visas, transportation, hotel and international flight coordination.</span></p>
-        <div class="svc-tags"><span class="stag">Víveres</span><span class="stag">Crew change</span><span class="stag">Spare parts</span><span class="stag">Médico</span></div>
-        <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">Entrega en 24h</span><span class="en" style="display:none">Delivery in 24h</span></span>
-          <a href="https://wa.me/50688509403?text=Provisiones%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#34D399"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
         </div>
       </div>
 
@@ -279,18 +292,18 @@
       </div>
       <div class="stay-opts">
         <div class="sopt">
-          <div class="sopt-d">3 m</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Importación Temporal Base</span><span class="en" style="display:none">Base Temporary Import</span></div><div class="sopt-s"><span class="es">Entrada inicial · prorrogable</span><span class="en" style="display:none">Initial entry · extendable</span></div></div>
-          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
-        </div>
-        <div class="sopt">
           <div class="sopt-d">6 m</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Primera prórroga</span><span class="en" style="display:none">First extension</span></div><div class="sopt-s"><span class="es">Extensión ante Aduana</span><span class="en" style="display:none">Extension with Customs</span></div></div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Importación Temporal</span><span class="en" style="display:none">Temporary Import</span></div><div class="sopt-s"><span class="es">Entrada inicial ante DGA · prorrogable</span><span class="en" style="display:none">Initial DGA entry · extendable</span></div></div>
           <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
         </div>
         <div class="sopt">
-          <div class="sopt-d">12 m</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Permanencia extendida</span><span class="en" style="display:none">Extended stay</span></div><div class="sopt-s"><span class="es">Segunda prórroga · DGA + MOPT</span><span class="en" style="display:none">Second extension · DGA + MOPT</span></div></div>
+          <div class="sopt-d">1 año</div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Primera prórroga · Contrato ICT</span><span class="en" style="display:none">First extension · ICT Contract</span></div><div class="sopt-s"><span class="es">Prórroga ante Aduana con contrato ICT registrado</span><span class="en" style="display:none">Extension with registered ICT (Tourism Institute) contract</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+        </div>
+        <div class="sopt">
+          <div class="sopt-d">2 años</div>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Segunda prórroga · Contrato de Marina</span><span class="en" style="display:none">Second extension · Marina Contract</span></div><div class="sopt-s"><span class="es">Permanencia extendida con contrato de marina registrado ante DGA + MOPT</span><span class="en" style="display:none">Extended stay with registered marina contract before DGA + MOPT</span></div></div>
           <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
         </div>
       </div>
