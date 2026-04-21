@@ -140,7 +140,15 @@
     .hact:hover .hact-arr{opacity:1;transform:translateX(3px)}
     @media(max-width:680px){.hero-actions{grid-template-columns:1fr 1fr}}
     @media(max-width:860px){.svc-grid{grid-template-columns:1fr}}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+    /* ── Lang fix: override global .es/.en inline rule for block elements ── */
+    html[data-lang="es"] .es { display: revert; }
+    html[data-lang="en"] .en { display: revert; }
+    html[data-lang="es"] span.es { display: inline; }
+    html[data-lang="en"] span.en { display: inline; }
+    html[data-lang="es"] .en { display: none !important; }
+    html[data-lang="en"] .es { display: none !important; }
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     @media(max-width:860px){.yhero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(4,1fr)}.stay-box{grid-template-columns:1fr}}
     @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr}.ysec{padding:3rem 1rem}}
   </style>
@@ -233,8 +241,8 @@
 <!-- SERVICES -->
 <section class="ysec" id="servicios">
   <div class="ycon">
-    <div class="slbl es">Servicios especializados</div>
-    <div class="slbl en" style="display:none">Specialized services</div>
+    <div class="slbl"><span class="es">Servicios especializados</span></div>
+    <div class="slbl" style="display:none"><span class="en">Specialized services</span></div>
     <h2 class="sh2"><span class="es">Todo lo que necesita <em>su yate</em></span><span class="en" style="display:none">Everything your <em>yacht needs</em></span></h2>
     <p class="sdesc"><span class="es">Un solo punto de contacto para clearance, aduana, logística y permanencia en todas las marinas de Costa Rica.</span><span class="en" style="display:none">One point of contact for clearance, customs, logistics and stay permits at every marina in Costa Rica.</span></p>
 
@@ -284,8 +292,8 @@
     <!-- STAY & CRUISING PERMITS -->
     <div class="stay-box">
       <div>
-        <div class="slbl es" style="margin-bottom:.625rem">Régimen de permanencia</div>
-        <div class="slbl en" style="display:none;margin-bottom:.625rem">Vessel stay regime</div>
+        <div class="slbl" style="margin-bottom:.625rem"><span class="es">Régimen de permanencia</span></div>
+        <div class="slbl" style="margin-bottom:.625rem"><span class="en">Vessel stay regime</span></div>
         <h3 class="stay-t"><span class="es"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span><span class="en" style="display:none"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span></h3>
         <p class="stay-p"><span class="es">Los yates extranjeros pueden permanecer en Costa Rica bajo Importación Temporal sin pagar impuestos de importación. Gestionamos el proceso completo ante la DGA — solicitud, prórroga y documentación de salida.</span><span class="en" style="display:none">Foreign yachts may remain in Costa Rica under Temporary Import without paying import taxes. We manage the entire process with the DGA — application, extensions and departure documentation.</span></p>
         <a href="https://wa.me/50688509403?text=Importacion%20temporal%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-o"><span class="es">Consultar régimen →</span><span class="en" style="display:none">Inquire about regime →</span></a>
@@ -314,8 +322,8 @@
 <!-- MARINA MAP -->
 <section class="ysec" id="marinas" style="background:var(--nv2)">
   <div class="ycon">
-    <div class="slbl es">Red de marinas</div>
-    <div class="slbl en" style="display:none">Marina network</div>
+    <div class="slbl"><span class="es">Red de marinas</span></div>
+    <div class="slbl" style="display:none"><span class="en">Marina network</span></div>
     <h2 class="sh2"><span class="es">Cobertura en <em>todas las marinas</em></span><span class="en" style="display:none">Coverage at <em>every marina</em></span></h2>
     <p class="sdesc" style="margin-bottom:1.375rem"><span class="es">Operamos en las principales marinas del Pacífico costarricense. Toca una marina para ver su ubicación.</span><span class="en" style="display:none">We operate at all major marinas on the Costa Rican Pacific. Tap a marina to see its location.</span></p>
     <div id="marina-map"></div>
@@ -396,8 +404,7 @@ document.addEventListener('DOMContentLoaded',initMarinaMap);
 
 function setLang(l){
   document.documentElement.setAttribute('data-lang',l);
-  document.querySelectorAll('.es').forEach(e=>e.style.display=l==='es'?'':'none');
-  document.querySelectorAll('.en').forEach(e=>e.style.display=l==='en'?'':'none');
+  // CSS [data-lang="es"] .es / .en handles visibility via revert
   document.getElementById('ly-es').classList.toggle('act',l==='es');
   document.getElementById('ly-en').classList.toggle('act',l==='en');
 }
