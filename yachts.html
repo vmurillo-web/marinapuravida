@@ -184,16 +184,15 @@
         <span class="en" style="display:none">Dedicated Agency · Superyachts &amp; Yachts</span>
       </div>
       <h1 class="yhero-h1">
-        <strong><span class="es">Superyates &amp; Yates</span><span class="en" style="display:none">Superyachts &amp; Yachts</span></strong><br>
+        <strong data-es="Superyates &amp; Yates" data-en="Superyachts &amp; Yachts">Superyates &amp; Yates</strong><br>
         Services<br>
         <em>Costa Rica</em>
       </h1>
       <p class="yhero-desc">
-        <span class="es">Clearance IN/OUT, agente aduanal, Stay &amp; Cruising Permits y transporte entre marinas para superyates y yates en Costa Rica.</span>
-        <span class="en" style="display:none">Clearance IN/OUT, customs agent, Stay &amp; Cruising Permits and marina-to-marina transport for superyachts and yachts in Costa Rica.</span>
+<span data-es="Clearance IN/OUT, agente aduanal, Stay &amp; Cruising Permits y transporte entre marinas para superyates y yates en Costa Rica." data-en="Clearance IN/OUT, customs agent, Stay &amp; Cruising Permits and marina-to-marina transport for superyachts and yachts in Costa Rica.">Clearance IN/OUT, agente aduanal, Stay &amp; Cruising Permits y transporte entre marinas para superyates y yates en Costa Rica.</span>
       </p>
       <div class="yhero-ctas">
-        <a href="#servicios" class="btn btn-p"><span class="es">Ver servicios ↓</span><span class="en" style="display:none">View services ↓</span></a>
+        <a href="#servicios" class="btn btn-p"><span data-es="Ver servicios ↓" data-en="View services ↓">Ver servicios ↓</span></a>
         <a href="https://wa.me/50688509403" target="_blank" rel="noopener" class="btn btn-wa">⚡ WhatsApp 24/7</a>
       </div>
     </div>
@@ -212,14 +211,14 @@
       </a>
       <a href="#servicios" class="hact hact-cus">
         <div class="hact-icon">📋</div>
-        <div class="hact-label"><span class="es">Aduana</span><span class="en" style="display:none">Customs</span></div>
-        <div class="hact-sub"><span class="es">Agente DGA</span><span class="en" style="display:none">DGA Agent</span></div>
+        <div class="hact-label" data-es="Aduana" data-en="Customs">Aduana</div>
+        <div class="hact-sub" data-es="Agente DGA" data-en="DGA Agent">Agente DGA</div>
         <div class="hact-arr">→</div>
       </a>
       <a href="#marinas" class="hact hact-map">
         <div class="hact-icon">🗺️</div>
-        <div class="hact-label"><span class="es">Marinas</span><span class="en" style="display:none">Marinas</span></div>
-        <div class="hact-sub"><span class="es">Ver mapa</span><span class="en" style="display:none">View map</span></div>
+        <div class="hact-label" data-es="Marinas" data-en="Marinas">Marinas</div>
+        <div class="hact-sub" data-es="Ver mapa" data-en="View map">Ver mapa</div>
         <div class="hact-arr">→</div>
       </a>
       <a href="#servicios" class="hact hact-stay">
@@ -404,7 +403,10 @@ document.addEventListener('DOMContentLoaded',initMarinaMap);
 
 function setLang(l){
   document.documentElement.setAttribute('data-lang',l);
-  // CSS [data-lang="es"] .es / .en handles visibility via revert
+  // Update data-es/data-en text nodes
+  document.querySelectorAll('[data-es]').forEach(function(el){
+    el.textContent = l==='en' ? (el.dataset.en||el.dataset.es) : el.dataset.es;
+  });
   document.getElementById('ly-es').classList.toggle('act',l==='es');
   document.getElementById('ly-en').classList.toggle('act',l==='en');
 }
