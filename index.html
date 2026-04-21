@@ -292,11 +292,82 @@
       <p class="section-desc mt-2"><span class="es">Un solo punto de contacto para el Pac&iacute;fico y el Atl&aacute;ntico. Toca cada puerto para ver draft m&aacute;ximo, coordenadas y servicios.</span><span class="en">One point of contact for Pacific &amp; Atlantic. Tap each port to view max draft, coordinates and services.</span></p>
     </div>
     <div class="fade-up"><div id="map"></div></div>
-    <div class="grid-4 mt-4">
-      <div class="card fade-up delay-1" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">CALDERA</div><div style="font-size:0.82rem;color:var(--muted)">Draft: P1:10.7m / P4:12.5m | LOA: 300m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div></div>
-      <div class="card fade-up delay-2" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">GOLFITO</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 9.8m (UKC 0.5m) | LOA: 420m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Sur</span><span class="en">South Pacific</span></div></div>
-      <div class="card fade-up delay-3" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">MO&Iacute;N / LIM&Oacute;N</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 15.5m | LOA: 366m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div></div>
-      <div class="card fade-up delay-4" style="text-align:center"><div style="font-size:1.5rem">&#9875;</div><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">PUNTA MORALES</div><div style="font-size:0.82rem;color:var(--muted)">Draft: 7.0m | LOA: 150m</div><div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div></div>
+    <div class="grid-4 mt-4" id="port-cards-grid">
+
+      <!-- CALDERA -->
+      <div class="port-flip-wrap fade-up delay-1" data-port-id="caldera">
+        <div class="port-flip-inner">
+          <div class="port-flip-front card" style="text-align:center">
+            <div style="font-size:1.5rem">&#9875;</div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">CALDERA</div>
+            <div style="font-size:0.82rem;color:var(--muted)">Draft: P1:10.7m / P4:12.5m | LOA: 300m</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div>
+          </div>
+          <div class="port-flip-back" style="background-image:url('assets/img/port-caldera-photo-card.webp')">
+            <div class="port-flip-overlay">
+              <div class="port-flip-name">CALDERA</div>
+              <div class="port-flip-sub"><span class="es">Pac&iacute;fico Central · P1:10.7m · P4:12.5m</span><span class="en">Central Pacific · P1:10.7m · P4:12.5m</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOLFITO -->
+      <div class="port-flip-wrap fade-up delay-2" data-port-id="golfito">
+        <div class="port-flip-inner">
+          <div class="port-flip-front card" style="text-align:center">
+            <div style="font-size:1.5rem">&#9875;</div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">GOLFITO</div>
+            <div style="font-size:0.82rem;color:var(--muted)">Draft: 9.8m (UKC 0.5m) | LOA: 420m</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Sur</span><span class="en">South Pacific</span></div>
+          </div>
+          <div class="port-flip-back port-flip-no-photo">
+            <div class="port-flip-overlay">
+              <div class="port-flip-name">GOLFITO</div>
+              <div class="port-flip-sub"><span class="es">Pac&iacute;fico Sur · 9.8m draft · LOA 420m</span><span class="en">South Pacific · 9.8m draft · LOA 420m</span></div>
+              <div class="port-flip-soon"><span class="es">Foto próximamente</span><span class="en">Photo coming soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOÍN -->
+      <div class="port-flip-wrap fade-up delay-3" data-port-id="moin">
+        <div class="port-flip-inner">
+          <div class="port-flip-front card" style="text-align:center">
+            <div style="font-size:1.5rem">&#9875;</div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">MO&Iacute;N / LIM&Oacute;N</div>
+            <div style="font-size:0.82rem;color:var(--muted)">Draft: 15.5m | LOA: 366m</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Atl&aacute;ntico</span><span class="en">Atlantic</span></div>
+          </div>
+          <div class="port-flip-back" style="background-image:url('assets/img/port-moin-card.webp')">
+            <div class="port-flip-overlay">
+              <div class="port-flip-name">MO&Iacute;N / LIM&Oacute;N</div>
+              <div class="port-flip-sub"><span class="es">Atl&aacute;ntico · 15.5m draft · LOA 366m</span><span class="en">Atlantic · 15.5m draft · LOA 366m</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PUNTA MORALES -->
+      <div class="port-flip-wrap fade-up delay-4" data-port-id="punta_morales">
+        <div class="port-flip-inner">
+          <div class="port-flip-front card" style="text-align:center">
+            <div style="font-size:1.5rem">&#9875;</div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin:0.5rem 0;letter-spacing:0.1em">PUNTA MORALES</div>
+            <div style="font-size:0.82rem;color:var(--muted)">Draft: 7.0m | LOA: 150m</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem"><span class="es">Pac&iacute;fico Central</span><span class="en">Central Pacific</span></div>
+          </div>
+          <div class="port-flip-back port-flip-no-photo">
+            <div class="port-flip-overlay">
+              <div class="port-flip-name">PUNTA MORALES</div>
+              <div class="port-flip-sub"><span class="es">Pac&iacute;fico Central · 7.0m draft · LOA 150m</span><span class="en">Central Pacific · 7.0m draft · LOA 150m</span></div>
+              <div class="port-flip-soon"><span class="es">Foto próximamente</span><span class="en">Photo coming soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -410,29 +481,24 @@
           </div>
         </div>
         <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7">
-          <span class="es">Descarga la programaci&oacute;n portuaria actualizada directamente desde el sistema JAPDEVA. El documento incluye ventanas programadas y finalizadas, buques, puestos, ETAs y tiempos estimados de operaci&oacute;n en Mo&iacute;n.</span>
-          <span class="en">Download the updated port schedule directly from the JAPDEVA system. The document includes programmed and finalized windows, vessels, berths, ETAs, and estimated operation times at Mo&iacute;n.</span>
+          <span class="es">JAPDEVA distribuye la programaci&oacute;n portuaria semanalmente. Para recibir el reporte m&aacute;s reciente o consultar disponibilidad de puestos, cont&aacute;ctenos directamente &mdash; lo gestionamos en tiempo real.</span>
+          <span class="en">JAPDEVA distributes the port schedule on a weekly basis. To receive the latest report or check berth availability, contact us directly &mdash; we manage it in real time.</span>
         </p>
-        <a href="https://www.japdeva.go.cr/prensa/comunicados/Programacion%20de%20Atraques%2006-04-26.pdf" target="_blank" rel="noopener"
-           class="btn btn-primary" style="justify-content:center;gap:0.75rem">
-          <span style="font-size:1.1rem">&#128196;</span>
-          <span class="es">Ver Programaci&oacute;n JAPDEVA Mo&iacute;n &rarr;</span>
-          <span class="en">View JAPDEVA Mo&iacute;n Schedule &rarr;</span>
+        <a href="https://wa.me/50688509403?text=Hola%20MPV%2C%20necesito%20la%20programaci%C3%B3n%20portuaria%20de%20JAPDEVA%20Mo%C3%ADn"
+           target="_blank" rel="noopener" class="btn" style="background:#25D366;color:#fff;justify-content:center;gap:0.75rem">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+          <span class="es">Solicitar Programaci&oacute;n JAPDEVA</span>
+          <span class="en">Request JAPDEVA Schedule</span>
         </a>
-        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-align:center">
-          <span class="es">Fuente oficial: japdeva.go.cr &mdash; Actualizado semanalmente</span>
-          <span class="en">Official source: japdeva.go.cr &mdash; Updated weekly</span>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:0.25rem">
+          <span class="es">&#128197; Actualizado: </span><span class="en">&#128197; Updated: </span>
+          <span id="japdeva-updated" style="color:var(--cyan)">—</span>
         </p>
-        <div style="background:rgba(0,200,200,0.06);border:1px solid rgba(0,200,200,0.2);border-radius:var(--radius);padding:0.75rem;text-align:center;font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.6">
-          <span style="font-size:0.95rem;margin-right:0.35rem">&#128197;</span>
-          <span class="es"><strong style="color:var(--cyan)">Per&iacute;odo:</strong> 03/04/2026 &rarr; 03/05/2026 &middot; <span style="color:rgba(255,255,255,0.5)">Generado 06/04/2026</span></span>
-          <span class="en"><strong style="color:var(--cyan)">Period:</strong> 03/04/2026 &rarr; 03/05/2026 &middot; <span style="color:rgba(255,255,255,0.5)">Generated 06/04/2026</span></span>
-        </div>
-        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:0.1rem">
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:0.35rem">
           <span class="es">Si el documento no carga, </span><span class="en">If the document doesn't load, </span>
           <a href="https://wa.me/50688509403?text=Hola%20MPV%2C%20necesito%20la%20programaci%C3%B3n%20portuaria%20de%20JAPDEVA%20Mo%C3%ADn" 
              target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline">
-            <span class="es">solic&iacute;talo por WhatsApp</span><span class="en">request it via WhatsApp</span>
+            <span class="es">solicítalo por WhatsApp</span><span class="en">request it via WhatsApp</span>
           </a>
         </p>
       </div>
