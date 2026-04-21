@@ -338,36 +338,31 @@ async function initMap() {
     return;
   }
 
-  // Port card hover → map marker highlight
+  // Port card click → flip + highlight map marker
   const markerMap = {};
   const activeIcon = L.divIcon({
     className: '',
-    html: `<div style="
-      width:40px;height:40px;
-      background:var(--cyan);
-      border:2.5px solid #fff;
-      border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:1.1rem;
-      box-shadow:0 0 0 8px rgba(0,200,200,0.25);
-      cursor:pointer;
-      transition:all .2s;
-    ">⚓</div>`,
+    html: `<div style="width:40px;height:40px;background:#00C8C8;border:2.5px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 0 10px rgba(0,200,200,0.2);cursor:pointer;">⚓</div>`,
     iconSize: [40, 40],
     iconAnchor: [20, 20],
     popupAnchor: [0, -24],
   });
 
+  // Wire up flip cards — click only, no hover
   document.querySelectorAll('.port-flip-wrap').forEach(card => {
-    const portId = card.dataset.portId;
-    card.addEventListener('mouseenter', () => {
-      if (markerMap[portId]) markerMap[portId].setIcon(activeIcon);
+    card.addEventListener('click', () => {
+      // Flip the card
+      card.classList.toggle('flipped');
+      // Highlight map marker
+      const portId = card.dataset.portId;
+      if (markerMap[portId]) {
+        if (card.classList.contains('flipped')) {
+          markerMap[portId].setIcon(activeIcon);
+        } else {
+          markerMap[portId].setIcon(mpvIcon);
+        }
+      }
     });
-    card.addEventListener('mouseleave', () => {
-      if (markerMap[portId]) markerMap[portId].setIcon(mpvIcon);
-    });
-    // Touch / tap flip
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
   });
 
   portsData.forEach(port => {
