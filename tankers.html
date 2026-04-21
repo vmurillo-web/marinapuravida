@@ -430,6 +430,218 @@
   </div>
 </section>
 
+
+<!-- RECOPE LINE UP -->
+<section class="section" style="background:var(--bg,#0D1B2A);padding:3rem 0" id="recope-lineup">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem">
+
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;color:var(--cyan,#00C8C8);margin-bottom:.4rem">&#127761; <span class="es">PROGRAMA DE ATRAQUES RECOPE</span><span class="en">RECOPE VESSEL LINE UP</span></div>
+        <h2 style="color:var(--text,#e8f0f7);font-size:1.4rem;margin-bottom:.25rem"><span class="es">Line Up <em style="color:var(--cyan,#00C8C8);font-style:italic">Terminal Moín</em></span><span class="en">Line Up <em style="color:var(--cyan,#00C8C8);font-style:italic">Moín Terminal</em></span></h2>
+        <div id="lineup-updated" style="font-size:.72rem;color:var(--muted,#4d6a80)"></div>
+      </div>
+      <button onclick="downloadLineupPDF()" style="display:flex;align-items:center;gap:.5rem;background:var(--cyan,#00C8C8);color:#0D1B2A;border:none;border-radius:8px;padding:.6rem 1.25rem;font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        &#128196; <span class="es">DESCARGAR PDF</span><span class="en">DOWNLOAD PDF</span>
+      </button>
+    </div>
+
+    <!-- CARDS GRID -->
+    <div id="lineup-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px"></div>
+
+    <!-- STATUS LEGEND -->
+    <div style="display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted,#4d6a80)">
+        <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block"></span>
+        <span class="es">Operando</span><span class="en">Operating</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted,#4d6a80)">
+        <span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block"></span>
+        <span class="es">Próximo (48h)</span><span class="en">Next (48h)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted,#4d6a80)">
+        <span style="width:8px;height:8px;border-radius:50%;background:#8aa4bc;display:inline-block"></span>
+        <span class="es">Planificado</span><span class="en">Planned</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(async function initLineup(){
+  const LANG = document.documentElement.getAttribute('data-lang') || 'es';
+  const PRODUCT_ICONS = {
+    diesel:'⛽', gasolina:'⛽', fueloil:'🛢️', lpg:'🔵', avgas:'✈️', asfalto:'🏗️'
+  };
+  const PRODUCT_COLORS = {
+    diesel:'#00C8C8', gasolina:'#F59E0B', fueloil:'#8aa4bc',
+    lpg:'#818CF8', avgas:'#34D399', asfalto:'#78716C'
+  };
+  const BERTH_LABELS = {'5-0':'Puesto 5-0 · Moín','5-1':'Puesto 5-1 · Moín','La Garita':'La Garita','Caldera':'Caldera'};
+
+  let data;
+  try {
+    const r = await fetch('assets/data/recope-lineup.json?v='+Date.now());
+    data = await r.json();
+  } catch(e){ return; }
+
+  const lang = document.documentElement.getAttribute('data-lang') || 'es';
+  const now = new Date();
+
+  // Updated label
+  const upd = document.getElementById('lineup-updated');
+  if(upd) upd.textContent = (lang==='es'?'Actualizado: ':'Updated: ')+data.updated+' '+data.updated_time+' · Fuente: '+data.source;
+
+  const grid = document.getElementById('lineup-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  data.vessels.forEach(function(v){
+    const etb = v.etb ? new Date(v.etb) : null;
+    const arr = v.arrival ? new Date(v.arrival) : null;
+    const hoursToETB = etb ? (etb - now) / 3600000 : null;
+
+    // Determine status color
+    let dotColor = '#8aa4bc', borderAcc = 'rgba(138,164,188,.2)';
+    if(v.status === 'operating'){ dotColor = '#22C55E'; borderAcc = 'rgba(34,197,94,.3)'; }
+    else if(v.status === 'next' || (hoursToETB !== null && hoursToETB >= 0 && hoursToETB <= 48)){ dotColor = '#F59E0B'; borderAcc = 'rgba(245,158,11,.3)'; }
+
+    const pColor = PRODUCT_COLORS[v.product_type] || '#8aa4bc';
+    const pIcon = PRODUCT_ICONS[v.product_type] || '🛢️';
+    const berthLabel = BERTH_LABELS[v.berth] || v.berth;
+
+    const fmtDate = function(d, label){
+      if(!d) return '—';
+      return label + ' ' + d.toLocaleDateString(lang==='es'?'es-CR':'en-US',{day:'numeric',month:'short'}) +
+        (d.getHours()||d.getMinutes() ? ' '+d.toLocaleTimeString(lang==='es'?'es-CR':'en-US',{hour:'2-digit',minute:'2-digit'}) : '');
+    };
+
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(255,255,255,.04);border:1px solid '+borderAcc+';border-radius:12px;padding:1rem 1.125rem;display:flex;flex-direction:column;gap:.625rem;transition:border-color .2s';
+    card.onmouseenter = function(){ this.style.borderColor = pColor+'66'; };
+    card.onmouseleave = function(){ this.style.borderColor = borderAcc; };
+
+    card.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:space-between">'+
+        '<div style="display:flex;align-items:center;gap:.5rem">'+
+          '<span style="width:8px;height:8px;border-radius:50%;background:'+dotColor+';display:inline-block;flex-shrink:0"></span>'+
+          '<span style="font-size:.68rem;font-family:var(--font-mono);color:var(--muted,#4d6a80);letter-spacing:.08em">#'+v.orden+'</span>'+
+        '</div>'+
+        '<span style="font-size:1rem">'+pIcon+'</span>'+
+      '</div>'+
+      '<div>'+
+        '<div style="font-size:1rem;font-weight:700;color:var(--text,#e8f0f7);letter-spacing:.02em">'+v.vessel+'</div>'+
+        '<div style="font-size:.78rem;font-weight:600;color:'+pColor+';margin-top:2px">'+v.product+'</div>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">'+
+        '<div style="background:rgba(0,0,0,.2);border-radius:7px;padding:.5rem .625rem">'+
+          '<div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted,#4d6a80);margin-bottom:2px">'+v.arrival_label+'</div>'+
+          '<div style="font-size:.8rem;font-weight:600;color:var(--text,#e8f0f7)">'+fmtDate(arr,'')+'</div>'+
+        '</div>'+
+        '<div style="background:rgba(0,0,0,.2);border-radius:7px;padding:.5rem .625rem;border:1px solid '+(v.status==='operating'?'rgba(34,197,94,.25)':v.status==='next'?'rgba(245,158,11,.25)':'transparent')+'">'+
+          '<div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted,#4d6a80);margin-bottom:2px">'+v.etb_label+'</div>'+
+          '<div style="font-size:.8rem;font-weight:600;color:'+(v.status==='operating'?'#22C55E':v.status==='next'?'#F59E0B':'var(--text,#e8f0f7)')+'">'+fmtDate(etb,'')+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div style="display:flex;align-items:center;justify-content:flex-end">'+
+        '<span style="font-size:.7rem;font-family:var(--font-mono);color:var(--muted,#4d6a80);background:rgba(0,0,0,.2);padding:2px 8px;border-radius:4px">'+berthLabel+'</span>'+
+      '</div>';
+
+    grid.appendChild(card);
+  });
+
+  // Expose data for PDF
+  window._lineupData = data;
+})();
+
+function downloadLineupPDF(){
+  if(!window._lineupData){ alert('Datos no cargados'); return; }
+  if(typeof window.jspdf === 'undefined'){ alert('PDF library loading...'); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+  const data = window._lineupData;
+  const lang = document.documentElement.getAttribute('data-lang') || 'es';
+  const now = new Date();
+
+  // Header
+  doc.setFillColor(13,27,42);
+  doc.rect(0,0,210,32,'F');
+  doc.setTextColor(0,200,200);
+  doc.setFontSize(8);
+  doc.setFont('helvetica','normal');
+  doc.text('MARINA PURA VIDA S.A. · MARITIME ADVISORY CR', 14, 11);
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(15);
+  doc.setFont('helvetica','bold');
+  doc.text(lang==='es'?'Programa de Atraques RECOPE':'RECOPE Vessel Line Up', 14, 20);
+  doc.setFontSize(8);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(138,164,188);
+  doc.text('Terminal Moín · Actualizado: '+data.updated+' '+data.updated_time+' · Fuente: '+data.source, 14, 27);
+
+  // Table headers
+  let y = 42;
+  const cols = [
+    {label:'#', w:8},
+    {label:lang==='es'?'Buque':'Vessel', w:42},
+    {label:lang==='es'?'Producto':'Product', w:38},
+    {label:'NOR / ETA', w:32},
+    {label:'ETB / ETC', w:32},
+    {label:lang==='es'?'Muelle':'Berth', w:30}
+  ];
+  let x = 14;
+  doc.setFillColor(13,27,42);
+  doc.rect(12, y-5, 186, 8, 'F');
+  doc.setTextColor(0,200,200);
+  doc.setFontSize(7.5);
+  doc.setFont('helvetica','bold');
+  cols.forEach(function(c){ doc.text(c.label, x, y); x += c.w; });
+
+  // Rows
+  doc.setFont('helvetica','normal');
+  y += 6;
+  data.vessels.forEach(function(v, i){
+    if(i % 2 === 0){ doc.setFillColor(255,255,255,0.03); } else { doc.setFillColor(245,248,252); }
+    doc.setFillColor(i%2===0?248:255, i%2===0?250:255, i%2===0?252:255);
+    doc.rect(12, y-4, 186, 7, 'F');
+
+    const fmtD = function(iso){
+      if(!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString(lang==='es'?'es-CR':'en-US',{day:'numeric',month:'short'})+(d.getHours()?(' '+d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')):'');
+    };
+
+    const STATUS_COLORS = {operating:[34,197,94], next:[245,158,11], planned:[138,164,188]};
+    const sc = STATUS_COLORS[v.status]||[138,164,188];
+
+    doc.setFontSize(7.5);
+    x = 14;
+    doc.setTextColor(...sc);
+    doc.text(String(v.orden), x, y); x += 8;
+    doc.setTextColor(13,27,42);
+    doc.text(v.vessel, x, y); x += 42;
+    doc.text(v.product, x, y); x += 38;
+    doc.text(fmtD(v.arrival), x, y); x += 32;
+    doc.text(fmtD(v.etb), x, y); x += 32;
+    doc.text(v.berth==='5-0'?'P.5-0 Moín':v.berth==='5-1'?'P.5-1 Moín':v.berth, x, y);
+    y += 7;
+  });
+
+  // Footer
+  doc.setDrawColor(0,200,200);
+  doc.setLineWidth(0.3);
+  doc.line(12, 277, 198, 277);
+  doc.setFontSize(7);
+  doc.setTextColor(138,164,188);
+  doc.text('Marina Pura Vida S.A.  ·  ops@marinapuravida.com  ·  +506 8850-9403  ·  marinapuravida.com', 14, 282);
+  doc.text('Generado: '+now.toLocaleDateString(lang==='es'?'es-CR':'en-US',{day:'numeric',month:'short',year:'numeric'}), 160, 282);
+
+  doc.save('RECOPE_LineUp_'+data.updated+'.pdf');
+}
+</script>
+
 <!-- CTA -->
 <section class="cta-bar">
   <div style="max-width:600px;margin:0 auto">
