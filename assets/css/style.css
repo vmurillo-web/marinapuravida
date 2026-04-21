@@ -1191,3 +1191,77 @@ html[data-lang="en"] .en-block { display: block; }
 [data-theme="dark"] .footer-logo img {
   border-radius: 0;
 }
+
+/* ── Port Flip Cards ─────────────────────────────────────── */
+.port-flip-wrap {
+  perspective: 1000px;
+  height: 130px;
+  cursor: pointer;
+}
+.port-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.port-flip-wrap:hover .port-flip-inner,
+.port-flip-wrap.flipped .port-flip-inner {
+  transform: rotateY(180deg);
+}
+.port-flip-front,
+.port-flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.port-flip-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 1rem;
+}
+.port-flip-back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--navy);
+}
+.port-flip-no-photo {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d2a40 100%);
+  border: 1px solid rgba(0,200,200,0.2);
+}
+.port-flip-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,24,38,0.92) 0%, rgba(8,24,38,0.4) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.875rem;
+}
+.port-flip-name {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.2rem;
+}
+.port-flip-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.4;
+}
+.port-flip-soon {
+  font-size: 0.68rem;
+  color: rgba(0,200,200,0.5);
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
