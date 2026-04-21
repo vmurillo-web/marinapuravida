@@ -338,6 +338,38 @@ async function initMap() {
     return;
   }
 
+  // Port card hover → map marker highlight
+  const markerMap = {};
+  const activeIcon = L.divIcon({
+    className: '',
+    html: `<div style="
+      width:40px;height:40px;
+      background:var(--cyan);
+      border:2.5px solid #fff;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;
+      box-shadow:0 0 0 8px rgba(0,200,200,0.25);
+      cursor:pointer;
+      transition:all .2s;
+    ">⚓</div>`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -24],
+  });
+
+  document.querySelectorAll('.port-flip-wrap').forEach(card => {
+    const portId = card.dataset.portId;
+    card.addEventListener('mouseenter', () => {
+      if (markerMap[portId]) markerMap[portId].setIcon(activeIcon);
+    });
+    card.addEventListener('mouseleave', () => {
+      if (markerMap[portId]) markerMap[portId].setIcon(mpvIcon);
+    });
+    // Touch / tap flip
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+  });
+
   portsData.forEach(port => {
     const lang = LANG;
     const name = lang === 'es' ? port.name_es : port.name_en;
@@ -345,6 +377,7 @@ async function initMap() {
     const services = lang === 'es' ? port.services_es : port.services_en;
 
     const marker = L.marker([port.lat, port.lng], { icon: mpvIcon }).addTo(map);
+    if (port.id) markerMap[port.id] = marker;
 
     // Build berth rows for ports with multiple drafts (e.g. Caldera)
     const berthRows = port.berths
