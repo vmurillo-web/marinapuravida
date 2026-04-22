@@ -347,7 +347,6 @@
 </a>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="assets/js/main.js"></script>
 <script>
 const MARINAS=[
   {id:'golfito',  name:'Marina Bahía Golfito', de:'Full-service marina in the heart of Golfito Bay',         ds:'Marina de servicio completo en el corazón de la Bahía de Golfito', lat:8.63710,  lng:-83.16905},
@@ -403,6 +402,7 @@ document.addEventListener('DOMContentLoaded',initMarinaMap);
 
 function setLang(l){
   document.documentElement.setAttribute('data-lang',l);
+  localStorage.setItem('mpv-lang',l);
   // Update data-es/data-en text nodes
   document.querySelectorAll('[data-es]').forEach(function(el){
     el.textContent = l==='en' ? (el.dataset.en||el.dataset.es) : el.dataset.es;
@@ -415,7 +415,9 @@ function toggleTheme(){
   document.documentElement.setAttribute('data-theme',t);
   document.getElementById('ly-theme').textContent=t==='dark'?'☀️':'🌙';
 }
-setLang('es');
+// Read saved language preference
+var _savedLang = localStorage.getItem('mpv-lang') || 'es';
+setLang(_savedLang);
 </script>
 </body>
 </html>
