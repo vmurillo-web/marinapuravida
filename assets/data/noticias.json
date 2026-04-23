@@ -1,19 +1,17 @@
 [
   {
     "id": 6,
-    "visible": true,
     "fecha": "2026-04-17",
-    "categoria_es": "Regulación Portuaria",
-    "categoria_en": "Port Regulation",
+    "puerto": "JAPDEVA · Moín",
+    "puerto_en": "JAPDEVA · Moín",
+    "tipo": "info",
     "titulo_es": "ARESEP aprueba ajuste tarifario JAPDEVA — Limón y Moín",
     "titulo_en": "ARESEP Approves JAPDEVA Tariff Adjustment — Limón and Moín",
-    "resumen_es": "La resolución RE-0036-IT-2026 fija nuevas tarifas máximas para servicios marítimos y portuarios de JAPDEVA. Primer ajuste ordinario en dos años. El remolcaje sube un 121% y la atención de nave un 63.85%.",
-    "resumen_en": "Resolution RE-0036-IT-2026 sets new maximum tariffs for JAPDEVA maritime and port services. First ordinary adjustment in two years. Towage increases 121% and vessel attendance 63.85%.",
-    "tag_es": "Nuevo",
-    "tag_en": "New",
-    "pdf": "assets/data/ARESEP_RE-0036-IT-2026_JAPDEVA.pdf",
-    "pdf_label_es": "Descargar análisis MPV →",
-    "pdf_label_en": "Download MPV analysis →"
+    "contenido_es": "La resolución RE-0036-IT-2026 fija nuevas tarifas máximas para servicios marítimos y portuarios de JAPDEVA. Primer ajuste ordinario en dos años. El remolcaje sube un 121.14% (de $0.12 a $0.27/TRB), la atención de nave un 63.85% y el montacargas hasta un 78%. El almacenaje baja un 73.98%. Las tarifas rigen 15 días después de publicación en La Gaceta.",
+    "contenido_en": "Resolution RE-0036-IT-2026 sets new maximum tariffs for JAPDEVA maritime and port services. First ordinary adjustment in two years. Towage increases 121.14% (from $0.12 to $0.27/TRB), vessel attendance 63.85% and forklift up to 78%. Storage decreases 73.98%. Tariffs take effect 15 days after publication in La Gaceta.",
+    "descarga_url": "assets/data/ARESEP_RE-0036-IT-2026_JAPDEVA.pdf",
+    "descarga_es": "Descargar Análisis Tarifario MPV",
+    "descarga_en": "Download MPV Tariff Analysis"
   },
   {
     "id": 5,
