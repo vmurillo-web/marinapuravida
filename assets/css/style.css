@@ -358,6 +358,21 @@ h4 { font-size: 1.1rem; }
   cursor: pointer;
 }
 .port-tag-link:hover {
+  background: rgba(0,200,200,0.22);
+  border-color: rgba(0,200,200,0.65);
+  transform: translateY(-1px);
+}
+.port-tag-recope:hover {
+  background: rgba(200,169,110,0.15);
+  border-color: rgba(200,169,110,0.5);
+  color: var(--gold);
+}
+.port-tag-link {
+  text-decoration: none;
+  transition: background .18s, border-color .18s, transform .15s;
+  cursor: pointer;
+}
+.port-tag-link:hover {
   background: rgba(0,200,200,0.2);
   border-color: rgba(0,200,200,0.6);
   transform: translateY(-1px);
