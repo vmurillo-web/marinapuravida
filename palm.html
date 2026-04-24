@@ -148,56 +148,68 @@
             <div><dt>Tugboats</dt><dd><span class="es">No disponibles</span><span class="en">Not available</span></dd></div>
           </dl>
 
-          <!-- Cargo connections -->
-          <div style="margin-top:1rem;background:rgba(0,200,200,.06);border:1px solid rgba(0,200,200,.2);border-radius:8px;padding:.875rem 1rem;font-size:.8rem;line-height:1.7">
-            <div style="font-family:var(--font-mono);font-size:.63rem;letter-spacing:.1em;color:var(--cyan);margin-bottom:.5rem">CARGO CONNECTIONS</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.25rem .75rem">
-              <div><span style="color:var(--muted)">Terminal lines:</span> <strong>3 × 8"</strong></div>
-              <div><span style="color:var(--muted)">Truck lines:</span> <strong>4 × 6"</strong></div>
-              <div><span style="color:var(--muted)">Terminal pressure:</span> <strong>~3 bar</strong></div>
-              <div><span style="color:var(--muted)">Truck pressure:</span> <strong>~1 bar</strong></div>
-              <div><span style="color:var(--muted)">Stop system:</span> <strong>Shore Stop</strong></div>
-              <div><span style="color:var(--muted)">Air blowing:</span> <strong>Shore (no pigs)</strong></div>
-              <div><span style="color:var(--muted)">Fresh water:</span> <strong>USD $10/MT (cash)</strong></div>
-              <div><span style="color:var(--muted)">Shore pass:</span> <strong>USD $150 (cash)</strong></div>
-            </div>
-          </div>
-
-          <div style="margin-top:.75rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:0.85rem 1rem;font-size:0.8rem;line-height:1.6;">
-            <span style="color:#F59E0B;font-weight:700;">&#9888;&#65039; <span class="es">Nota operacional</span><span class="en">Operational note</span>:</span>
-            <span class="es"> Bow thruster operativo <strong>obligatorio</strong>. Sin BT: debe contratar remolcador.</span>
-            <span class="en"> Operative bow thruster <strong>mandatory</strong>. Without BT: tug hire required.</span>
-          </div>
-
-
-          <!-- Services -->
-          <div style="margin-top:.75rem;background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:.875rem 1rem;font-size:.78rem">
-            <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;color:#22C55E;margin-bottom:.5rem">SERVICES AVAILABLE</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .75rem;color:var(--text2)">
-              <div>&#x2705; Fresh water <span style="color:var(--muted)">(cash)</span></div>
-              <div>&#x2705; Shore pass <span style="color:var(--muted)">(cash)</span></div>
-              <div>&#x2705; De-slopping <span style="color:var(--muted)">(72h notice)</span></div>
-              <div>&#x2705; <span class="es">Buceo / trabajo submarino</span><span class="en">Underwater work</span> <span style="color:var(--muted)">(<span class="es">con autorización</span><span class="en">with permission</span>)</span></div>
-              <div>&#x2705; Bunkering <span style="color:var(--muted)">(<span class="es">camión, prepago</span><span class="en">truck, prepaid</span>)</span></div>
-              <div>&#x2705; <span class="es">Descarga de basura</span><span class="en">Garbage disposal</span> <span style="color:var(--muted)">(<span class="es">según indicaciones</span><span class="en">as directed</span>)</span></div>
-              <div>&#x2705; Taxi boat / Tours</div>
-              <div>&#x2705; Boat lines</div>
-              <div>&#x2705; <span class="es">Recarga extintores</span><span class="en">Refilling extinguishers</span></div>
-              <div>&#x2705; Life jackets <span style="color:var(--muted)">(<span class="es">reemplazo cilindro</span><span class="en">cylinder replace</span>)</span></div>
-              <div>&#x2705; Life rafts <span style="color:var(--muted)">(<span class="es">servicio</span><span class="en">service</span>)</span></div>
-              <div>&#x274C; Shore gangway</div>
-            </div>
-          </div>
-
-          <!-- Safety -->
-          <div style="margin-top:.75rem;font-size:.75rem;color:var(--text2);line-height:1.65;background:rgba(0,0,0,.1);border-radius:8px;padding:.75rem 1rem">
-            <strong style="color:var(--text)"><span class="es">Restricciones:</span><span class="en">Restrictions:</span></strong>
-            <span class="es"> Sin hot work sin autorización · Sin limpieza de tanques en muelle · Sin scrubbers open-loop · Basura en bolsas transparentes con 48h de aviso.</span>
-            <span class="en"> No hot work without authorization · No tank cleaning at berth · No open-loop scrubbers · Garbage in clear bags with 48h notice.</span>
-          </div>
-
         </div>
       </div>
+    </div>
+
+    <!-- CARGO CONNECTIONS + SERVICES — side by side vcards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem">
+
+      <!-- CARGO CONNECTIONS VCARD -->
+      <div style="background:var(--navy-mid,#132233);border:1px solid rgba(0,200,200,.22);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);margin-bottom:.4rem">&#9875; Cargo Connections</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text)"><span class="es">Puerto Golfito · Pier 1</span><span class="en">Port Golfito · Pier 1</span></div>
+        </div>
+        <dl style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem">
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Terminal lines</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--cyan);margin-top:.1rem">3 × 8"</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Truck lines</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--cyan);margin-top:.1rem">4 × 6"</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Terminal pressure</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">~3 bar</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Truck pressure</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">~1 bar</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Stop system</dt><dd style="font-family:var(--font-mono);font-size:.92rem;font-weight:600;color:var(--text);margin-top:.1rem">Shore Stop</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Air blowing</dt><dd style="font-family:var(--font-mono);font-size:.92rem;font-weight:600;color:var(--text);margin-top:.1rem"><span class="es">Shore · sin pigs</span><span class="en">Shore · no pigs</span></dd></div>
+        </dl>
+        <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:.875rem">
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:.75rem">
+            <span style="color:#F59E0B;font-weight:700">&#9888;&#65039;</span>
+            <span class="es"> Bow thruster operativo <strong style="color:var(--text)">obligatorio</strong>. Sin BT: contratar remolcador.</span>
+            <span class="en"> Operative bow thruster <strong style="color:var(--text)">mandatory</strong>. Without BT: tug hire required.</span>
+          </div>
+          <a href="https://wa.me/50688509403?text=Necesito%20cotizar%20remolcador%20Puerto%20Golfito"
+             target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;font-size:.78rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;text-decoration:none;transition:opacity .2s"
+             onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            &#9883; <span class="es">Cotizar remolcador</span><span class="en">Request tug quote</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- SERVICES AVAILABLE VCARD -->
+      <div style="background:var(--navy-mid,#132233);border:1px solid rgba(34,197,94,.22);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:#22C55E;margin-bottom:.4rem">&#10003; Services Available</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text)"><span class="es">Golfito · Golfo Dulce</span><span class="en">Golfito · Golfo Dulce</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.78rem;color:var(--text2)">
+          <div>&#x2705; Fresh water <span style="color:var(--muted)">(cash)</span></div>
+          <div>&#x2705; Shore pass <span style="color:var(--muted)">(cash)</span></div>
+          <div>&#x2705; De-slopping <span style="color:var(--muted)">(72h)</span></div>
+          <div>&#x2705; <span class="es">Trabajo submarino</span><span class="en">Underwater work</span></div>
+          <div>&#x2705; Bunkering <span style="color:var(--muted)">(<span class="es">camión</span><span class="en">truck</span>)</span></div>
+          <div>&#x2705; <span class="es">Descarga basura</span><span class="en">Garbage disposal</span></div>
+          <div>&#x2705; Taxi boat / Tours</div>
+          <div>&#x2705; Boat lines</div>
+          <div>&#x2705; <span class="es">Recarga extintores</span><span class="en">Extinguishers</span></div>
+          <div>&#x2705; Life jackets</div>
+          <div>&#x2705; Life rafts</div>
+          <div>&#x274C; Shore gangway</div>
+        </div>
+        <div style="margin-top:auto;font-size:.72rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.07);padding-top:.75rem;line-height:1.6">
+          <span class="es">Sin hot work sin autorización · Sin limpieza de tanques · Sin scrubbers open-loop</span>
+          <span class="en">No hot work without authorization · No tank cleaning · No open-loop scrubbers</span>
+        </div>
+      </div>
+
     </div>
 
     <!-- PHOTO BACKGROUND BANNER -->
@@ -427,18 +439,32 @@ async function loadPrices(){
   var lang=document.documentElement.getAttribute('data-lang')||'es';
   try{
     // World Bank PPOIL indicator via CORS proxy
-    var palmUrl='https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.worldbank.org/v2/en/indicator/PPOIL?mrv=3&format=json');
-    var brentUrl='https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.worldbank.org/v2/en/indicator/POILBRE?mrv=3&format=json');
-    var myrUrl='https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.exchangerate-api.com/v4/latest/MYR');
+    // Try multiple CORS proxies in sequence
+    async function wbFetch(indicator){
+      var proxies=[
+        'https://corsproxy.io/?',
+        'https://api.allorigins.win/raw?url=',
+      ];
+      var target='https://api.worldbank.org/v2/en/indicator/'+indicator+'?mrv=3&format=json';
+      for(var p of proxies){
+        try{
+          var r=await fetch(p+(p.includes('allorigins')?encodeURIComponent(target):encodeURIComponent(target)));
+          if(!r.ok) continue;
+          var d=await r.json();
+          if(Array.isArray(d)&&d[1]) return d;
+        }catch(e){}
+      }
+      return null;
+    }
 
-    var [palmRes,brentRes,myrRes]=await Promise.all([
-      fetch(palmUrl),fetch(brentUrl),fetch(myrUrl)
-    ]);
-    var palmData=await palmRes.json();
-    var brentData=await brentRes.json();
-    var myrData=await myrRes.json();
+    var myrRate=0.213;
+    try{
+      var mr=await fetch('https://open.er-api.com/v6/latest/MYR');
+      var md=await mr.json();
+      if(md&&md.rates&&md.rates.USD) myrRate=md.rates.USD;
+    }catch(e){}
 
-    var myrRate=(myrData&&myrData.rates&&myrData.rates.USD)?myrData.rates.USD:0.213;
+    var [palmData,brentData]=await Promise.all([wbFetch('PPOIL'),wbFetch('POILBRE')]);
 
     function getLatest(data){
       if(!data||!data[1]) return null;
