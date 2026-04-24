@@ -28,6 +28,12 @@
     .ynav-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--tx2);font-family:'DM Mono',monospace;font-size:.7rem;padding:4px 9px;cursor:pointer;transition:all var(--trans)}
     .ynav-btn:hover,.ynav-btn.act{background:var(--cy);color:var(--nv);border-color:var(--cy)}
     [data-theme="light"] .ynav-btn{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1)}
+    .ynav-links{display:flex;align-items:center;gap:.125rem}
+    .ynav-links a{color:var(--tx2);font-size:.82rem;font-weight:500;padding:.35rem .65rem;border-radius:6px;text-decoration:none;transition:all var(--trans);white-space:nowrap}
+    .ynav-links a:hover{color:var(--tx);background:rgba(255,255,255,.07)}
+    .ynav-links a.active{color:var(--cy)}
+    [data-theme="light"] .ynav-links a:hover{background:rgba(0,0,0,.06)}
+    @media(max-width:860px){.ynav-links{display:none}}
 
     /* HERO */
     .yhero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:7rem 1.5rem 4rem}
@@ -151,6 +157,37 @@
         @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     @media(max-width:860px){.yhero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(4,1fr)}.stay-box{grid-template-columns:1fr}}
     @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr}.ysec{padding:3rem 1rem}}
+    /* ── Light mode comprehensive fixes ── */
+    [data-theme="light"] .svc{background:#fff;border-color:rgba(0,0,0,.1)}
+    [data-theme="light"] .svc:hover{border-color:var(--cy);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    [data-theme="light"] .svc-nm{color:#0D1B2A}
+    [data-theme="light"] .svc-body{color:#3a5a78}
+    [data-theme="light"] .svc-foot{border-top-color:rgba(0,0,0,.08)}
+    [data-theme="light"] .svc-foot-lbl{color:#4d6a80}
+    [data-theme="light"] .stag{background:rgba(0,200,200,.08);border-color:rgba(0,200,200,.25);color:var(--cy)}
+    [data-theme="light"] .hact{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1)}
+    [data-theme="light"] .hact:hover{background:rgba(0,0,0,.07)}
+    [data-theme="light"] .hact-label{color:#0D1B2A}
+    [data-theme="light"] .hact-sub{color:#4d6a80}
+    [data-theme="light"] .stay-box{background:linear-gradient(135deg,#e8f4fb,#d4eaf5);border-color:rgba(0,200,200,.25)}
+    [data-theme="light"] .stay-t{color:#0D1B2A}
+    [data-theme="light"] .stay-t strong{color:var(--cy)}
+    [data-theme="light"] .stay-p{color:#3a5a78}
+    [data-theme="light"] .sopt{background:rgba(0,200,200,.07);border-color:rgba(0,200,200,.2)}
+    [data-theme="light"] .sopt-t{color:#0D1B2A}
+    [data-theme="light"] .sopt-s{color:#4d6a80}
+    [data-theme="light"] .sopt-b{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#166534}
+    [data-theme="light"] .sopt-d{color:var(--cy)}
+    [data-theme="light"] .slbl{color:var(--cy)}
+    [data-theme="light"] .sh2{color:#0D1B2A}
+    [data-theme="light"] .sdesc{color:#3a5a78}
+    [data-theme="light"] .mnm{color:#0D1B2A}
+    [data-theme="light"] .mde{color:#4d6a80}
+    [data-theme="light"] .mco{color:#7a9ab8}
+    [data-theme="light"] .ycta h2{color:#0D1B2A}
+    [data-theme="light"] .ycta p{color:#3a5a78}
+    [data-theme="light"] .btn-o{color:var(--cy);border-color:rgba(0,200,200,.4)}
+    [data-theme="light"] .btn-o:hover{background:rgba(0,200,200,.08)}
   </style>
 </head>
 <body>
@@ -160,12 +197,21 @@
     <div class="ynav-logo">⚓</div>
     <span>Marina Pura Vida</span>
   </a>
+  <div class="ynav-links">
+    <a href="index.html#services"><span class="es">Servicios</span><span class="en">Services</span></a>
+    <a href="index.html#ports"><span class="es">Puertos</span><span class="en">Ports</span></a>
+    <a href="yachts.html" class="active"><span class="es">Yates</span><span class="en">Yachts</span></a>
+    <a href="palm.html"><span class="es">Palm Oil</span><span class="en">Palm Oil</span></a>
+    <a href="recope.html">RECOPE</a>
+    <a href="roro.html">RORO</a>
+    <a href="index.html#news"><span class="es">Noticias</span><span class="en">News</span></a>
+  </div>
   <div class="ynav-r">
     <button class="ynav-btn act" id="ly-es" onclick="setLang('es')">ES</button>
     <button class="ynav-btn" id="ly-en" onclick="setLang('en')">EN</button>
     <button class="ynav-btn" id="ly-theme" onclick="toggleTheme()">☀️</button>
     <a href="index.html#contact" class="btn btn-p" style="padding:.42rem .9rem;font-size:.78rem">
-      <span class="es">Contacto</span><span class="en" style="display:none">Contact</span>
+      <span class="es">Contacto</span><span class="en">Contact</span>
     </a>
   </div>
 </nav>
@@ -181,7 +227,7 @@
     <div>
       <div class="yhero-badge">
         <span class="es">Agencia Especializada · Superyates &amp; Yates</span>
-        <span class="en" style="display:none">Dedicated Agency · Superyachts &amp; Yachts</span>
+        <span class="en">Dedicated Agency · Superyachts &amp; Yachts</span>
       </div>
       <h1 class="yhero-h1">
         <strong data-es="Superyates &amp; Yates" data-en="Superyachts &amp; Yachts">Superyates &amp; Yates</strong><br>
@@ -200,13 +246,13 @@
       <a href="#servicios" class="hact hact-in">
         <div class="hact-icon">🟢</div>
         <div class="hact-label">Clearance IN</div>
-        <div class="hact-sub"><span class="es">Entrada oficial</span><span class="en" style="display:none">Official entry</span></div>
+        <div class="hact-sub"><span class="es">Entrada oficial</span><span class="en">Official entry</span></div>
         <div class="hact-arr">→</div>
       </a>
       <a href="#servicios" class="hact hact-out">
         <div class="hact-icon">🔴</div>
         <div class="hact-label">Clearance OUT</div>
-        <div class="hact-sub"><span class="es">Zarpe oficial</span><span class="en" style="display:none">Official departure</span></div>
+        <div class="hact-sub"><span class="es">Zarpe oficial</span><span class="en">Official departure</span></div>
         <div class="hact-arr">→</div>
       </a>
       <a href="#servicios" class="hact hact-cus">
@@ -224,13 +270,13 @@
       <a href="#servicios" class="hact hact-stay">
         <div class="hact-icon">📅</div>
         <div class="hact-label">Stay Permits</div>
-        <div class="hact-sub"><span class="es">6m · 1 año · 2 años</span><span class="en" style="display:none">6m · 1yr · 2yr</span></div>
+        <div class="hact-sub"><span class="es">6m · 1 año · 2 años</span><span class="en">6m · 1yr · 2yr</span></div>
         <div class="hact-arr">→</div>
       </a>
       <a href="https://wa.me/50688509403?text=Transporte%20de%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="hact hact-transport">
         <div class="hact-icon">🚢</div>
         <div class="hact-label">Transport</div>
-        <div class="hact-sub"><span class="es">Traslado entre marinas</span><span class="en" style="display:none">Marina to marina</span></div>
+        <div class="hact-sub"><span class="es">Traslado entre marinas</span><span class="en">Marina to marina</span></div>
         <div class="hact-arr">→</div>
       </a>
     </div>
@@ -242,47 +288,47 @@
   <div class="ycon">
     <div class="slbl"><span class="es">Servicios especializados</span></div>
     <div class="slbl" style="display:none"><span class="en">Specialized services</span></div>
-    <h2 class="sh2"><span class="es">Todo lo que necesita <em>su yate</em></span><span class="en" style="display:none">Everything your <em>yacht needs</em></span></h2>
-    <p class="sdesc"><span class="es">Un solo punto de contacto para clearance, aduana, logística y permanencia en todas las marinas de Costa Rica.</span><span class="en" style="display:none">One point of contact for clearance, customs, logistics and stay permits at every marina in Costa Rica.</span></p>
+    <h2 class="sh2"><span class="es">Todo lo que necesita <em>su yate</em></span><span class="en">Everything your <em>yacht needs</em></span></h2>
+    <p class="sdesc"><span class="es">Un solo punto de contacto para clearance, aduana, logística y permanencia en todas las marinas de Costa Rica.</span><span class="en">One point of contact for clearance, customs, logistics and stay permits at every marina in Costa Rica.</span></p>
 
     <div class="svc-grid">
 
       <div class="svc" style="--ac:#22C55E">
         <div class="svc-head">
           <div class="svc-ico" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">🟢</div>
-          <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada oficial · Todas las marinas</span><span class="en" style="display:none">Official entry · All marinas</span></div></div>
+          <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada oficial · Todas las marinas</span><span class="en">Official entry · All marinas</span></div></div>
         </div>
-        <p class="svc-body"><span class="es">Entrada oficial de su embarcación en todas las marinas y puertos de Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera y más. Coordinación con Migración, Policía Fronteriza y Aduanas.</span><span class="en" style="display:none">Official vessel entry at all marinas and ports in Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera and more. Coordination with Immigration, Border Police and Customs.</span></p>
+        <p class="svc-body"><span class="es">Entrada oficial de su embarcación en todas las marinas y puertos de Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera y más. Coordinación con Migración, Policía Fronteriza y Aduanas.</span><span class="en">Official vessel entry at all marinas and ports in Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera and more. Coordination with Immigration, Border Police and Customs.</span></p>
         <div class="svc-tags"><span class="stag">Salud / Sanidad</span><span class="stag">Migración</span><span class="stag">Aduana DGA</span><span class="stag">Cuarentena</span></div>
         <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">Todas las marinas del país</span><span class="en" style="display:none">All marinas nationwide</span></span>
-          <a href="https://wa.me/50688509403?text=Clearance%20IN%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#22C55E"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
+          <span class="svc-foot-lbl"><span class="es">Todas las marinas del país</span><span class="en">All marinas nationwide</span></span>
+          <a href="https://wa.me/50688509403?text=Clearance%20IN%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#22C55E"><span class="es">Solicitar →</span><span class="en">Request →</span></a>
         </div>
       </div>
 
       <div class="svc" style="--ac:#EF4444">
         <div class="svc-head">
           <div class="svc-ico" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">🔴</div>
-          <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Zarpe oficial · Todas las marinas</span><span class="en" style="display:none">Official departure · All marinas</span></div></div>
+          <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Zarpe oficial · Todas las marinas</span><span class="en">Official departure · All marinas</span></div></div>
         </div>
-        <p class="svc-body"><span class="es">Despacho oficial de salida en todos los puertos. Coordinamos zarpe con autoridades, desaduanamiento y documentación completa para su siguiente destino.</span><span class="en" style="display:none">Official departure clearance at all ports. We coordinate with authorities, vessel de-customs and complete documentation for your next destination.</span></p>
+        <p class="svc-body"><span class="es">Despacho oficial de salida en todos los puertos. Coordinamos zarpe con autoridades, desaduanamiento y documentación completa para su siguiente destino.</span><span class="en">Official departure clearance at all ports. We coordinate with authorities, vessel de-customs and complete documentation for your next destination.</span></p>
         <div class="svc-tags"><span class="stag">Zarpe oficial</span><span class="stag">Aduana</span><span class="stag">Migración</span></div>
         <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">24h antes del zarpe</span><span class="en" style="display:none">24h before departure</span></span>
-          <a href="https://wa.me/50688509403?text=Clearance%20OUT%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#EF4444"><span class="es">Solicitar →</span><span class="en" style="display:none">Request →</span></a>
+          <span class="svc-foot-lbl"><span class="es">24h antes del zarpe</span><span class="en">24h before departure</span></span>
+          <a href="https://wa.me/50688509403?text=Clearance%20OUT%20Costa%20Rica" target="_blank" rel="noopener" class="svc-lnk" style="color:#EF4444"><span class="es">Solicitar →</span><span class="en">Request →</span></a>
         </div>
       </div>
 
       <div class="svc" style="--ac:#F59E0B">
         <div class="svc-head">
           <div class="svc-ico" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📋</div>
-          <div><div class="svc-nm"><span class="es">Agente Aduanal</span><span class="en" style="display:none">Customs Agent</span></div><div class="svc-sub" style="color:#F59E0B">DGA · TICA · SINAC</div></div>
+          <div><div class="svc-nm"><span class="es">Agente Aduanal</span><span class="en">Customs Agent</span></div><div class="svc-sub" style="color:#F59E0B">DGA · TICA · SINAC</div></div>
         </div>
-        <p class="svc-body"><span class="es">Somos su agente aduanal en Costa Rica. Si su yate llega en un yacht transport, actuamos como su representante ante la DGA desde el momento del desembarque — importación temporal, TICA, repuestos y cualquier trámite durante su estadía.</span><span class="en" style="display:none">We act as your dedicated customs agent in Costa Rica. Whether your yacht arrives on a yacht transport or under its own power, we represent you before the DGA from the moment of arrival — temporary import, TICA, spare parts and all customs processes during your stay.</span></p>
+        <p class="svc-body"><span class="es">Somos su agente aduanal en Costa Rica. Si su yate llega en un yacht transport, actuamos como su representante ante la DGA desde el momento del desembarque — importación temporal, TICA, repuestos y cualquier trámite durante su estadía.</span><span class="en">We act as your dedicated customs agent in Costa Rica. Whether your yacht arrives on a yacht transport or under its own power, we represent you before the DGA from the moment of arrival — temporary import, TICA, spare parts and all customs processes during your stay.</span></p>
         <div class="svc-tags"><span class="stag">TICA</span><span class="stag">DUA</span><span class="stag">Spare parts</span><span class="stag">Provisioning</span></div>
         <div class="svc-foot">
-          <span class="svc-foot-lbl"><span class="es">In-house, sin terceros</span><span class="en" style="display:none">In-house, no third parties</span></span>
-          <a href="https://wa.me/50688509403?text=Agente%20aduanal%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#F59E0B"><span class="es">Consultar →</span><span class="en" style="display:none">Inquire →</span></a>
+          <span class="svc-foot-lbl"><span class="es">In-house, sin terceros</span><span class="en">In-house, no third parties</span></span>
+          <a href="https://wa.me/50688509403?text=Agente%20aduanal%20yate" target="_blank" rel="noopener" class="svc-lnk" style="color:#F59E0B"><span class="es">Consultar →</span><span class="en">Inquire →</span></a>
         </div>
       </div>
 
@@ -293,25 +339,25 @@
       <div>
         <div class="slbl" style="margin-bottom:.625rem"><span class="es">Régimen de permanencia</span></div>
         <div class="slbl" style="margin-bottom:.625rem"><span class="en">Vessel stay regime</span></div>
-        <h3 class="stay-t"><span class="es"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span><span class="en" style="display:none"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span></h3>
-        <p class="stay-p"><span class="es">Los yates extranjeros pueden permanecer en Costa Rica bajo Importación Temporal sin pagar impuestos de importación. Gestionamos el proceso completo ante la DGA — solicitud, prórroga y documentación de salida.</span><span class="en" style="display:none">Foreign yachts may remain in Costa Rica under Temporary Import without paying import taxes. We manage the entire process with the DGA — application, extensions and departure documentation.</span></p>
-        <a href="https://wa.me/50688509403?text=Importacion%20temporal%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-o"><span class="es">Consultar régimen →</span><span class="en" style="display:none">Inquire about regime →</span></a>
+        <h3 class="stay-t"><span class="es"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span><span class="en"><strong>Stay & Cruising</strong><br>Permits Costa Rica</span></h3>
+        <p class="stay-p"><span class="es">Los yates extranjeros pueden permanecer en Costa Rica bajo Importación Temporal sin pagar impuestos de importación. Gestionamos el proceso completo ante la DGA — solicitud, prórroga y documentación de salida.</span><span class="en">Foreign yachts may remain in Costa Rica under Temporary Import without paying import taxes. We manage the entire process with the DGA — application, extensions and departure documentation.</span></p>
+        <a href="https://wa.me/50688509403?text=Importacion%20temporal%20yate%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-o"><span class="es">Consultar régimen →</span><span class="en">Inquire about regime →</span></a>
       </div>
       <div class="stay-opts">
         <div class="sopt">
           <div class="sopt-d">6 m</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Importación Temporal</span><span class="en" style="display:none">Temporary Import</span></div><div class="sopt-s"><span class="es">Entrada inicial ante DGA · prorrogable</span><span class="en" style="display:none">Initial DGA entry · extendable</span></div></div>
-          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Importación Temporal</span><span class="en">Temporary Import</span></div><div class="sopt-s"><span class="es">Entrada inicial ante DGA · prorrogable</span><span class="en">Initial DGA entry · extendable</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en">Tax-free</span></span>
         </div>
         <div class="sopt">
           <div class="sopt-d">1 año</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Primera prórroga · Contrato ICT</span><span class="en" style="display:none">First extension · ICT Contract</span></div><div class="sopt-s"><span class="es">Prórroga ante Aduana con contrato ICT registrado</span><span class="en" style="display:none">Extension with registered ICT (Tourism Institute) contract</span></div></div>
-          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Primera prórroga · Contrato ICT</span><span class="en">First extension · ICT Contract</span></div><div class="sopt-s"><span class="es">Prórroga ante Aduana con contrato ICT registrado</span><span class="en">Extension with registered ICT (Tourism Institute) contract</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en">Tax-free</span></span>
         </div>
         <div class="sopt">
           <div class="sopt-d">2 años</div>
-          <div class="sopt-i"><div class="sopt-t"><span class="es">Segunda prórroga · Contrato de Marina</span><span class="en" style="display:none">Second extension · Marina Contract</span></div><div class="sopt-s"><span class="es">Permanencia extendida con contrato de marina registrado ante DGA + MOPT</span><span class="en" style="display:none">Extended stay with registered marina contract before DGA + MOPT</span></div></div>
-          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en" style="display:none">Tax-free</span></span>
+          <div class="sopt-i"><div class="sopt-t"><span class="es">Segunda prórroga · Contrato de Marina</span><span class="en">Second extension · Marina Contract</span></div><div class="sopt-s"><span class="es">Permanencia extendida con contrato de marina registrado ante DGA + MOPT</span><span class="en">Extended stay with registered marina contract before DGA + MOPT</span></div></div>
+          <span class="sopt-b">✓ <span class="es">Sin impuesto</span><span class="en">Tax-free</span></span>
         </div>
       </div>
     </div>
@@ -323,8 +369,8 @@
   <div class="ycon">
     <div class="slbl"><span class="es">Red de marinas</span></div>
     <div class="slbl" style="display:none"><span class="en">Marina network</span></div>
-    <h2 class="sh2"><span class="es">Cobertura en <em>todas las marinas</em></span><span class="en" style="display:none">Coverage at <em>every marina</em></span></h2>
-    <p class="sdesc" style="margin-bottom:1.375rem"><span class="es">Operamos en las principales marinas del Pacífico costarricense. Toca una marina para ver su ubicación.</span><span class="en" style="display:none">We operate at all major marinas on the Costa Rican Pacific. Tap a marina to see its location.</span></p>
+    <h2 class="sh2"><span class="es">Cobertura en <em>todas las marinas</em></span><span class="en">Coverage at <em>every marina</em></span></h2>
+    <p class="sdesc" style="margin-bottom:1.375rem"><span class="es">Operamos en las principales marinas del Pacífico costarricense. Toca una marina para ver su ubicación.</span><span class="en">We operate at all major marinas on the Costa Rican Pacific. Tap a marina to see its location.</span></p>
     <div id="marina-map"></div>
     <div class="marina-grid" id="marina-list"></div>
   </div>
@@ -332,12 +378,12 @@
 
 <!-- CTA -->
 <section class="ycta">
-  <h2><span class="es">¿Listo para su escala en <em style="color:var(--cy);font-style:italic">Costa Rica</em>?</span><span class="en" style="display:none">Ready for your <em style="color:var(--cy);font-style:italic">Costa Rica</em> port call?</span></h2>
-  <p><span class="es">Respondemos en menos de 2 horas. Disponibles 24/7 para cualquier consulta operacional.</span><span class="en" style="display:none">We respond within 2 hours. Available 24/7 for any operational inquiry.</span></p>
+  <h2><span class="es">¿Listo para su escala en <em style="color:var(--cy);font-style:italic">Costa Rica</em>?</span><span class="en">Ready for your <em style="color:var(--cy);font-style:italic">Costa Rica</em> port call?</span></h2>
+  <p><span class="es">Respondemos en menos de 2 horas. Disponibles 24/7 para cualquier consulta operacional.</span><span class="en">We respond within 2 hours. Available 24/7 for any operational inquiry.</span></p>
   <div class="ycta-btns">
     <a href="https://wa.me/50688509403?text=Superyacht%20services%20Costa%20Rica" target="_blank" rel="noopener" class="btn btn-wa">⚡ WhatsApp 24/7</a>
     <a href="mailto:ops@marinapuravida.com" class="btn btn-o">ops@marinapuravida.com</a>
-    <a href="index.html" class="btn btn-o"><span class="es">← Inicio</span><span class="en" style="display:none">← Home</span></a>
+    <a href="index.html" class="btn btn-o"><span class="es">← Inicio</span><span class="en">← Home</span></a>
   </div>
   <p style="margin-top:1.5rem;color:var(--mt);font-size:.78rem">+506 8850.9403 &nbsp;·&nbsp; +506 7050.0037</p>
 </section>
@@ -385,7 +431,7 @@ function initMarinaMap(){
     MARINAS.forEach(m=>{
       const c=document.createElement('div');
       c.className='mcard'; c.dataset.mid=m.id;
-      c.innerHTML='<div class="mdot"></div><div><div class="mnm">'+m.name+'</div><div class="mde"><span class="es">'+m.ds+'</span><span class="en" style="display:none">'+m.de+'</span></div><div class="mco">'+m.lat.toFixed(5)+'°N &nbsp; '+Math.abs(m.lng).toFixed(5)+'°W</div></div>';
+      c.innerHTML='<div class="mdot"></div><div><div class="mnm">'+m.name+'</div><div class="mde"><span class="es">'+m.ds+'</span><span class="en">'+m.de+'</span></div><div class="mco">'+m.lat.toFixed(5)+'°N &nbsp; '+Math.abs(m.lng).toFixed(5)+'°W</div></div>';
       c.onclick=()=>{
         document.querySelectorAll('.mcard').forEach(x=>{x.classList.remove('act');markers[x.dataset.mid]&&markers[x.dataset.mid].setIcon(mkIco(false));});
         c.classList.add('act');
