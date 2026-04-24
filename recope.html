@@ -161,65 +161,120 @@
             <div><dt>Tugs</dt><dd>2–3 <span class="es">según tamaño</span><span class="en">per vessel size</span></dd></div>
           </dl>
 
-          <!-- Berth 5-0 -->
-          <div style="background:rgba(0,200,200,.05);border:1px solid rgba(0,200,200,.18);border-radius:8px;padding:.875rem 1rem;margin-bottom:.75rem">
-            <div style="font-family:var(--font-mono);font-size:.63rem;letter-spacing:.12em;color:var(--cyan);margin-bottom:.6rem">BERTH 5-0 — DIESEL · JET A1 · MTBE · GASOLINE</div>
-            <dl class="pd-grid">
-              <div><dt>Max LOA</dt><dd>250 m</dd></div>
-              <div><dt>Max DWT</dt><dd>80,000 T</dd></div>
-              <div><dt>Max Draft</dt><dd>13.0 m</dd></div>
-              <div><dt>Max Pressure</dt><dd>10.5 bar</dd></div>
-              <div><dt>Min Freeboard</dt><dd>4 m</dd></div>
-              <div><dt>Max Freeboard</dt><dd>12.5 m</dd></div>
-            </dl>
-            <div style="margin-top:.625rem;font-size:.75rem;color:var(--text2);line-height:1.6">
-              <strong style="color:var(--text)">Loading Arms:</strong> 1×12" Jet A1 · 2×12" Diesel · 2×12" Gasoline<br>
-              <strong style="color:var(--text)">Notes:</strong> No vapor recovery · No bunker · No provisions · No slop disposal
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Berth 5-1 -->
-          <div style="background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.2);border-radius:8px;padding:.875rem 1rem;margin-bottom:.75rem">
-            <div style="font-family:var(--font-mono);font-size:.63rem;letter-spacing:.12em;color:#818CF8;margin-bottom:.6rem">BERTH 5-1 — LPG · FUEL OIL · DIESEL · JET A1 · GASOLINE · ASPHALT</div>
-            <dl class="pd-grid">
-              <div><dt>Max LOA (Fuel Oil)</dt><dd>213 m</dd></div>
-              <div><dt>Max LOA (Diesel/Gas)</dt><dd>195 m</dd></div>
-              <div><dt>Max DWT</dt><dd>60,000 T</dd></div>
-              <div><dt>Max Draft</dt><dd>12.5 m</dd></div>
-              <div><dt>Max Freeboard</dt><dd>12.5 m</dd></div>
-              <div><dt>Pipeline Length</dt><dd>~3.5 km</dd></div>
-            </dl>
-            <div style="margin-top:.625rem;font-size:.75rem;color:var(--text2);line-height:1.6">
-              <strong style="color:var(--text)">Hoses:</strong> 1×10" Jet A1 · 2×10" Diesel · 2×10" Gasoline · 1×10" LPG · 2×8" Fuel Oil · 1×8" Asphalt<br>
-              <strong style="color:var(--text)">Pressures:</strong> 10.5 bar (Fuel Oil/Diesel/Gas) · 16 bar (LPG) · 5 bar (Asphalt)<br>
-              <strong style="color:var(--text)">Min Temps:</strong> LPG &minus;10°C · Fuel Oil 57°C · Asphalt 143°C<br>
-              <strong style="color:var(--text)">Notes:</strong> Provisions allowed · Bunker when no cargo ops · Contact agent for slop disposal
-            </div>
-          </div>
+    <!-- BERTH VCARDS — side by side full width -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem">
 
-          <!-- Operational limits -->
-          <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:.875rem 1rem">
-            <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;color:#EF4444;margin-bottom:.5rem">OPERATIONAL LIMITS</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.25rem .75rem;font-size:.78rem;color:var(--text2)">
-              <div>Max swell alongside: <strong style="color:var(--text)">1.5 m</strong></div>
-              <div>Stop ops at wind: <strong style="color:var(--text)">25 kt</strong></div>
-              <div>Disconnect at wind: <strong style="color:var(--text)">30 kt</strong></div>
-              <div>No deballasting at berth</div>
-              <div>No tank cleaning at berth</div>
-              <div>No soot blowing at berth</div>
-              <div>No potable water available</div>
-              <div>No crude oil reception</div>
-            </div>
+      <!-- BERTH 5-0 -->
+      <div style="background:var(--navy-mid,#132233);border:1px solid rgba(0,200,200,.25);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);margin-bottom:.35rem">Puesto 5-0</div>
+          <div style="font-size:1.05rem;font-weight:700;color:var(--text)">Berth 5-0</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem">
+            <span style="background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.25);color:var(--cyan);font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Diesel</span>
+            <span style="background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.25);color:var(--cyan);font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Jet A1</span>
+            <span style="background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.25);color:var(--cyan);font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">MTBE</span>
+            <span style="background:rgba(0,200,200,.1);border:1px solid rgba(0,200,200,.25);color:var(--cyan);font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Gasoline</span>
           </div>
         </div>
-        <div class="price-card" style="margin-top:1rem">
-          <div class="pc-lbl">BRENT CRUDE</div>
-          <div class="pc-name">ICE Brent Crude Oil</div>
-          <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
-          <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
-          <div class="pc-unit">USD / BBL</div>
-          <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
+        <dl style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem">
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max LOA</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">250 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max DWT</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">80,000 T</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max Draft</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--cyan);margin-top:.1rem">13.0 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max Pressure</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">10.5 bar</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Min Freeboard</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">4 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max Freeboard</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">12.5 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Pipeline</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">~4.0 km</dd></div>
+        </dl>
+        <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:.75rem;font-size:.75rem;color:var(--text2);line-height:1.65">
+          <strong style="color:var(--text)">Loading Arms:</strong> 1×12" Jet A1 · 2×12" Diesel · 2×12" Gasoline
         </div>
+        <div style="margin-top:auto;font-size:.72rem;color:var(--muted);line-height:1.5;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:6px;padding:.5rem .75rem">
+          ❌ No bunker &nbsp;·&nbsp; ❌ No provisions &nbsp;·&nbsp; ❌ No slop disposal &nbsp;·&nbsp; ❌ No vapor recovery
+        </div>
+      </div>
+
+      <!-- BERTH 5-1 -->
+      <div style="background:var(--navy-mid,#132233);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:#818CF8;margin-bottom:.35rem">Puesto 5-1</div>
+          <div style="font-size:1.05rem;font-weight:700;color:var(--text)">Berth 5-1</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem">
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">LPG</span>
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Fuel Oil</span>
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Diesel</span>
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Jet A1</span>
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Gasoline</span>
+            <span style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:#818CF8;font-family:var(--font-mono);font-size:.62rem;padding:2px 7px;border-radius:4px">Asphalt</span>
+          </div>
+        </div>
+        <dl style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem">
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max LOA (FO)</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">213 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max LOA (Diesel/Gas)</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">195 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max DWT</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">60,000 T</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max Draft</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:#818CF8;margin-top:.1rem">12.5 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Max Freeboard</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">12.5 m</dd></div>
+          <div><dt style="font-size:.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Pipeline</dt><dd style="font-family:var(--font-mono);font-size:.95rem;font-weight:600;color:var(--text);margin-top:.1rem">~3.5 km</dd></div>
+        </dl>
+        <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:.75rem;font-size:.75rem;color:var(--text2);line-height:1.65">
+          <strong style="color:var(--text)">Hoses:</strong> 1×10" JetA1 · 2×10" Diesel · 2×10" Gasoline · 1×10" LPG · 2×8" FO · 1×8" Asphalt<br>
+          <strong style="color:var(--text)">Pressures:</strong> 10.5 bar (FO/Diesel/Gas) · 16 bar (LPG) · 5 bar (Asphalt)<br>
+          <strong style="color:var(--text)">Min Temps:</strong> LPG −10°C · FO 57°C · Asphalt 143°C
+        </div>
+        <div style="margin-top:auto;font-size:.72rem;color:var(--muted);line-height:1.5;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.18);border-radius:6px;padding:.5rem .75rem">
+          ✅ Provisions allowed &nbsp;·&nbsp; ✅ Bunker (no cargo ops) &nbsp;·&nbsp; ✅ Slop disposal (contact agent)
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OPERATIONAL LIMITS full width -->
+    <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:1.25rem 1.5rem;margin-top:1rem">
+      <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:#EF4444;margin-bottom:.75rem">Operational Limits</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem 1rem;font-size:.78rem;color:var(--text2)">
+        <div>Max swell: <strong style="color:var(--text)">1.5 m</strong></div>
+        <div>Stop ops: <strong style="color:var(--text)">25 kt wind</strong></div>
+        <div>Disconnect: <strong style="color:var(--text)">30 kt wind</strong></div>
+        <div>Tidal range: <strong style="color:var(--text)">0.3 m</strong></div>
+        <div>No deballasting</div>
+        <div>No tank cleaning</div>
+        <div>No soot blowing</div>
+        <div>No potable water</div>
+      </div>
+    </div>
+
+    <!-- RECOPE PHOTO BANNER -->
+    <div style="position:relative;width:100%;height:360px;border-radius:16px;overflow:hidden;margin-top:2rem">
+      <img src="assets/img/recope-moin.webp" alt="Terminal RECOPE Moín — Puestos 5-0 y 5-1"
+           style="width:100%;height:100%;object-fit:cover;object-position:center 55%">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.85) 0%,rgba(13,27,42,.45) 55%,rgba(13,27,42,.15) 100%)"></div>
+      <div style="position:absolute;inset:0;display:flex;align-items:flex-end;padding:2rem 2.5rem">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:.4rem">&#9041; Terminal RECOPE · Puerto Moín · Costa Rica</div>
+          <div style="font-size:1.4rem;font-weight:300;color:#fff;line-height:1.2">
+            <span class="es">10°00'30" N · 83°05' W · <strong>Canal: 16 m</strong></span>
+            <span class="en">10°00'30" N · 83°05' W · <strong>Channel: 16 m</strong></span>
+          </div>
+          <div style="font-size:.82rem;color:rgba(255,255,255,.55);margin-top:.4rem">
+            <span class="es">Puestos 5-0 y 5-1 · JAPDEVA · Atlántico · Costa Rica</span>
+            <span class="en">Berths 5-0 and 5-1 · JAPDEVA · Atlantic · Costa Rica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brent Price -->
+    <div style="margin-top:1.5rem;display:flex;justify-content:center">
+      <div class="price-card" style="max-width:280px;width:100%">
+        <div class="pc-lbl">BRENT CRUDE</div>
+        <div class="pc-name">ICE Brent Crude Oil</div>
+        <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
+        <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
+        <div class="pc-unit">USD / BBL</div>
+        <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
       </div>
     </div>
 
