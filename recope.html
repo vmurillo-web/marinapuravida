@@ -292,7 +292,7 @@
         <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
         <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
         <div class="pc-unit">USD / BBL</div>
-        <div class="pc-src"><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
+        <div class="pc-src"><span id="brent-updated" style="color:var(--muted);font-size:.7rem"></span><br><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
       </div>
     </div>
 
@@ -342,19 +342,19 @@
 
             <!-- SECTOR paths: 0=N(337.5-22.5), going clockwise -->
             <!-- N sector (337.5 to 22.5) - DANGER -->
-            <path id="s-n" d="M140,140 L140,20 A120,120 0 0,1 186.6,53.4 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+            <path id="s-n" d="M140,140 L140,20 A120,120 0 0,1 186.6,53.4 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
             <!-- NNE (22.5 to 45) - DANGER -->
-            <path id="s-nne" d="M140,140 L186.6,53.4 A120,120 0 0,1 224.9,55.1 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+            <path id="s-nne" d="M140,140 L186.6,53.4 A120,120 0 0,1 224.9,55.1 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
             <!-- NE (45 to 67.5) - CAUTION -->
             <path id="s-ne" d="M140,140 L224.9,55.1 A120,120 0 0,1 245.1,95.1 Z" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
             <!-- ENE (67.5 to 90) - CAUTION -->
             <path id="s-ene" d="M140,140 L245.1,95.1 A120,120 0 0,1 260,140 Z" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
             <!-- E (90 to 112.5) - OK -->
-            <path id="s-e" d="M140,140 L260,140 A120,120 0 0,1 245.1,184.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <path id="s-e" d="M140,140 L260,140 A120,120 0 0,1 245.1,184.9 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
             <!-- ESE (112.5 to 135) - OK -->
-            <path id="s-ese" d="M140,140 L245.1,184.9 A120,120 0 0,1 224.9,224.9 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <path id="s-ese" d="M140,140 L245.1,184.9 A120,120 0 0,1 224.9,224.9 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
             <!-- SE (135 to 157.5) - OK -->
-            <path id="s-se" d="M140,140 L224.9,224.9 A120,120 0 0,1 186.6,226.6 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+            <path id="s-se" d="M140,140 L224.9,224.9 A120,120 0 0,1 186.6,226.6 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
             <!-- SSE (157.5 to 180) - OK -->
             <path id="s-sse" d="M140,140 L186.6,226.6 A120,120 0 0,1 140,260 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
             <!-- S (180 to 202.5) - OK -->
@@ -370,9 +370,9 @@
             <!-- WNW (292.5 to 315) - CAUTION -->
             <path id="s-wnw" d="M140,140 L34.9,95.1 A120,120 0 0,1 55.1,55.1 Z" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
             <!-- NW (315 to 337.5) - DANGER -->
-            <path id="s-nw" d="M140,140 L55.1,55.1 A120,120 0 0,1 93.4,26.6 Z" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+            <path id="s-nw" d="M140,140 L55.1,55.1 A120,120 0 0,1 93.4,26.6 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
             <!-- NNW (337.5 to 360) - DANGER (connects back to N) -->
-            <path id="s-nnw" d="M140,140 L93.4,26.6 A120,120 0 0,1 140,20 Z" fill="rgba(239,68,68,0.2)" stroke="rgba(239,68,68,0.4)" stroke-width="1"/>
+            <path id="s-nnw" d="M140,140 L93.4,26.6 A120,120 0 0,1 140,20 Z" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
 
             <!-- Cardinal cross lines -->
             <line x1="140" y1="20" x2="140" y2="260" stroke="var(--border)" stroke-width="0.75" opacity="0.5"/>
@@ -746,22 +746,22 @@ function degCard(d){return DIRS[Math.round(((d%360)+360)%360/22.5)%16];}
 
 // Sector IDs mapped to degree ranges
 var SECTORS=[
-  {id:'s-n',   from:337.5, to:22.5,  risk:'danger'},
-  {id:'s-nne', from:22.5,  to:45,    risk:'danger'},
-  {id:'s-ne',  from:45,    to:67.5,  risk:'caution'},
+  {id:'s-n',   from:337.5, to:22.5,  risk:'ok'},
+  {id:'s-nne', from:22.5,  to:45,    risk:'ok'},
+  {id:'s-ne',  from:45,    to:67.5,  risk:'ok'},
   {id:'s-ene', from:67.5,  to:90,    risk:'caution'},
-  {id:'s-e',   from:90,    to:112.5, risk:'ok'},
-  {id:'s-ese', from:112.5, to:135,   risk:'ok'},
-  {id:'s-se',  from:135,   to:157.5, risk:'ok'},
-  {id:'s-sse', from:157.5, to:180,   risk:'ok'},
+  {id:'s-e',   from:90,    to:112.5, risk:'danger'},
+  {id:'s-ese', from:112.5, to:135,   risk:'danger'},
+  {id:'s-se',  from:135,   to:157.5, risk:'danger'},
+  {id:'s-sse', from:157.5, to:180,   risk:'caution'},
   {id:'s-s',   from:180,   to:202.5, risk:'ok'},
   {id:'s-ssw', from:202.5, to:225,   risk:'ok'},
   {id:'s-sw',  from:225,   to:247.5, risk:'ok'},
   {id:'s-wsw', from:247.5, to:270,   risk:'ok'},
   {id:'s-w',   from:270,   to:292.5, risk:'ok'},
-  {id:'s-wnw', from:292.5, to:315,   risk:'caution'},
-  {id:'s-nw',  from:315,   to:337.5, risk:'danger'},
-  {id:'s-nnw', from:337.5, to:360,   risk:'danger'}
+  {id:'s-wnw', from:292.5, to:315,   risk:'ok'},
+  {id:'s-nw',  from:315,   to:337.5, risk:'ok'},
+  {id:'s-nnw', from:337.5, to:360,   risk:'ok'}
 ];
 
 function inSector(deg, from, to){
@@ -876,85 +876,50 @@ async function getMyrRate(){
 }
 
 async function loadPrices(){
+  var lang=document.documentElement.getAttribute('data-lang')||'es';
   try{
-    // World Bank Commodity Price API - monthly reference
-    // PPOIL = Palm Oil (USD/MT), PPOILKE = Palm Kernel Oil, POILBRE = Brent
-    var wbUrl='https://api.worldbank.org/v2/en/indicator/PCOPP?mrv=1&format=json';
-    // Use correct indicators
-    var palmUrl='https://api.worldbank.org/v2/en/indicator/PPOIL?mrv=3&format=json';
-    var brentUrl='https://api.worldbank.org/v2/en/indicator/POILBRE?mrv=3&format=json';
-
-    var myrRate=await getMyrRate();
-
-    var [palmRes,brentRes]=await Promise.all([
-      fetch(palmUrl),
-      fetch(brentUrl)
-    ]);
-    var palmData=await palmRes.json();
-    var brentData=await brentRes.json();
-
-    // Extract latest non-null value
-    function getLatest(data){
-      if(!data||!data[1]) return null;
-      for(var i=0;i<data[1].length;i++){
-        if(data[1][i].value!=null) return {val:data[1][i].value, date:data[1][i].date};
+    // CORS-proxy wrapper for World Bank API
+    async function wbFetch(indicator){
+      var target='https://api.worldbank.org/v2/en/indicator/'+indicator+'?mrv=3&format=json';
+      var proxies=[
+        'https://corsproxy.io/?'+encodeURIComponent(target),
+        'https://api.allorigins.win/raw?url='+encodeURIComponent(target)
+      ];
+      for(var p of proxies){
+        try{
+          var r=await fetch(p);
+          if(!r.ok) continue;
+          var d=await r.json();
+          if(Array.isArray(d)&&d[1]) return d;
+        }catch(e){}
       }
       return null;
     }
 
-    var palmVal=getLatest(palmData);
-    var brentVal=getLatest(brentData);
+    var brentData=await wbFetch('POILBRE');
 
-    var lang=document.documentElement.getAttribute('data-lang')||'es';
-
-    if(palmVal){
-      var usdPerMT=palmVal.val;
-      // Convert USD/MT to MYR/MT using inverse rate
-      var myrPerMT=usdPerMT/myrRate;
-      var fmtMYR=Math.round(myrPerMT).toLocaleString();
-      var fmtUSD=Math.round(usdPerMT).toLocaleString();
-
-      // CPO - use palm oil price
-      var cpoMyr=document.getElementById('cpo-myr');
-      var cpoUsd=document.getElementById('cpo-usd');
-      if(cpoMyr) cpoMyr.textContent=fmtMYR;
-      if(cpoUsd) cpoUsd.textContent='USD '+fmtUSD;
-
-      // PKO typically ~30-40% higher than CPO
-      var pkoUSD=Math.round(usdPerMT*1.35);
-      var pkoMYR=Math.round(pkoUSD/myrRate);
-      var pkoMyrEl=document.getElementById('pko-myr');
-      var pkoUsdEl=document.getElementById('pko-usd');
-      if(pkoMyrEl) pkoMyrEl.textContent=pkoMYR.toLocaleString();
-      if(pkoUsdEl) pkoUsdEl.textContent='USD '+pkoUSD.toLocaleString();
-
-      // RBD Olein typically ~5-10% higher than CPO
-      var oleinUSD=Math.round(usdPerMT*1.07);
-      var oleinMYR=Math.round(oleinUSD/myrRate);
-      var oleinMyrEl=document.getElementById('olein-myr');
-      var oleinUsdEl=document.getElementById('olein-usd');
-      if(oleinMyrEl) oleinMyrEl.textContent=oleinMYR.toLocaleString();
-      if(oleinUsdEl) oleinUsdEl.textContent='USD '+oleinUSD.toLocaleString();
-
-      // Add date note
-      var u=document.getElementById('prices-updated');
-      if(u) u.textContent=(lang==='es'?'Ref. mensual: ':'Monthly ref.: ')+palmVal.date;
+    function getLatest(data){
+      if(!data||!data[1]) return null;
+      for(var i=0;i<data[1].length;i++){
+        if(data[1][i]&&data[1][i].value!=null) return {val:data[1][i].value,date:data[1][i].date};
+      }
+      return null;
     }
+
+    var brentVal=getLatest(brentData);
 
     if(brentVal){
       var brentEl=document.getElementById('brent-usd');
       if(brentEl) brentEl.textContent=brentVal.val.toFixed(2);
+      var u=document.getElementById('brent-updated');
+      if(u) u.textContent=(lang==='es'?'Ref. mensual: ':'Monthly ref.: ')+brentVal.date;
     }
 
   }catch(e){
-    console.warn('Prices error:',e);
-    // Fallback: show link to Investing.com
-    var lang=document.documentElement.getAttribute('data-lang')||'es';
-    var link='<a href="https://www.investing.com/commodities/palm-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.78rem;text-decoration:none;">'+(lang==='es'?'Ver en Investing.com →':'View on Investing.com →')+'</a>';
-    ['cpo-myr','pko-myr','olein-myr'].forEach(function(id){
-      var el=document.getElementById(id);
-      if(el) el.innerHTML=link;
-    });
+    var brentEl=document.getElementById('brent-usd');
+    if(brentEl){
+      brentEl.innerHTML='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.78rem;text-decoration:none;">'+(lang==='es'?'Ver precio →':'View price →')+'</a>';
+    }
   }
 }
 
