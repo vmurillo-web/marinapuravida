@@ -84,8 +84,8 @@
 
     /* STAY FEATURE */
     .stay-box{position:relative;overflow:hidden;border:1px solid rgba(0,200,200,.18);border-radius:var(--rl);padding:2.25rem;margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-    .stay-box-bg{position:absolute;inset:0;background-image:url('assets/img/yacht-cada-transport.webp');background-size:cover;background-position:center 40%;opacity:.18;filter:saturate(.55)}
-    .stay-box-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.92) 0%,rgba(13,27,42,.78) 55%,rgba(13,27,42,.65) 100%)}
+    .stay-box-bg{position:absolute;inset:0;background-image:url('assets/img/yacht-cada-transport.webp');background-size:cover;background-position:center 40%;opacity:.32;filter:saturate(.7)}
+    .stay-box-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.82) 0%,rgba(13,27,42,.65) 55%,rgba(13,27,42,.5) 100%)}
     .stay-box > *{position:relative;z-index:1}
     .stay-t{font-size:1.45rem;font-weight:300;color:var(--tx);margin-bottom:.625rem;line-height:1.3}
     .stay-t strong{font-weight:600;color:var(--cy)}
@@ -175,8 +175,12 @@
     [data-theme="light"] .hact-label{color:#0D1B2A}
     [data-theme="light"] .hact-sub{color:#4d6a80}
     [data-theme="light"] .stay-box{border-color:rgba(0,200,200,.25)}
-    [data-theme="light"] .stay-box-bg{opacity:.1}
-    [data-theme="light"] .stay-box-ov{background:linear-gradient(135deg,rgba(13,27,42,.88) 0%,rgba(13,27,42,.75) 100%)}
+    [data-theme="light"] .stay-box-bg{opacity:.28}
+    [data-theme="light"] .stay-box-ov{background:linear-gradient(135deg,rgba(13,27,42,.80) 0%,rgba(13,27,42,.65) 100%)}
+    [data-theme="light"] .stay-box .stay-t{color:#fff}
+    [data-theme="light"] .stay-box .stay-p{color:rgba(255,255,255,.75)}
+    [data-theme="light"] .stay-box .slbl{color:var(--cy)}
+    [data-theme="light"] .stay-box .btn-o{color:var(--cy);border-color:rgba(0,200,200,.5)}
     [data-theme="light"] .stay-t{color:#0D1B2A}
     [data-theme="light"] .stay-t strong{color:var(--cy)}
     [data-theme="light"] .stay-p{color:#3a5a78}
@@ -197,12 +201,13 @@
     [data-theme="light"] .btn-o:hover{background:rgba(0,200,200,.08)}
     /* Ensure photo card content is above overlay */
     .svc .svc-body,.svc .svc-tags,.svc .svc-foot{position:relative;z-index:1}
-    /* Light mode: keep photo cards dark so text stays white */
-    [data-theme="light"] .svc[style*="position:relative"]{color:#fff}
-    [data-theme="light"] .svc[style*="position:relative"] .svc-nm{color:#fff}
-    [data-theme="light"] .svc[style*="position:relative"] .svc-body{color:rgba(255,255,255,.75)}
-    [data-theme="light"] .svc[style*="position:relative"] .svc-foot{border-top-color:rgba(255,255,255,.15)}
-    [data-theme="light"] .svc[style*="position:relative"] .svc-foot-lbl{color:rgba(255,255,255,.55)}
+    /* Photo service cards — always dark to show photo */
+    .svc[style*="position:relative"] .svc-nm{color:#fff!important}
+    .svc[style*="position:relative"] .svc-body{color:rgba(255,255,255,.75)!important}
+    .svc[style*="position:relative"] .svc-foot{border-top-color:rgba(255,255,255,.15)!important}
+    .svc[style*="position:relative"] .svc-foot-lbl{color:rgba(255,255,255,.55)!important}
+    .svc[style*="position:relative"] .stag{background:rgba(0,0,0,.3)!important;border-color:rgba(255,255,255,.2)!important;color:rgba(255,255,255,.85)!important}
+    .svc[style*="position:relative"] .svc-lnk{filter:brightness(1.2)}
     [data-theme="light"] #premium-services > div > div > div[style*="background:var(--nv2)"]{background:#fff!important;border-color:rgba(0,0,0,.12)!important}
     [data-theme="light"] #premium-services p{color:#3a5a78!important}
     [data-theme="light"] #premium-services .text-var{color:#0D1B2A!important}
