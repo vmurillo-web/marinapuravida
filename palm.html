@@ -453,81 +453,85 @@ async function getMyrRate(){
 
 async function loadPrices(){
   var lang=document.documentElement.getAttribute('data-lang')||'es';
+
+  // Precios de referencia — actualizar mensualmente
+  var refCPOusd = 985;   // CPO USD/MT (Banco Mundial Q1 2026)
+
+  // Tipo de cambio MYR/USD — intentar obtener en tiempo real
+  var myrRate = 0.213;
+  var rateOk = false;
   try{
-    // World Bank PPOIL indicator via CORS proxy
-    // Try multiple CORS proxies in sequence
-    async function wbFetch(indicator){
-      var proxies=[
-        'https://corsproxy.io/?',
-        'https://api.allorigins.win/raw?url=',
-      ];
-      var target='https://api.worldbank.org/v2/en/indicator/'+indicator+'?mrv=3&format=json';
-      for(var p of proxies){
-        try{
-          var r=await fetch(p+(p.includes('allorigins')?encodeURIComponent(target):encodeURIComponent(target)));
-          if(!r.ok) continue;
-          var d=await r.json();
-          if(Array.isArray(d)&&d[1]) return d;
-        }catch(e){}
-      }
-      return null;
-    }
+    var rr=await fetch('https://open.er-api.com/v6/latest/MYR');
+    var rd=await rr.json();
+    if(rd&&rd.rates&&rd.rates.USD){ myrRate=rd.rates.USD; rateOk=true; }
+  }catch(e){}
 
-    var myrRate=0.213;
+  // Intentar obtener precio real desde Banco Mundial vía proxy
+  var proxySuccess=false;
+  var proxies=['https://corsproxy.io/?','https://api.allorigins.win/raw?url='];
+  var target='https://api.worldbank.org/v2/en/indicator/PPOIL?mrv=3&format=json';
+  for(var p of proxies){
     try{
-      var mr=await fetch('https://open.er-api.com/v6/latest/MYR');
-      var md=await mr.json();
-      if(md&&md.rates&&md.rates.USD) myrRate=md.rates.USD;
-    }catch(e){}
-
-    var [palmData,brentData]=await Promise.all([wbFetch('PPOIL'),wbFetch('POILBRE')]);
-
-    function getLatest(data){
-      if(!data||!data[1]) return null;
-      for(var i=0;i<data[1].length;i++){
-        if(data[1][i]&&data[1][i].value!=null) return {val:data[1][i].value,date:data[1][i].date};
+      var r=await fetch(p+encodeURIComponent(target));
+      if(!r.ok) continue;
+      var d=await r.json();
+      if(Array.isArray(d)&&d[1]){
+        for(var i=0;i<d[1].length;i++){
+          if(d[1][i]&&d[1][i].value!=null){
+            refCPOusd=d[1][i].value;
+            proxySuccess=true;
+            break;
+          }
+        }
       }
-      return null;
+      if(proxySuccess) break;
+    }catch(e){}
+  }
+
+  // Calcular y mostrar precios
+  var sets=[
+    {myrId:'cpo-myr',  usdId:'cpo-usd',   mult:1},
+    {myrId:'pko-myr',  usdId:'pko-usd',   mult:1.15},
+    {myrId:'olein-myr',usdId:'olein-usd', mult:1.035}
+  ];
+  sets.forEach(function(s){
+    var usd=Math.round(refCPOusd*s.mult);
+    var myr=Math.round(usd/myrRate);
+    var em=document.getElementById(s.myrId);
+    var eu=document.getElementById(s.usdId);
+    if(em) em.textContent=myr.toLocaleString();
+    if(eu) eu.textContent='USD '+usd.toLocaleString();
+  });
+
+  var now=new Date();
+  var fechaStr=now.toLocaleDateString('es-CR',{year:'numeric',month:'long'});
+  var u=document.getElementById('prices-updated');
+  if(u){
+    if(proxySuccess){
+      u.textContent=(lang==='es'?'Fuente: World Bank · ':'Source: World Bank · ')+fechaStr;
+    } else {
+      u.textContent=(lang==='es'?'Precios de referencia · ':'Reference prices · ')+fechaStr;
     }
+  }
 
-    var palmVal=getLatest(palmData);
-    var brentVal=getLatest(brentData);
-
-    if(palmVal){
-      var usdPerMT=palmVal.val;
-      var myrPerMT=usdPerMT/myrRate;
-
-      var sets=[
-        {myrId:'cpo-myr',usdId:'cpo-usd',mult:1},
-        {myrId:'pko-myr',usdId:'pko-usd',mult:1.35},
-        {myrId:'olein-myr',usdId:'olein-usd',mult:1.07}
-      ];
-      sets.forEach(function(s){
-        var usd=Math.round(usdPerMT*s.mult);
-        var myr=Math.round(usd/myrRate);
-        var em=document.getElementById(s.myrId);
-        var eu=document.getElementById(s.usdId);
-        if(em) em.textContent=myr.toLocaleString();
-        if(eu) eu.textContent='USD '+usd.toLocaleString();
-      });
-
-      var u=document.getElementById('prices-updated');
-      if(u) u.textContent=(lang==='es'?'Ref. mensual: ':'Monthly ref.: ')+palmVal.date;
+  // Brent vía proxy
+  var brentData=null;
+  for(var pb of proxies){
+    try{
+      var rb=await fetch(pb+encodeURIComponent('https://api.worldbank.org/v2/en/indicator/POILBRE?mrv=3&format=json'));
+      if(!rb.ok) continue;
+      var db=await rb.json();
+      if(Array.isArray(db)&&db[1]){ brentData=db; break; }
+    }catch(e){}
+  }
+  if(brentData){
+    for(var j=0;j<brentData[1].length;j++){
+      if(brentData[1][j]&&brentData[1][j].value!=null){
+        var bEl=document.getElementById('brent-usd');
+        if(bEl) bEl.textContent=brentData[1][j].value.toFixed(2);
+        break;
+      }
     }
-
-    if(brentVal){
-      var brentEl=document.getElementById('brent-usd');
-      if(brentEl) brentEl.textContent=brentVal.val.toFixed(2);
-    }
-
-  }catch(e){
-    // Silent fallback — show external links, no console warning shown to user
-    var link='<a href="https://www.investing.com/commodities/palm-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.78rem;text-decoration:none;">'+(lang==='es'?'Ver precios →':'View prices →')+'</a>';
-    ['cpo-myr','pko-myr','olein-myr'].forEach(function(id){
-      var el=document.getElementById(id); if(el) el.innerHTML=link;
-    });
-    var u=document.getElementById('prices-updated');
-    if(u) u.textContent=lang==='es'?'Fuente externa disponible':'External source available';
   }
 }
 
