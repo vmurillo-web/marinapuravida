@@ -83,7 +83,10 @@
     .svc-lnk:hover{gap:.55rem}
 
     /* STAY FEATURE */
-    .stay-box{background:linear-gradient(135deg,var(--nv2),var(--nv3));border:1px solid rgba(0,200,200,.18);border-radius:var(--rl);padding:2.25rem;margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .stay-box{position:relative;overflow:hidden;border:1px solid rgba(0,200,200,.18);border-radius:var(--rl);padding:2.25rem;margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .stay-box-bg{position:absolute;inset:0;background-image:url('assets/img/yacht-cada-transport.webp');background-size:cover;background-position:center 40%;opacity:.18;filter:saturate(.55)}
+    .stay-box-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,27,42,.92) 0%,rgba(13,27,42,.78) 55%,rgba(13,27,42,.65) 100%)}
+    .stay-box > *{position:relative;z-index:1}
     .stay-t{font-size:1.45rem;font-weight:300;color:var(--tx);margin-bottom:.625rem;line-height:1.3}
     .stay-t strong{font-weight:600;color:var(--cy)}
     .stay-p{color:var(--tx2);font-size:.85rem;line-height:1.75;margin-bottom:1.375rem}
@@ -156,6 +159,8 @@
     html[data-lang="en"] .es { display: none !important; }
         @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
     @media(max-width:860px){.yhero-inner{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(4,1fr)}.stay-box{grid-template-columns:1fr}}
+    @media(max-width:900px){#premium-services .ps-grid{grid-template-columns:1fr!important}}
+    @media(max-width:680px){.hero-actions{grid-template-columns:1fr 1fr}.svc-grid{grid-template-columns:1fr}}
     @media(max-width:560px){.stats-grid{grid-template-columns:1fr 1fr}.ysec{padding:3rem 1rem}}
     /* ── Light mode comprehensive fixes ── */
     [data-theme="light"] .svc{background:#fff;border-color:rgba(0,0,0,.1)}
@@ -169,7 +174,9 @@
     [data-theme="light"] .hact:hover{background:rgba(0,0,0,.07)}
     [data-theme="light"] .hact-label{color:#0D1B2A}
     [data-theme="light"] .hact-sub{color:#4d6a80}
-    [data-theme="light"] .stay-box{background:linear-gradient(135deg,#e8f4fb,#d4eaf5);border-color:rgba(0,200,200,.25)}
+    [data-theme="light"] .stay-box{border-color:rgba(0,200,200,.25)}
+    [data-theme="light"] .stay-box-bg{opacity:.1}
+    [data-theme="light"] .stay-box-ov{background:linear-gradient(135deg,rgba(13,27,42,.88) 0%,rgba(13,27,42,.75) 100%)}
     [data-theme="light"] .stay-t{color:#0D1B2A}
     [data-theme="light"] .stay-t strong{color:var(--cy)}
     [data-theme="light"] .stay-p{color:#3a5a78}
@@ -188,6 +195,14 @@
     [data-theme="light"] .ycta p{color:#3a5a78}
     [data-theme="light"] .btn-o{color:var(--cy);border-color:rgba(0,200,200,.4)}
     [data-theme="light"] .btn-o:hover{background:rgba(0,200,200,.08)}
+    /* Ensure photo card content is above overlay */
+    .svc .svc-body,.svc .svc-tags,.svc .svc-foot{position:relative;z-index:1}
+    /* Light mode: keep photo cards dark so text stays white */
+    [data-theme="light"] .svc[style*="position:relative"]{color:#fff}
+    [data-theme="light"] .svc[style*="position:relative"] .svc-nm{color:#fff}
+    [data-theme="light"] .svc[style*="position:relative"] .svc-body{color:rgba(255,255,255,.75)}
+    [data-theme="light"] .svc[style*="position:relative"] .svc-foot{border-top-color:rgba(255,255,255,.15)}
+    [data-theme="light"] .svc[style*="position:relative"] .svc-foot-lbl{color:rgba(255,255,255,.55)}
     [data-theme="light"] #premium-services > div > div > div[style*="background:var(--nv2)"]{background:#fff!important;border-color:rgba(0,0,0,.12)!important}
     [data-theme="light"] #premium-services p{color:#3a5a78!important}
     [data-theme="light"] #premium-services .text-var{color:#0D1B2A!important}
@@ -296,9 +311,11 @@
 
     <div class="svc-grid">
 
-      <div class="svc" style="--ac:#22C55E">
-        <div class="svc-head">
-          <div class="svc-ico" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">🟢</div>
+      <div class="svc" style="--ac:#22C55E;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:url('assets/img/yacht-cada-dia-golfito.webp');background-size:cover;background-position:center;opacity:.18;filter:saturate(.6)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,42,.7) 0%,rgba(13,27,42,.95) 100%)"></div>
+        <div class="svc-head" style="position:relative;z-index:1">
+          <div class="svc-ico" style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3)">🟢</div>
           <div><div class="svc-nm">Clearance IN</div><div class="svc-sub" style="color:#22C55E"><span class="es">Entrada oficial · Todas las marinas</span><span class="en">Official entry · All marinas</span></div></div>
         </div>
         <p class="svc-body"><span class="es">Entrada oficial de su embarcación en todas las marinas y puertos de Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera y más. Coordinación con Migración, Policía Fronteriza y Aduanas.</span><span class="en">Official vessel entry at all marinas and ports in Costa Rica — Golfito, Quepos, Flamingo, Papagayo, Caldera and more. Coordination with Immigration, Border Police and Customs.</span></p>
@@ -309,9 +326,11 @@
         </div>
       </div>
 
-      <div class="svc" style="--ac:#EF4444">
-        <div class="svc-head">
-          <div class="svc-ico" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">🔴</div>
+      <div class="svc" style="--ac:#EF4444;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:url('assets/img/yacht-koru-golfito.webp');background-size:cover;background-position:center;opacity:.18;filter:saturate(.6)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,42,.7) 0%,rgba(13,27,42,.95) 100%)"></div>
+        <div class="svc-head" style="position:relative;z-index:1">
+          <div class="svc-ico" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3)">🔴</div>
           <div><div class="svc-nm">Clearance OUT</div><div class="svc-sub" style="color:#EF4444"><span class="es">Zarpe oficial · Todas las marinas</span><span class="en">Official departure · All marinas</span></div></div>
         </div>
         <p class="svc-body"><span class="es">Despacho oficial de salida en todos los puertos. Coordinamos zarpe con autoridades, desaduanamiento y documentación completa para su siguiente destino.</span><span class="en">Official departure clearance at all ports. We coordinate with authorities, vessel de-customs and complete documentation for your next destination.</span></p>
@@ -322,9 +341,11 @@
         </div>
       </div>
 
-      <div class="svc" style="--ac:#F59E0B">
-        <div class="svc-head">
-          <div class="svc-ico" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📋</div>
+      <div class="svc" style="--ac:#F59E0B;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:url('assets/img/yacht-infinity-golfito.webp');background-size:cover;background-position:center;opacity:.18;filter:saturate(.6)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,42,.7) 0%,rgba(13,27,42,.95) 100%)"></div>
+        <div class="svc-head" style="position:relative;z-index:1">
+          <div class="svc-ico" style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">📋</div>
           <div><div class="svc-nm"><span class="es">Agente Aduanal</span><span class="en">Customs Agent</span></div><div class="svc-sub" style="color:#F59E0B">DGA · TICA · SINAC</div></div>
         </div>
         <p class="svc-body"><span class="es">Somos su agente aduanal en Costa Rica. Si su yate llega en un yacht transport, actuamos como su representante ante la DGA desde el momento del desembarque — importación temporal, TICA, repuestos y cualquier trámite durante su estadía.</span><span class="en">We act as your dedicated customs agent in Costa Rica. Whether your yacht arrives on a yacht transport or under its own power, we represent you before the DGA from the moment of arrival — temporary import, TICA, spare parts and all customs processes during your stay.</span></p>
@@ -339,6 +360,8 @@
 
     <!-- STAY & CRUISING PERMITS -->
     <div class="stay-box">
+      <div class="stay-box-bg" aria-hidden="true"></div>
+      <div class="stay-box-ov" aria-hidden="true"></div>
       <div>
         <div class="slbl" style="margin-bottom:.625rem"><span class="es">Régimen de permanencia</span></div>
         <div class="slbl" style="margin-bottom:.625rem"><span class="en">Vessel stay regime</span></div>
@@ -382,7 +405,7 @@
       <span class="en">From on-board safety to shoreside experience — every detail of your Costa Rica call, managed with precision and discretion.</span>
     </p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem">
+    <div class="ps-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem">
 
       <!-- SAFETY & COMPLIANCE -->
       <div style="background:var(--nv2);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(239,68,68,.45)'" onmouseout="this.style.borderColor='rgba(239,68,68,.2)'">
