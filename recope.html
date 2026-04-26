@@ -284,16 +284,39 @@
       </div>
     </div>
 
-    <!-- Brent Price -->
-    <div style="margin-top:1.5rem;display:flex;justify-content:center">
-      <div class="price-card" style="max-width:280px;width:100%">
-        <div class="pc-lbl">BRENT CRUDE</div>
-        <div class="pc-name">ICE Brent Crude Oil</div>
-        <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
-        <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
-        <div class="pc-unit">USD / BBL</div>
-        <div class="pc-src"><span id="brent-updated" style="color:var(--muted);font-size:.7rem"></span><br><span class="es">Fuente: World Bank · Referencia mensual</span><span class="en">Source: World Bank · Monthly reference</span></div>
+    <!-- Brent + Asfalto Precios -->
+    <div style="margin-top:2rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+        <div>
+          <h3 style="font-size:1.1rem;font-weight:600;color:var(--text)"><span class="es">Precios de Referencia</span><span class="en">Reference Prices</span></h3>
+          <p style="color:var(--muted);font-size:.82rem;margin-top:.25rem"><span class="es">Brent internacional y asfalto puesto en Costa Rica.</span><span class="en">International Brent and asphalt delivered in Costa Rica.</span></p>
+        </div>
+        <span id="prices-recope-updated" style="font-family:var(--font-mono);font-size:.72rem;color:var(--muted)"></span>
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+        <!-- BRENT CRUDE -->
+        <div class="price-card">
+          <div class="pc-lbl">BRENT CRUDE</div>
+          <div class="pc-name">ICE Brent Crude Oil</div>
+          <div class="pc-sub"><span class="es">Referencia internacional</span><span class="en">International benchmark</span></div>
+          <div class="pc-main" id="brent-usd" style="font-size:1.5rem;">--</div>
+          <div class="pc-unit">USD / BBL</div>
+          <div class="pc-src"><span class="es">Fuente: World Bank · Mensual</span><span class="en">Source: World Bank · Monthly</span></div>
+        </div>
+        <!-- ASFALTO COSTA RICA -->
+        <div class="price-card" style="border-color:rgba(129,140,248,.35)">
+          <div class="pc-lbl" style="color:#818CF8">ASFALTO CR</div>
+          <div class="pc-name">Asphalt Cement AC-30</div>
+          <div class="pc-sub"><span class="es">Precio estimado puesto CR</span><span class="en">Est. delivered price CR</span></div>
+          <div class="pc-main" id="asphalt-cr" style="font-size:1.5rem;color:#818CF8;">--</div>
+          <div class="pc-unit">USD / TM</div>
+          <div class="pc-src"><span class="es">Base: Brent + prima logística</span><span class="en">Base: Brent + logistics premium</span></div>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:.75rem;text-align:center">
+        <span class="es">&#9888;&#65039; Precios de referencia. El asfalto en CR se indexa al Brent + prima estacional. Contactar para cotización firme.</span>
+        <span class="en">&#9888;&#65039; Reference prices. Asphalt in CR is indexed to Brent + seasonal premium. Contact for firm quote.</span>
+      </p>
     </div>
 
     <!-- Swell Widget -->
@@ -877,49 +900,53 @@ async function getMyrRate(){
 
 async function loadPrices(){
   var lang=document.documentElement.getAttribute('data-lang')||'es';
-  try{
-    // CORS-proxy wrapper for World Bank API
-    async function wbFetch(indicator){
-      var target='https://api.worldbank.org/v2/en/indicator/'+indicator+'?mrv=3&format=json';
-      var proxies=[
-        'https://corsproxy.io/?'+encodeURIComponent(target),
-        'https://api.allorigins.win/raw?url='+encodeURIComponent(target)
-      ];
-      for(var p of proxies){
-        try{
-          var r=await fetch(p);
-          if(!r.ok) continue;
-          var d=await r.json();
-          if(Array.isArray(d)&&d[1]) return d;
-        }catch(e){}
+
+  // Precios de referencia — actualizar mensualmente
+  var brentUsd   = 74.50;   // ← Brent USD/BBL (actualizar mensualmente)
+  var primaAsfalto = 200;   // ← Prima logística CR USD/TM (flete + margen)
+
+  // Intentar obtener Brent real desde Banco Mundial vía proxy
+  var proxySuccess=false;
+  var proxies=['https://corsproxy.io/?','https://api.allorigins.win/raw?url='];
+  var target='https://api.worldbank.org/v2/en/indicator/POILBRE?mrv=3&format=json';
+  for(var p of proxies){
+    try{
+      var r=await fetch(p+encodeURIComponent(target));
+      if(!r.ok) continue;
+      var d=await r.json();
+      if(Array.isArray(d)&&d[1]){
+        for(var i=0;i<d[1].length;i++){
+          if(d[1][i]&&d[1][i].value!=null){
+            brentUsd=d[1][i].value;
+            proxySuccess=true;
+            break;
+          }
+        }
       }
-      return null;
-    }
+      if(proxySuccess) break;
+    }catch(e){}
+  }
 
-    var brentData=await wbFetch('POILBRE');
+  // Calcular asfalto CR: (Brent × 1.05) + prima logística
+  var asphaltCR=Math.round(brentUsd*6.289*1.05+primaAsfalto); // BBL→TM conv ×6.289
 
-    function getLatest(data){
-      if(!data||!data[1]) return null;
-      for(var i=0;i<data[1].length;i++){
-        if(data[1][i]&&data[1][i].value!=null) return {val:data[1][i].value,date:data[1][i].date};
-      }
-      return null;
-    }
+  // Mostrar Brent
+  var brentEl=document.getElementById('brent-usd');
+  if(brentEl) brentEl.textContent=brentUsd.toFixed(2);
 
-    var brentVal=getLatest(brentData);
+  // Mostrar Asfalto CR
+  var asphEl=document.getElementById('asphalt-cr');
+  if(asphEl) asphEl.textContent=asphaltCR.toLocaleString();
 
-    if(brentVal){
-      var brentEl=document.getElementById('brent-usd');
-      if(brentEl) brentEl.textContent=brentVal.val.toFixed(2);
-      var u=document.getElementById('brent-updated');
-      if(u) u.textContent=(lang==='es'?'Ref. mensual: ':'Monthly ref.: ')+brentVal.date;
-    }
-
-  }catch(e){
-    var brentEl=document.getElementById('brent-usd');
-    if(brentEl){
-      brentEl.innerHTML='<a href="https://www.investing.com/commodities/crude-oil" target="_blank" rel="noopener" style="color:var(--cyan);font-size:.78rem;text-decoration:none;">'+(lang==='es'?'Ver precio →':'View price →')+'</a>';
-    }
+  // Timestamp
+  var now=new Date();
+  var fechaStr=now.toLocaleDateString('es-CR',{year:'numeric',month:'long'});
+  var u=document.getElementById('prices-recope-updated');
+  if(u){
+    u.textContent=(proxySuccess
+      ?(lang==='es'?'Fuente: World Bank · ':'Source: World Bank · ')
+      :(lang==='es'?'Referencia · ':'Reference · '))
+      +fechaStr;
   }
 }
 
